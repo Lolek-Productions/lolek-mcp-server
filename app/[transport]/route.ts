@@ -4,7 +4,17 @@ import { z } from "zod";
 const handler = createMcpHandler(
   async (server) => {
     server.tool(
-      "echo",
+      "Tool 1",
+      "description",
+      {
+        message: z.string(),
+      },
+      async ({ message }) => ({
+        content: [{ type: "text", text: `Tool echo: ${message}` }],
+      })
+    );
+    server.tool(
+      "Tool 2",
       "description",
       {
         message: z.string(),
@@ -17,8 +27,11 @@ const handler = createMcpHandler(
   {
     capabilities: {
       tools: {
-        echo: {
-          description: "Echo a message",
+        "Tool 1": {
+          description: "Tool 1 description",
+        },
+        "Tool 2": {
+          description: "Tool 2 description",
         },
       },
     },
