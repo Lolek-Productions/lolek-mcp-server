@@ -26,7 +26,7 @@ const handler = createMcpHandler(
   {
     basePath: "",
     verboseLogs: true,
-    maxDuration: 60,
+    maxDuration: 800,
   }
 );
 
