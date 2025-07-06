@@ -69,7 +69,7 @@ const handler = createMcpHandler(
           return {
             content: [{
               type: "text",
-              text: `Error reading file: ${error.message}`
+              text: `Error reading file: ${error instanceof Error ? error.message : String(error)}`
             }]
           };
         }
@@ -104,7 +104,7 @@ const handler = createMcpHandler(
           return {
             content: [{
               type: "text",
-              text: `Error reading file: ${error.message}`
+              text: `Error reading file: ${error instanceof Error ? error.message : String(error)}`
             }]
           };
         }
@@ -165,7 +165,7 @@ Workflow: Use get-sections → get-headings → targeted searches`
           return {
             content: [{
               type: "text",
-              text: `Error reading docs directory: ${error.message}`
+              text: `Error reading docs directory: ${error instanceof Error ? error.message : String(error)}`
             }]
           };
         }
