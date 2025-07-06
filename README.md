@@ -1,7 +1,49 @@
-# Example Next.js MCP Server
+# Next.js MCP Server with Documentation Navigation
 
 **Uses `@vercel/mcp-adapter`**
 
+This MCP server provides efficient navigation tools for large documentation files, designed to help AI models traverse content without loading massive files all at once.
+
+## Available Tools
+
+### 1. `list-docs` - Document Discovery
+**Purpose**: Discover what documentation topics are available  
+**Usage**: Start here to see available topics
+
+### 2. `get-sections` - Topic Navigation  
+**Purpose**: Get high-level topic areas from documentation  
+**Parameters**: `topic` (optional): "nextjs", "shadcn"  
+**Usage**: Use after `list-docs` to see topic areas
+
+### 3. `get-headings` - Content Extraction
+**Purpose**: Extract specific content from documentation  
+**Parameters**: 
+- `topic` (optional): "nextjs", "shadcn"
+- `file` (optional): "content", "index", "headings" 
+- `type` (optional): "markdown" for # headings, "titles" for TITLE: lines
+
+## Recommended Workflow
+
+```
+1. list-docs          → See available topics
+2. get-sections       → Browse topic areas  
+3. get-headings       → Extract specific content
+4. Targeted searches  → Find exact information
+```
+
+## Documentation Structure
+
+```
+docs/
+├── nextjs/
+│   ├── content.md    # 685 Next.js titles
+│   └── index.md      # 20 organized sections
+└── shadcn/
+    ├── content.md    # 63 shadcn/ui titles  
+    └── index.md      # 10 organized sections
+```
+
+This approach provides **token efficiency**, **faster navigation**, and **better context management** for large documentation sets.
 
 ## Usage
 
@@ -24,3 +66,5 @@ Update `app/[transport]/route.ts` with your tools, prompts, and resources follow
 ```sh
 node scripts/test-client.mjs https://mcp-server-flax.vercel.app
 ```
+
+
