@@ -83,7 +83,7 @@ To connect Claude Code to this MCP server, you'll need to configure it in your C
    Use the following Claude Code command to add this MCP server:
 
    ```bash
-   claude mcp add lolek-mcp-server --transport http --url https://mcp-server-flax.vercel.app/mcp
+   claude mcp add --transport http lolek-mcp-server https://mcp-server-flax.vercel.app/mcp
    ```
 
 2. **Alternative: Manual Configuration**
@@ -106,6 +106,29 @@ To connect Claude Code to this MCP server, you'll need to configure it in your C
 3. **Verify Configuration**
    
    List your configured MCP servers:
+   ```bash
+   claude mcp list
+   ```
+
+   Get details for a specific server:
+   ```bash
+   claude mcp get lolek-mcp-server
+   ```
+
+### Checking MCP Server Status
+
+Within Claude Code, you can check the status of your MCP servers:
+
+1. **Use the `/mcp` command in Claude Code:**
+   ```
+   /mcp
+   ```
+   This opens an interactive menu where you can:
+   - View connection status for all servers
+   - View server capabilities
+   - Authenticate or clear authentication for servers
+
+2. **Check from command line:**
    ```bash
    claude mcp list
    ```
