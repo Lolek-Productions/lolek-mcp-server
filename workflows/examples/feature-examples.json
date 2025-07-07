@@ -1,0 +1,74 @@
+{
+  "title": "Feature Pre-Planning Examples",
+  "description": "Example answers for feature pre-planning to demonstrate quality standards",
+  "examples": [
+    {
+      "name": "Bulk Contact Import - Good Example",
+      "score": 4.3,
+      "level": "good",
+      "answers": {
+        "feature_description": "Add bulk contact import functionality that allows users to upload CSV files containing contact information and automatically import them into the system with validation and error handling.",
+        "user_story": "As a sales manager, I want to import contacts from CSV files so that I can quickly add leads from trade shows and external sources without manual data entry.",
+        "acceptance_criteria": [
+          "Support CSV files up to 10MB in size",
+          "Validate email formats and phone number formats",
+          "Show real-time progress bar during import",
+          "Display detailed success/error summary after import",
+          "Allow column mapping for different CSV formats",
+          "Handle duplicate detection and user choice for resolution",
+          "Provide downloadable error report for failed imports"
+        ],
+        "user_workflow": "1. User clicks 'Import Contacts' button from contacts dashboard 2. File upload dialog opens 3. User selects CSV file 4. System shows column mapping interface 5. User maps CSV columns to contact fields 6. User previews first 5 rows 7. User clicks 'Start Import' 8. Progress bar shows import status 9. System displays results summary with success/error counts 10. User can download error report if needed",
+        "technical_approach": "Use React file upload component with drag-and-drop support. Parse CSV files using Papa Parse library on frontend for preview and validation. Send data to backend API in chunks of 100 records. Validate data server-side using existing contact validation logic. Use database transactions for atomic imports. Implement background job processing for large imports.",
+        "affected_components": [
+          "ContactList component - add import button and progress overlay",
+          "ContactService - add import API endpoints and validation",
+          "Database - add import_batches table for tracking",
+          "New: ImportDialog component with file upload and mapping",
+          "New: ImportProgress component for status updates",
+          "New: ImportResults component for summary display"
+        ],
+        "data_changes": [
+          "Add import_batch_id field to contacts table",
+          "Create import_batches table with status, file_name, total_records, success_count, error_count",
+          "Add indexes on import_batch_id for performance"
+        ],
+        "edge_cases": [
+          "Invalid CSV format or corrupted file",
+          "Empty file or file with only headers",
+          "Duplicate email addresses within import and existing database",
+          "Special characters in contact names or company names",
+          "Network interruption during large import",
+          "Very large files that exceed browser memory limits",
+          "Malformed data that passes initial validation but fails database constraints"
+        ],
+        "testing_strategy": "Unit tests for CSV parsing, validation logic, and API endpoints. Integration tests for complete import workflow. Manual testing with various CSV formats from common sources (Excel, Google Sheets, CRM exports). Performance testing with large files (5MB+). Error scenario testing for all identified edge cases.",
+        "rollback_plan": "Feature flag to disable import functionality immediately. Database rollback script to remove specific import batch if needed. Clear error messaging guides users to manual data entry alternatives. Import history tracking allows identification of problematic imports."
+      }
+    },
+    {
+      "name": "Bulk Contact Import - Poor Example",
+      "score": 1.8,
+      "level": "needs_improvement",
+      "answers": {
+        "feature_description": "Import contacts from files",
+        "user_story": "Users want to import contacts",
+        "acceptance_criteria": [
+          "Upload files",
+          "Import data"
+        ],
+        "user_workflow": "Upload file and import",
+        "technical_approach": "Use some library to read files",
+        "affected_components": [
+          "Contact page"
+        ],
+        "data_changes": [],
+        "edge_cases": [
+          "Bad files"
+        ],
+        "testing_strategy": "Test it works",
+        "rollback_plan": "Turn it off"
+      }
+    }
+  ]
+}

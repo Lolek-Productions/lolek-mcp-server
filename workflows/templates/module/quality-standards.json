@@ -1,0 +1,112 @@
+{
+  "type": "module",
+  "title": "Module Quality Standards",
+  "description": "Quality criteria for evaluating module pre-planning answers",
+  "scoring": {
+    "scale": 5,
+    "thresholds": {
+      "excellent": 4.5,
+      "good": 3.5,
+      "acceptable": 2.5,
+      "needs_improvement": 1.5,
+      "inadequate": 0
+    }
+  },
+  "criteria": [
+    {
+      "id": "purpose_clarity",
+      "question_id": "purpose",
+      "weight": 15,
+      "description": "How clear and specific is the module's purpose?",
+      "excellent": "Purpose is crystal clear, specific, and directly addresses a business need",
+      "good": "Purpose is clear with minor ambiguity",
+      "acceptable": "Purpose is somewhat clear but could be more specific",
+      "needs_improvement": "Purpose is vague or too broad",
+      "inadequate": "Purpose is unclear or missing"
+    },
+    {
+      "id": "scope_definition",
+      "question_id": "scope",
+      "weight": 15,
+      "description": "How well-defined is the module scope?",
+      "excellent": "Scope is well-defined with 3-7 specific, achievable functionalities",
+      "good": "Scope is mostly clear with minor gaps",
+      "acceptable": "Scope is defined but may be too broad or narrow",
+      "needs_improvement": "Scope is unclear or poorly defined",
+      "inadequate": "Scope is missing or completely unclear"
+    },
+    {
+      "id": "user_understanding",
+      "question_id": "users",
+      "weight": 10,
+      "description": "How well are the target users identified?",
+      "excellent": "Users are clearly identified with roles and use cases",
+      "good": "Users are well identified with minor gaps",
+      "acceptable": "Users are identified but lack detail",
+      "needs_improvement": "Users are poorly identified",
+      "inadequate": "Users are not identified or unclear"
+    },
+    {
+      "id": "data_modeling",
+      "question_id": "data_entities",
+      "weight": 15,
+      "description": "How well are the data entities defined?",
+      "excellent": "Data entities are comprehensive with key attributes and relationships",
+      "good": "Data entities are well defined with minor gaps",
+      "acceptable": "Data entities are defined but lack detail",
+      "needs_improvement": "Data entities are poorly defined",
+      "inadequate": "Data entities are missing or unclear"
+    },
+    {
+      "id": "performance_consideration",
+      "question_id": "performance_requirements",
+      "weight": 10,
+      "description": "How well are performance requirements considered?",
+      "excellent": "Performance requirements are specific and measurable",
+      "good": "Performance requirements are mostly clear",
+      "acceptable": "Performance requirements are mentioned but vague",
+      "needs_improvement": "Performance requirements are poorly defined",
+      "inadequate": "Performance requirements are missing"
+    },
+    {
+      "id": "security_awareness",
+      "question_id": "security_considerations",
+      "weight": 15,
+      "description": "How well are security considerations addressed?",
+      "excellent": "Comprehensive security considerations with specific measures",
+      "good": "Good security considerations with minor gaps",
+      "acceptable": "Basic security considerations mentioned",
+      "needs_improvement": "Limited security considerations",
+      "inadequate": "Security considerations missing or inadequate"
+    },
+    {
+      "id": "ui_planning",
+      "question_id": "ui_requirements",
+      "weight": 10,
+      "description": "How well are UI requirements planned?",
+      "excellent": "UI requirements are detailed and user-focused",
+      "good": "UI requirements are well planned with minor gaps",
+      "acceptable": "UI requirements are basic but adequate",
+      "needs_improvement": "UI requirements are poorly planned",
+      "inadequate": "UI requirements are missing or unclear"
+    },
+    {
+      "id": "success_metrics",
+      "question_id": "success_metrics",
+      "weight": 10,
+      "description": "How well are success metrics defined?",
+      "excellent": "Success metrics are specific, measurable, and relevant",
+      "good": "Success metrics are mostly well-defined",
+      "acceptable": "Success metrics are mentioned but could be more specific",
+      "needs_improvement": "Success metrics are poorly defined",
+      "inadequate": "Success metrics are missing or unclear"
+    }
+  ],
+  "recommendations": {
+    "excellent": "Excellent pre-planning! You're ready to proceed with detailed implementation planning.",
+    "good": "Good pre-planning with minor areas for improvement. Consider refining the highlighted areas before proceeding.",
+    "acceptable": "Acceptable pre-planning but several areas need more detail. Please address the feedback before creating the implementation plan.",
+    "needs_improvement": "The pre-planning needs significant improvement. Please revise your answers based on the feedback provided.",
+    "inadequate": "The pre-planning is inadequate. Please start over and provide more detailed, thoughtful answers."
+  }
+}

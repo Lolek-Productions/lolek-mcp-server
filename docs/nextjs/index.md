@@ -1,4 +1,111 @@
-# Next.js Documentation Sections
+# Next.js Documentation Index
+
+<!-- FILTER_METADATA
+{
+  "sections": {
+    "Project Setup and Initialization": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "setup"]
+    },
+    "Environment Configuration": {
+      "status": "approved", 
+      "access": "public",
+      "tags": ["core", "config"]
+    },
+    "Development Server Management": {
+      "status": "approved",
+      "access": "public", 
+      "tags": ["core", "dev"]
+    },
+    "API Routes and Route Handlers": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "api"]
+    },
+    "Content Management System (CMS) Integration": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "cms"]
+    },
+    "Preview Mode and Draft Content": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "preview"]
+    },
+    "Data Fetching and Rendering": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "data"]
+    },
+    "Middleware and Authentication": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "auth"]
+    },
+    "Performance and Optimization": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "performance"]
+    },
+    "Deployment and Production": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "deployment"]
+    },
+    "Components and UI": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "ui"]
+    },
+    "Routing and Navigation": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "routing"]
+    },
+    "Metadata and SEO": {
+      "status": "approved",
+      "access": "public",
+      "tags": ["core", "seo"]
+    },
+    "Testing and Development Tools": {
+      "status": "approved",
+      "access": "developer",
+      "tags": ["dev-tools", "testing"]
+    },
+    "API References and Documentation": {
+      "status": "internal-only",
+      "access": "internal",
+      "tags": ["internal", "reference"]
+    },
+    "MDX and Documentation": {
+      "status": "experimental",
+      "access": "developer",
+      "tags": ["experimental", "docs"]
+    },
+    "External Services and Integrations": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "integrations"]
+    },
+    "Configuration and Advanced Features": {
+      "status": "approved",
+      "access": "advanced",
+      "tags": ["advanced", "config"]
+    },
+    "Error Handling and Debugging": {
+      "status": "deprecated",
+      "access": "legacy",
+      "tags": ["deprecated", "debug"]
+    },
+    "Utilities and Helpers": {
+      "status": "internal-only",
+      "access": "internal",
+      "tags": ["internal", "utils"]
+    }
+  }
+}
+-->
 
 ## 1. Project Setup and Initialization
 - Create Next.js App with API Routes Middleware Example

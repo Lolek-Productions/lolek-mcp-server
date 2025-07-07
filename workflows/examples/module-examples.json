@@ -1,0 +1,83 @@
+{
+  "title": "Module Pre-Planning Examples",
+  "description": "Example answers for module pre-planning to demonstrate quality standards",
+  "examples": [
+    {
+      "name": "Contacts Module - Good Example",
+      "score": 4.2,
+      "level": "good",
+      "answers": {
+        "purpose": "Manage customer contact information and communication history for sales and support teams. This module will centralize customer data, track interactions, and provide search capabilities to improve customer relationship management.",
+        "scope": [
+          "Create, read, update, delete contacts",
+          "Search and filter contacts by various criteria",
+          "Import/export contact data from CSV files",
+          "Track communication history with timeline view",
+          "Organize contacts by tags and categories",
+          "Generate contact reports and analytics"
+        ],
+        "users": "Primary users include sales team members who need to track leads and customers, customer service representatives who need access to contact history, and sales managers who need reporting capabilities.",
+        "data_entities": [
+          "Contact: name, email, phone, company, position, tags, created_date, updated_date",
+          "Communication: type, date, content, direction, contact_id, user_id",
+          "Company: name, industry, size, website, address, contacts_count",
+          "Tag: name, color, description, usage_count"
+        ],
+        "integrations": [
+          "Email service (SendGrid) for sending communications",
+          "Calendar system for scheduling follow-ups",
+          "Authentication module for user management",
+          "Notification service for updates"
+        ],
+        "performance_requirements": "Handle 50,000+ contacts with sub-second search response time. Support 100 concurrent users. Process bulk imports of 5,000+ records within 2 minutes.",
+        "security_considerations": [
+          "Encrypt PII data at rest and in transit",
+          "Implement role-based access control",
+          "GDPR compliance for data export/deletion",
+          "Audit logging for all data modifications",
+          "Rate limiting for API endpoints"
+        ],
+        "ui_requirements": "Clean, modern interface with contact list view, detailed contact cards, advanced search filters, bulk action capabilities, and mobile-responsive design for field sales use.",
+        "success_metrics": [
+          "Reduce time to find contact information by 60%",
+          "Increase user adoption rate to 85%",
+          "Achieve 99.5% uptime",
+          "Process imports 5x faster than current Excel-based system"
+        ],
+        "constraints": [
+          "Must integrate with existing CRM database schema",
+          "Limited to current React/Node.js technology stack",
+          "Must be completed within 6 months",
+          "Budget constraint of $50,000"
+        ]
+      }
+    },
+    {
+      "name": "Contacts Module - Poor Example",
+      "score": 2.1,
+      "level": "needs_improvement",
+      "answers": {
+        "purpose": "Handle contacts",
+        "scope": [
+          "Add contacts",
+          "Edit contacts",
+          "Delete contacts"
+        ],
+        "users": "Users",
+        "data_entities": [
+          "Contact: name, email"
+        ],
+        "integrations": [],
+        "performance_requirements": "Should be fast",
+        "security_considerations": [
+          "Make it secure"
+        ],
+        "ui_requirements": "Good UI",
+        "success_metrics": [
+          "Users like it"
+        ],
+        "constraints": []
+      }
+    }
+  ]
+}

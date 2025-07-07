@@ -1,0 +1,370 @@
+{
+  "name": "Module Development Workflow",
+  "description": "Complete workflow for developing a new module from conception to deployment",
+  "type": "module",
+  "totalSteps": 11,
+  "steps": [
+    {
+      "id": "1_preplanning",
+      "name": "Pre-Planning & Requirements",
+      "description": "Define and validate the module concept and requirements",
+      "deliverables": [
+        "Module purpose and scope definition",
+        "User requirements and personas",
+        "Data model design",
+        "Integration requirements",
+        "Quality-evaluated pre-planning document"
+      ],
+      "activities": [
+        "Use get-preplanning-questions tool for module type",
+        "Answer all 10 pre-planning questions thoroughly",
+        "Use evaluate-preplanning-answers tool for quality assessment",
+        "Refine answers until achieving 3.5+ quality score",
+        "Use generate-implementation-plan tool",
+        "Stakeholder interviews and requirements gathering"
+      ],
+      "exitCriteria": [
+        "All required questions answered",
+        "Quality score ≥ 3.5/5.0",
+        "Implementation plan generated",
+        "Stakeholder requirements documented",
+        "Business case approved"
+      ]
+    },
+    {
+      "id": "2_architecture",
+      "name": "Architecture & Design",
+      "description": "Design the complete module architecture and interfaces",
+      "deliverables": [
+        "System architecture document",
+        "Database schema design",
+        "API specifications",
+        "Security architecture",
+        "Integration points definition",
+        "UI/UX design system"
+      ],
+      "activities": [
+        "Design overall system architecture",
+        "Create detailed database schema",
+        "Define all API endpoints and contracts",
+        "Design security model and access controls",
+        "Plan integration with existing systems",
+        "Create UI mockups and user flows",
+        "Performance and scalability planning"
+      ],
+      "exitCriteria": [
+        "Architecture review completed",
+        "Database design approved",
+        "API contracts finalized",
+        "Security model validated",
+        "Integration approach confirmed",
+        "UI/UX design approved"
+      ]
+    },
+    {
+      "id": "3_setup",
+      "name": "Project Setup & Infrastructure",
+      "description": "Set up development environment and project infrastructure",
+      "deliverables": [
+        "Development environment configured",
+        "Project structure created",
+        "CI/CD pipeline setup",
+        "Testing framework configured",
+        "Documentation structure"
+      ],
+      "activities": [
+        "Create module directory structure",
+        "Set up development environment",
+        "Configure build and deployment pipelines",
+        "Set up testing frameworks",
+        "Configure code quality tools",
+        "Create documentation templates",
+        "Set up monitoring and logging"
+      ],
+      "exitCriteria": [
+        "Development environment ready",
+        "Project structure established",
+        "CI/CD pipeline functional",
+        "Testing framework ready",
+        "Development tools configured"
+      ]
+    },
+    {
+      "id": "4_data_layer",
+      "name": "Data Layer Implementation",
+      "description": "Implement database models, migrations, and data access layer",
+      "deliverables": [
+        "Database models implemented",
+        "Migration scripts",
+        "Data access layer (DAL)",
+        "Database indexes and optimization",
+        "Data validation logic"
+      ],
+      "activities": [
+        "Create database models and entities",
+        "Write database migration scripts",
+        "Implement data access layer",
+        "Add database indexes for performance",
+        "Implement data validation and constraints",
+        "Write unit tests for data layer"
+      ],
+      "exitCriteria": [
+        "All models implemented",
+        "Migrations tested",
+        "Data access layer functional",
+        "Performance optimized",
+        "Data layer tests passing"
+      ]
+    },
+    {
+      "id": "5_api_layer",
+      "name": "API Layer Implementation",
+      "description": "Implement business logic and API endpoints",
+      "deliverables": [
+        "Business logic implementation",
+        "API endpoints",
+        "Authentication and authorization",
+        "Input validation and error handling",
+        "API documentation"
+      ],
+      "activities": [
+        "Implement core business logic",
+        "Create API endpoints and controllers",
+        "Implement authentication and authorization",
+        "Add input validation and sanitization",
+        "Implement error handling and logging",
+        "Write API documentation",
+        "Write unit and integration tests"
+      ],
+      "exitCriteria": [
+        "All APIs implemented",
+        "Authentication working",
+        "Error handling complete",
+        "API documentation current",
+        "API tests passing"
+      ]
+    },
+    {
+      "id": "6_ui_implementation",
+      "name": "User Interface Implementation",
+      "description": "Implement user interface components and user experience",
+      "deliverables": [
+        "UI components implemented",
+        "User workflows",
+        "Responsive design",
+        "Accessibility features",
+        "UI integration with APIs"
+      ],
+      "activities": [
+        "Implement UI components",
+        "Create user workflows and navigation",
+        "Ensure responsive design",
+        "Implement accessibility features",
+        "Integrate UI with API layer",
+        "Add client-side validation",
+        "Write UI tests"
+      ],
+      "exitCriteria": [
+        "All UI components functional",
+        "User workflows complete",
+        "Responsive design verified",
+        "Accessibility requirements met",
+        "UI tests passing"
+      ]
+    },
+    {
+      "id": "7_integration",
+      "name": "System Integration",
+      "description": "Integrate module with existing systems and external services",
+      "deliverables": [
+        "Integration with existing modules",
+        "External service integrations",
+        "Data migration scripts",
+        "Integration testing",
+        "Performance optimization"
+      ],
+      "activities": [
+        "Integrate with existing system modules",
+        "Implement external service integrations",
+        "Create data migration scripts if needed",
+        "Perform integration testing",
+        "Optimize performance and scalability",
+        "Test error scenarios and fallbacks"
+      ],
+      "exitCriteria": [
+        "All integrations working",
+        "Data migration tested",
+        "Integration tests passing",
+        "Performance targets met",
+        "Error handling verified"
+      ]
+    },
+    {
+      "id": "8_testing",
+      "name": "Comprehensive Testing",
+      "description": "Perform thorough testing of the complete module",
+      "deliverables": [
+        "Unit test coverage",
+        "Integration test suite",
+        "End-to-end test scenarios",
+        "Performance test results",
+        "Security testing results",
+        "User acceptance testing"
+      ],
+      "activities": [
+        "Achieve comprehensive unit test coverage",
+        "Execute integration test suite",
+        "Perform end-to-end testing",
+        "Conduct performance and load testing",
+        "Perform security testing and vulnerability scanning",
+        "Facilitate user acceptance testing",
+        "Fix identified issues and bugs"
+      ],
+      "exitCriteria": [
+        "Test coverage ≥ 80%",
+        "All critical tests passing",
+        "Performance requirements met",
+        "Security vulnerabilities addressed",
+        "User acceptance criteria met"
+      ]
+    },
+    {
+      "id": "9_documentation",
+      "name": "Documentation & Training",
+      "description": "Create comprehensive documentation and training materials",
+      "deliverables": [
+        "Technical documentation",
+        "User documentation",
+        "API documentation",
+        "Deployment guide",
+        "Training materials"
+      ],
+      "activities": [
+        "Write technical documentation",
+        "Create user guides and help documentation",
+        "Finalize API documentation",
+        "Create deployment and maintenance guides",
+        "Prepare training materials for users",
+        "Record demo videos if needed"
+      ],
+      "exitCriteria": [
+        "Documentation complete and reviewed",
+        "User guides validated",
+        "API docs current",
+        "Deployment guide tested",
+        "Training materials ready"
+      ]
+    },
+    {
+      "id": "10_deployment",
+      "name": "Deployment & Launch",
+      "description": "Deploy module to production and launch to users",
+      "deliverables": [
+        "Staging deployment",
+        "Production deployment",
+        "Monitoring and alerting",
+        "User rollout plan",
+        "Support procedures"
+      ],
+      "activities": [
+        "Deploy to staging environment",
+        "Perform staging validation",
+        "Deploy to production environment",
+        "Configure monitoring and alerting",
+        "Execute user rollout plan",
+        "Set up support procedures",
+        "Monitor initial usage"
+      ],
+      "exitCriteria": [
+        "Production deployment successful",
+        "Monitoring active",
+        "Users can access module",
+        "Support procedures in place",
+        "No critical issues"
+      ]
+    },
+    {
+      "id": "11_monitoring",
+      "name": "Post-Launch Monitoring & Support",
+      "description": "Monitor module performance and provide ongoing support",
+      "deliverables": [
+        "Performance monitoring reports",
+        "User adoption metrics",
+        "Issue resolution",
+        "User feedback analysis",
+        "Optimization recommendations"
+      ],
+      "activities": [
+        "Monitor system performance and stability",
+        "Track user adoption and usage patterns",
+        "Respond to user issues and questions",
+        "Collect and analyze user feedback",
+        "Identify optimization opportunities",
+        "Plan future enhancements"
+      ],
+      "exitCriteria": [
+        "Performance within targets",
+        "User adoption on track",
+        "Support issues resolved",
+        "User satisfaction acceptable",
+        "Handoff to maintenance team"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "name": "Technical Lead",
+      "responsibilities": ["Architecture", "Technical Decisions", "Code Review"]
+    },
+    {
+      "name": "Backend Developer",
+      "responsibilities": ["API Implementation", "Database Design", "Integration"]
+    },
+    {
+      "name": "Frontend Developer",
+      "responsibilities": ["UI Implementation", "User Experience", "Client Integration"]
+    },
+    {
+      "name": "DevOps Engineer",
+      "responsibilities": ["Infrastructure", "Deployment", "Monitoring"]
+    },
+    {
+      "name": "QA Engineer",
+      "responsibilities": ["Testing Strategy", "Quality Assurance", "Bug Tracking"]
+    },
+    {
+      "name": "Product Manager",
+      "responsibilities": ["Requirements", "User Stories", "Stakeholder Management"]
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": "1_preplanning",
+      "checkpoint": "Business case and pre-planning approved (score ≥ 3.5)"
+    },
+    {
+      "step": "2_architecture",
+      "checkpoint": "Architecture review and approval"
+    },
+    {
+      "step": "4_data_layer",
+      "checkpoint": "Data layer implementation complete"
+    },
+    {
+      "step": "5_api_layer",
+      "checkpoint": "API layer functional and tested"
+    },
+    {
+      "step": "6_ui_implementation",
+      "checkpoint": "UI implementation complete"
+    },
+    {
+      "step": "8_testing",
+      "checkpoint": "All testing complete and passing"
+    },
+    {
+      "step": "10_deployment",
+      "checkpoint": "Production deployment successful"
+    }
+  ]
+}

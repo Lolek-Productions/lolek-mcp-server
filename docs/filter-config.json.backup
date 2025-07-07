@@ -1,0 +1,140 @@
+{
+  "description": "Configuration for filtering documentation content for agent consumption",
+  "filterProfiles": {
+    "default": {
+      "excludeFeatureStatus": [
+        "deprecated",
+        "internal-only", 
+        "experimental",
+        "alpha",
+        "beta",
+        "unstable"
+      ],
+      "excludeSections": [
+        "Advanced Configuration",
+        "Internal APIs",
+        "Debug Mode",
+        "Development Only",
+        "Core Team Only"
+      ],
+      "excludeByPattern": [
+        "<!-- INTERNAL -->.*?<!-- /INTERNAL -->",
+        "<!-- EXPERIMENTAL -->.*?<!-- /EXPERIMENTAL -->",
+        "<!-- DEPRECATED -->.*?<!-- /DEPRECATED -->"
+      ],
+      "excludeKeywords": [
+        "experimental",
+        "internal",
+        "deprecated", 
+        "alpha",
+        "unstable",
+        "debug-only",
+        "core-team"
+      ],
+      "excludeAccess": [
+        "internal",
+        "admin-only",
+        "core-team"
+      ],
+      "excludeTags": [
+        "advanced",
+        "experimental",
+        "deprecated",
+        "internal"
+      ],
+      "allowedTopics": [
+        "nextjs",
+        "shadcn"
+      ],
+      "blockedTopics": []
+    },
+    "public": {
+      "excludeFeatureStatus": [
+        "deprecated",
+        "internal-only",
+        "experimental", 
+        "alpha",
+        "beta",
+        "unstable",
+        "advanced"
+      ],
+      "excludeSections": [
+        "Advanced Configuration",
+        "Internal APIs", 
+        "Debug Mode",
+        "Development Only",
+        "Core Team Only",
+        "Server Configuration",
+        "Performance Tuning"
+      ],
+      "excludeByPattern": [
+        "<!-- INTERNAL -->.*?<!-- /INTERNAL -->",
+        "<!-- EXPERIMENTAL -->.*?<!-- /EXPERIMENTAL -->",
+        "<!-- DEPRECATED -->.*?<!-- /DEPRECATED -->",
+        "<!-- ADVANCED -->.*?<!-- /ADVANCED -->"
+      ],
+      "excludeKeywords": [
+        "experimental",
+        "internal", 
+        "deprecated",
+        "alpha",
+        "unstable",
+        "debug-only",
+        "core-team",
+        "advanced",
+        "server-side"
+      ],
+      "excludeAccess": [
+        "internal",
+        "admin-only",
+        "core-team",
+        "advanced"
+      ],
+      "excludeTags": [
+        "advanced",
+        "experimental",
+        "deprecated",
+        "internal",
+        "server-side"
+      ],
+      "allowedTopics": [
+        "nextjs",
+        "shadcn"
+      ],
+      "blockedTopics": []
+    },
+    "developer": {
+      "excludeFeatureStatus": [
+        "deprecated",
+        "internal-only"
+      ],
+      "excludeSections": [
+        "Internal APIs",
+        "Core Team Only"
+      ],
+      "excludeByPattern": [
+        "<!-- INTERNAL -->.*?<!-- /INTERNAL -->",
+        "<!-- DEPRECATED -->.*?<!-- /DEPRECATED -->"
+      ],
+      "excludeKeywords": [
+        "internal",
+        "deprecated",
+        "core-team"
+      ],
+      "excludeAccess": [
+        "internal",
+        "core-team"
+      ],
+      "excludeTags": [
+        "deprecated",
+        "internal"
+      ],
+      "allowedTopics": [
+        "nextjs",
+        "shadcn"
+      ],
+      "blockedTopics": []
+    }
+  },
+  "defaultProfile": "default"
+}

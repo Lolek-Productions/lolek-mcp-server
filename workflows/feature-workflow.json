@@ -1,0 +1,249 @@
+{
+  "name": "Feature Development Workflow",
+  "description": "Complete workflow for developing a new feature from conception to deployment",
+  "type": "feature",
+  "totalSteps": 8,
+  "steps": [
+    {
+      "id": "1_preplanning",
+      "name": "Pre-Planning",
+      "description": "Define and validate the feature concept",
+      "deliverables": [
+        "Feature description and user story",
+        "Acceptance criteria",
+        "Technical approach",
+        "Risk assessment",
+        "Quality-evaluated pre-planning document"
+      ],
+      "activities": [
+        "Use get-preplanning-questions tool for feature type",
+        "Answer all 10 pre-planning questions thoroughly",
+        "Use evaluate-preplanning-answers tool for quality assessment",
+        "Refine answers until achieving 3.5+ quality score",
+        "Use generate-implementation-plan tool"
+      ],
+      "exitCriteria": [
+        "All required questions answered",
+        "Quality score ≥ 3.5/5.0",
+        "Implementation plan generated",
+        "Stakeholder approval obtained"
+      ]
+    },
+    {
+      "id": "2_design",
+      "name": "Design & Architecture",
+      "description": "Create detailed technical and UI designs",
+      "deliverables": [
+        "Technical design document",
+        "UI mockups/wireframes",
+        "Database schema changes",
+        "API specifications",
+        "Component architecture"
+      ],
+      "activities": [
+        "Create wireframes and user flow diagrams",
+        "Design database schema modifications",
+        "Define API endpoints and data contracts",
+        "Plan component structure and interactions",
+        "Review design with team and stakeholders"
+      ],
+      "exitCriteria": [
+        "Technical design approved",
+        "UI mockups approved",
+        "Database changes documented",
+        "API contracts defined",
+        "Team consensus on approach"
+      ]
+    },
+    {
+      "id": "3_setup",
+      "name": "Development Setup",
+      "description": "Prepare development environment and structure",
+      "deliverables": [
+        "Feature branch created",
+        "Development environment configured",
+        "Initial file structure",
+        "Dependencies installed"
+      ],
+      "activities": [
+        "Create feature branch from main",
+        "Set up development environment",
+        "Create initial component/file structure",
+        "Install any new dependencies",
+        "Configure development tools"
+      ],
+      "exitCriteria": [
+        "Feature branch ready",
+        "Development environment working",
+        "Basic structure in place",
+        "Dependencies resolved"
+      ]
+    },
+    {
+      "id": "4_implementation",
+      "name": "Core Implementation",
+      "description": "Implement the core feature functionality",
+      "deliverables": [
+        "Core feature functionality",
+        "User interface components",
+        "API endpoints",
+        "Database migrations",
+        "Unit tests"
+      ],
+      "activities": [
+        "Implement core business logic",
+        "Create user interface components",
+        "Build API endpoints",
+        "Write database migrations",
+        "Write unit tests for new code",
+        "Handle edge cases identified in pre-planning"
+      ],
+      "exitCriteria": [
+        "Core functionality complete",
+        "UI components functional",
+        "APIs working as designed",
+        "Database changes applied",
+        "Unit tests passing"
+      ]
+    },
+    {
+      "id": "5_integration",
+      "name": "Integration & Testing",
+      "description": "Integrate with existing system and comprehensive testing",
+      "deliverables": [
+        "Integration with existing components",
+        "End-to-end tests",
+        "Performance testing results",
+        "Bug fixes",
+        "Documentation updates"
+      ],
+      "activities": [
+        "Integrate with existing system components",
+        "Write integration tests",
+        "Perform end-to-end testing",
+        "Conduct performance testing",
+        "Fix identified bugs",
+        "Update documentation"
+      ],
+      "exitCriteria": [
+        "Integration tests passing",
+        "End-to-end tests passing",
+        "Performance requirements met",
+        "No critical bugs",
+        "Documentation updated"
+      ]
+    },
+    {
+      "id": "6_review",
+      "name": "Code Review & QA",
+      "description": "Peer review and quality assurance",
+      "deliverables": [
+        "Code review completed",
+        "QA testing completed",
+        "Security review (if needed)",
+        "Accessibility review (if applicable)"
+      ],
+      "activities": [
+        "Submit pull request for code review",
+        "Address code review feedback",
+        "QA team testing",
+        "Security review for sensitive features",
+        "Accessibility testing for UI features"
+      ],
+      "exitCriteria": [
+        "Code review approved",
+        "QA sign-off obtained",
+        "Security concerns addressed",
+        "Accessibility requirements met"
+      ]
+    },
+    {
+      "id": "7_deployment",
+      "name": "Deployment",
+      "description": "Deploy feature to production environment",
+      "deliverables": [
+        "Feature deployed to staging",
+        "Feature deployed to production",
+        "Monitoring configured",
+        "Rollback plan ready"
+      ],
+      "activities": [
+        "Deploy to staging environment",
+        "Perform staging validation",
+        "Deploy to production",
+        "Configure monitoring and alerts",
+        "Verify rollback procedures"
+      ],
+      "exitCriteria": [
+        "Staging deployment successful",
+        "Production deployment successful",
+        "Monitoring active",
+        "Rollback tested"
+      ]
+    },
+    {
+      "id": "8_monitoring",
+      "name": "Post-Deployment Monitoring",
+      "description": "Monitor feature performance and user adoption",
+      "deliverables": [
+        "Performance metrics",
+        "User adoption metrics",
+        "Error monitoring",
+        "User feedback collection"
+      ],
+      "activities": [
+        "Monitor feature performance",
+        "Track user adoption and usage",
+        "Monitor error rates and issues",
+        "Collect user feedback",
+        "Make minor adjustments if needed"
+      ],
+      "exitCriteria": [
+        "Performance within targets",
+        "No critical errors",
+        "User adoption tracking",
+        "Feedback collected and reviewed"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "name": "Developer",
+      "responsibilities": ["Implementation", "Testing", "Code Review"]
+    },
+    {
+      "name": "Designer", 
+      "responsibilities": ["UI Design", "User Experience", "Accessibility"]
+    },
+    {
+      "name": "Product Manager",
+      "responsibilities": ["Requirements", "Acceptance Criteria", "Stakeholder Communication"]
+    },
+    {
+      "name": "QA Engineer",
+      "responsibilities": ["Testing", "Quality Assurance", "Bug Reporting"]
+    }
+  ],
+  "checkpoints": [
+    {
+      "step": "1_preplanning",
+      "checkpoint": "Pre-planning quality score ≥ 3.5"
+    },
+    {
+      "step": "2_design",
+      "checkpoint": "Design approval from stakeholders"
+    },
+    {
+      "step": "4_implementation", 
+      "checkpoint": "Core functionality demo"
+    },
+    {
+      "step": "6_review",
+      "checkpoint": "Code review and QA approval"
+    },
+    {
+      "step": "7_deployment",
+      "checkpoint": "Successful production deployment"
+    }
+  ]
+}
