@@ -13,6 +13,14 @@ Establish a secure, user-friendly authentication system that:
 - Integrates with the overall application architecture
 - Supports modern authentication patterns and best practices
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For middleware, route protection, and server-side authentication patterns
+
+## Chapter Focus
+
+This chapter covers project-specific authentication patterns using Supabase. For detailed Next.js authentication patterns, reference the docs above.
+
 ---
 
 ## Authentication

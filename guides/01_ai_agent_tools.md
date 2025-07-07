@@ -21,6 +21,15 @@ The primary objective is to enable conversations with AI that result in 95% comp
 - Guidelines for maintaining code quality and consistency
 - Structured approach to complex features like wizards and multi-step workflows
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For framework-specific APIs, routing, and configuration
+- [shadcn/ui Documentation](../docs/shadcn/) - For component library installation and usage
+
+## Chapter Focus
+
+This chapter covers AI agent setup, MCP integration, and our project-specific technology stack decisions. For detailed framework documentation, reference the docs above.
+
 ---
 
 ## AI Agent
@@ -78,10 +87,10 @@ The server integrates seamlessly with Claude Code via MCP configuration, allowin
 ## Recommended Technology Stack
 
 ### Frontend Stack
-- **Framework**: Next.js 15 (App Router) for modern React development
+- **Framework**: Next.js 15 (App Router) - See [Next.js documentation](../docs/nextjs/) for implementation details
 - **Language**: TypeScript for type safety and developer experience
 - **Styling**: Tailwind CSS for utility-first styling
-- **Components**: shadcn/ui components built on Radix UI primitives
+- **Components**: shadcn/ui components - See [shadcn/ui documentation](../docs/shadcn/) for usage patterns
 
 ### Backend Stack
 - **Database & Auth**: Supabase (PostgreSQL + Authentication)
@@ -92,6 +101,9 @@ The server integrates seamlessly with Claude Code via MCP configuration, allowin
 - **Component System**: Radix UI primitives with shadcn/ui styling
 - **Icons**: Lucide React for consistent iconography
 - **Responsive Design**: Mobile-first approach with Tailwind CSS
+
+### Integration Notes
+This stack provides a cohesive development experience for MCP server applications. The Next.js App Router handles routing and server-side rendering, while shadcn/ui provides consistent UI components. Supabase manages authentication and database operations seamlessly.
 
 ## Actions for the Agent
 
@@ -118,7 +130,7 @@ Use the main-sidebar component
 - Do not create migrations for supabase.  
 - Ordinarily use Form-Field for the input 
 - Use a toast whenever appropriate to give feedback to the user.  
-- use shadcn components
+- Use shadcn/ui components - See [shadcn/ui documentation](../docs/shadcn/) for component APIs
 
 ### on running npm run build
 takes time.  So only do it when asked or when about to push to the repository.

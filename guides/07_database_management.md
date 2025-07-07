@@ -13,6 +13,14 @@ Establish effective database management practices that:
 - Support collaboration between developers and AI agents
 - Ensure consistent database interaction patterns
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For Server Actions, API routes, and database integration patterns
+
+## Chapter Focus
+
+This chapter covers project-specific database management workflows using Supabase. For detailed Next.js database integration patterns, reference the docs above.
+
 ---
 
 ## Refresh the Database Structure

@@ -13,6 +13,14 @@ Establish productive development workflows that:
 - Support collaboration between developers and AI agents
 - Ensure consistent development practices across projects
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For framework-specific build commands, development server, and configuration
+
+## Chapter Focus
+
+This chapter covers project-specific development workflows and tools. For detailed Next.js command documentation, reference the docs above.
+
 ---
 
 ## Terminal Session Management (tmux)
@@ -40,7 +48,7 @@ tmux kill-server       # Kill all sessions and stop server
 tmux kill-session -t 2
 
 # Start session with multiple windows
-tmux new -s project -d 'npm run dev'
+tmux new -s project -d 'npm run dev'  # See Next.js docs for dev command details
 ```
 
 ### Reference
@@ -79,7 +87,7 @@ Sometimes the Next.js build cache can cause issues with stale builds, component 
 rm -rf .next
 
 # Then restart your development server
-npm run dev
+npm run dev  # See Next.js docs for development server details
 ```
 
 **When to use this:**
@@ -88,6 +96,8 @@ npm run dev
 - Stale imports or module resolution issues
 - After major dependency updates
 - TypeScript errors that persist after fixes
+
+For detailed Next.js build and caching information, see [Next.js documentation](../docs/nextjs/).
 
 ## Creating a flow: for example creating a homily
 

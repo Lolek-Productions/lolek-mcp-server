@@ -13,6 +13,14 @@ Establish a reliable deployment and hosting workflow that:
 - Manages environment variables and secrets securely
 - Enables easy scaling and maintenance
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For build processes, deployment configuration, and production optimization
+
+## Chapter Focus
+
+This chapter covers project-specific deployment and hosting workflows. For detailed Next.js deployment documentation, reference the docs above.
+
 ---
 
 ## GitHub Integration

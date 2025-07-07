@@ -67,4 +67,63 @@ Update `app/[transport]/route.ts` with your tools, prompts, and resources follow
 node scripts/test-client.mjs https://mcp-server-flax.vercel.app
 ```
 
+## Connecting Claude Code to this MCP Server
+
+To connect Claude Code to this MCP server, you'll need to configure it in your Claude Code settings.
+
+### Prerequisites
+- Claude Code installed and running
+- This MCP server deployed (e.g., on Vercel)
+- Server URL (e.g., `https://mcp-server-flax.vercel.app`)
+
+### Configuration Steps
+
+1. **Add MCP Server using Claude Code CLI**
+   
+   Use the following Claude Code command to add this MCP server:
+
+   ```bash
+   claude mcp add lolek-mcp-server --transport http --url https://mcp-server-flax.vercel.app/mcp
+   ```
+
+2. **Alternative: Manual Configuration**
+   
+   If you prefer to manually configure, add the following to your Claude Code MCP settings:
+
+   ```json
+   {
+     "mcpServers": {
+       "lolek-mcp-server": {
+         "transport": {
+           "type": "http",
+           "url": "https://mcp-server-flax.vercel.app/mcp"
+         }
+       }
+     }
+   }
+   ```
+
+3. **Verify Configuration**
+   
+   List your configured MCP servers:
+   ```bash
+   claude mcp list
+   ```
+
+### Usage in Claude Code
+
+Once connected, you can use the three documentation navigation tools described above.
+
+Example usage:
+```
+Claude, use the list-docs tool to see what documentation is available.
+```
+
+### Troubleshooting
+
+- Ensure your server URL is correct and accessible
+- Check that the MCP server is properly deployed and running
+- Verify the configuration syntax in your Claude Code settings
+- Check Claude Code logs for any connection errors
+
 

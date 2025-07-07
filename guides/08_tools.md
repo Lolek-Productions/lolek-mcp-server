@@ -4,6 +4,15 @@
 
 This chapter provides practical tools and frameworks for development work. It includes definitions, workflows, checklists, and standards that developers and AI agents can use to ensure consistent, high-quality development practices.
 
+## Required Reading
+
+- [Next.js Documentation](../docs/nextjs/) - For component patterns, routing, and development best practices
+- [shadcn/ui Documentation](../docs/shadcn/) - For component library standards and usage patterns
+
+## Chapter Focus
+
+This chapter covers project-specific development tools, workflows, and standards. For detailed framework documentation, reference the docs above.
+
 ## Core Development Concepts
 
 ### What is a Properly Defined Feature?

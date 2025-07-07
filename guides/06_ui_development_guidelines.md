@@ -13,15 +13,22 @@ Create cohesive user interface standards that:
 - Support complex user workflows through wizards and multi-step processes
 - Maintain visual consistency through standardized branding and assets
 
----
+## Required Reading
 
-<!-- TODO: Many sections below need expanded content with detailed examples and implementation guidance -->
+- [shadcn/ui Documentation](../docs/shadcn/) - For component installation, usage patterns, and configuration
+- [Next.js Documentation](../docs/nextjs/) - For routing, component structure, and framework-specific patterns
+
+## Chapter Focus
+
+This chapter covers our project-specific UI patterns and standards for building MCP server applications. For detailed component documentation and installation instructions, reference the docs above.
+
+---
 
 ## How to make a table
 Tables shoudl have a search bar, pagination, and the ability to sort by key columns.  The table should also have a button to be able to create a new item.  That button may redirect the user to the /create page.  The table should produce a link to the /edit page.  Also, the table should allow the user to delete items.
 
 ## Toast
-Use toasts.  Sonner is the currently recommend toast at shadcn/ui
+Use toasts for user feedback. See [shadcn/ui documentation](../docs/shadcn/) for Sonner toast implementation details.
 
 ## How to construct a module
 for example: Petitions Module
@@ -56,19 +63,20 @@ AI agent, look at this app on how to describe a module heading.
 - page component
 - centered carad component
 
-## how to use tables:
-use shadcn
+## How to use tables:
+Use shadcn/ui Data Table components. See [shadcn/ui documentation](../docs/shadcn/) for implementation details.
 
 ## Styling
-Use shadcn
+Use shadcn/ui component library. See [shadcn/ui documentation](../docs/shadcn/) for styling guidelines and customization options.
 
 ## Design
-Use lucide-react icons where posssible
+Use lucide-react icons where possible for consistent visual language.
 
 ## Development Guidelines for AI Agents
 - Ordinarily use Form-Field for input components
 - Use a toast whenever appropriate to give feedback to the user
-- Use shadcn components consistently throughout the application
+- Use shadcn/ui components consistently throughout the application
+- Reference [shadcn/ui documentation](../docs/shadcn/) for component APIs and usage patterns
 
 ## Branding and Assets
 
