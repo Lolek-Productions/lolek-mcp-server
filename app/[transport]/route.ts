@@ -15,8 +15,8 @@ const handler = createMcpHandler(
     // Initialize ContentFilter instance
     const contentFilter = new ContentFilter();
     server.tool(
-      "Tool 1", // Name
-      "description", // Description
+      "tool-1", // Name
+      "Echo tool for testing", // Description
       {
         message: z.string(), //Input that the tool receives from the user
       },
@@ -25,8 +25,8 @@ const handler = createMcpHandler(
       })
     );
     server.tool(
-      "Tool 2",
-      "description",
+      "tool-2",
+      "Second echo tool for testing",
       {
         message: z.string(),
       },

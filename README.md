@@ -239,8 +239,11 @@ To connect Claude Code to this MCP server, you'll need to configure it in your C
    Use the following Claude Code command to add this MCP server:
 
    ```bash
-   claude mcp add --transport http lolek-mcp-server https://mcp-server-flax.vercel.app/mcp
+   claude mcp add --transport http lolek_mcp https://mcp-server-flax.vercel.app/mcp
    ```
+
+1a. ** to remove the MCP server**
+    claude mcp remove lolek_mcp
 
 2. **Alternative: Manual Configuration**
    
