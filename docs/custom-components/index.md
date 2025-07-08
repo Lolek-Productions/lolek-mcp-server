@@ -1,6 +1,6 @@
 # Custom Components Documentation
 
-This documentation covers all custom React components and project setup guidance for Next.js applications with shadcn/ui, Tailwind CSS, and Supabase authentication.
+This documentation covers custom React components and comprehensive project setup guidance to help AI agents build Next.js applications quickly and consistently. The MCP server provides tools, components, and configuration patterns for shadcn/ui, Tailwind CSS, and Supabase authentication.
 
 ## 1. Application Context Components
 
@@ -146,6 +146,27 @@ User profile dropdown with Supabase authentication and user management
 - Multi-platform testing
 - PWA support
 
-## 13. Usage Context
+## 13. Purpose & Usage Context
 
-These components are designed for a church management application with features for managing contacts, parishes, campaigns, and user authentication. All components follow consistent design patterns and can be adapted for other applications.
+### MCP Server Purpose
+This MCP server is designed to help AI agents build applications quickly and consistently by providing:
+- Pre-built, production-ready React components
+- Complete project setup and configuration guidance
+- Standardized development patterns and workflows
+- Infrastructure and deployment procedures
+
+### Component Library Context
+The custom components provide common application patterns including:
+- Authentication workflows (login, signup, user profiles)
+- Navigation structures (headers, sidebars, breadcrumbs)
+- Layout containers (forms, pages, cards)
+- UI interactions (copy buttons, collapsible sections)
+
+### Example Applications
+The components include examples from a church management application (contacts, parishes, campaigns) but are designed to be generic and adaptable for any business application requiring user authentication, data management, and responsive design.
+
+### AI Agent Benefits
+- **Rapid Development**: Start with working components instead of building from scratch
+- **Consistent Patterns**: Follow established TypeScript, styling, and architectural patterns
+- **Complete Stack**: From database setup to deployment, all guidance is provided
+- **Best Practices**: Security, accessibility, and performance considerations built-in

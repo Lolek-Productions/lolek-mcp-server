@@ -1066,13 +1066,39 @@ DESCRIPTION: Complete branding guidelines including logo design and favicon crea
 
 ----------------------------------------
 
-TITLE: Usage Context
-DESCRIPTION: Application context and usage patterns for church management systems.
+TITLE: MCP Server Purpose & Usage Context
+DESCRIPTION: Purpose and context for the MCP server and component library designed to help AI agents build applications quickly and consistently.
 
-These components are designed for a church management application ("Lolek Productions - Serving the Church") with features for:
-- Managing contacts, parishes, and campaigns
+## MCP Server Purpose
+This MCP server is designed to help AI agents build applications quickly and consistently by providing:
+- Pre-built, production-ready React components
+- Complete project setup and configuration guidance
+- Standardized development patterns and workflows
+- Infrastructure and deployment procedures
+
+## Component Library Context
+The custom components provide common application patterns including:
+- Authentication workflows (login, signup, user profiles)
+- Navigation structures (headers, sidebars, breadcrumbs)
+- Layout containers (forms, pages, cards)
+- UI interactions (copy buttons, collapsible sections)
+
+## Example Applications
+The components include examples from a church management application (contacts, parishes, campaigns) but are designed to be generic and adaptable for any business application requiring:
 - User authentication and profile management
+- Data management with individual or team-based scoping
 - Administrative functions and user management
 - Responsive design for desktop and mobile devices
 
-All components follow consistent design patterns and can be easily adapted for other applications by modifying navigation items, branding, and authentication providers.
+## AI Agent Benefits
+- **Rapid Development**: Start with working components instead of building from scratch
+- **Consistent Patterns**: Follow established TypeScript, styling, and architectural patterns
+- **Complete Stack**: From database setup to deployment, all guidance is provided
+- **Best Practices**: Security, accessibility, and performance considerations built-in
+
+## Adaptability
+All components follow consistent design patterns and can be easily adapted for other applications by:
+- Modifying navigation items and menu structures
+- Updating branding and styling
+- Changing authentication providers or workflows
+- Adapting data models for different business domains
