@@ -228,7 +228,7 @@ npm run test:e2e-workflows
 #### Quick Setup
 ```bash
 # Add MCP server
-claude mcp add --transport http lolek-mcp https://your-server-url.vercel.app/mcp
+claude mcp add --transport http lolek-mcp https://mcp-server-flax.vercel.app/mcp
 
 # Verify configuration
 claude mcp list
@@ -245,7 +245,7 @@ Add to Claude Code MCP settings:
     "lolek-mcp-server": {
       "transport": {
         "type": "http", 
-        "url": "https://your-server-url.vercel.app/mcp"
+        "url": "https://mcp-server-flax.vercel.app/mcp"
       }
     }
   }
