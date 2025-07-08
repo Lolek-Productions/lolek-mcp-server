@@ -11,8 +11,15 @@ export const getIntroduction: ToolDefinition = {
         type: "text" as const,
         text: `# Welcome to Lolek MCP Server
 
+## Purpose
+Lolek MCP Server is designed to **help AI agents build applications quickly and consistently** by providing:
+- Pre-built, production-ready React components
+- Complete project setup and configuration guidance  
+- Standardized development patterns and workflows
+- Infrastructure and deployment procedures
+
 ## Overview
-Lolek MCP Server is a Next.js-based Model Context Protocol (MCP) server that provides documentation navigation and simple planning workflow tools. It's designed to help developers efficiently navigate documentation and create quality implementation plans.
+This Next.js-based Model Context Protocol (MCP) server provides documentation navigation, planning workflow tools, and comprehensive development guidance. It accelerates application development by offering proven patterns, components, and setup procedures.
 
 ## Core Capabilities
 
@@ -36,9 +43,16 @@ Lolek MCP Server is a Next.js-based Model Context Protocol (MCP) server that pro
 4. **Agent Handles Execution** → Create checklist and track progress
 
 ## Documentation Available
-- **custom-components**: 9 React components for Next.js applications
-- **nextjs**: 685 Next.js framework documentation titles
+- **custom-components**: Pre-built React components + complete project setup guidance
+- **nextjs**: 685 Next.js framework documentation titles  
 - **shadcn**: 63 shadcn/ui component library titles
+
+### Custom Components Include:
+- Authentication workflows (login, signup, user profiles)
+- Navigation structures (headers, sidebars, breadcrumbs)
+- Layout containers (forms, pages, cards)
+- UI interactions (copy buttons, collapsible sections)
+- Complete technology stack and setup guidance
 
 ## Getting Started
 1. Use \`get-workflows\` to see available workflow types
@@ -59,7 +73,13 @@ This server includes behavioral rules for AI agents working on the project:
 - **Content Filtering** with IGNORE directives
 - **Client-side approach** for persistent workflow tracking
 
-*This server focuses on simplicity and essential functionality for effective planning and documentation navigation.*`
+## AI Agent Benefits
+- **Rapid Development**: Start with working components instead of building from scratch
+- **Consistent Patterns**: Follow established TypeScript, styling, and architectural patterns
+- **Complete Stack**: From database setup to deployment, all guidance is provided
+- **Best Practices**: Security, accessibility, and performance considerations built-in
+
+*This server accelerates development by providing proven patterns and comprehensive guidance for building modern web applications.*`
       }]
     };
   }
