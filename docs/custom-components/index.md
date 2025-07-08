@@ -2,7 +2,17 @@
 
 This documentation covers all custom React components found in the `/examples` folder, designed for a Next.js application with shadcn/ui, Tailwind CSS, and Supabase authentication.
 
-## 1. Public Page Components
+## 1. Application Context Components
+
+### AppContextProvider
+- Application context provider for global state management
+- Centralized user authentication state with Supabase integration
+- Application settings management (theme, sidebar, notifications)
+- Persistent settings storage with localStorage
+- Custom hook (useAppContext) for accessing state and methods
+- Automatic auth state listening and session management
+
+## 2. Public Page Components
 
 ### PublicFooter
 - Simple footer component for public-facing pages
@@ -15,7 +25,7 @@ This documentation covers all custom React components found in the `/examples` f
 - Logo, navigation links, and login button
 - Requires company logo in public folder
 
-## 2. Layout and Container Components
+## 3. Layout and Container Components
 
 ### CenteredFormCard
 - Reusable centered card container for forms and content
@@ -29,7 +39,7 @@ This documentation covers all custom React components found in the `/examples` f
 - Can wrap content in CenteredFormCard when needed
 - Supports custom max-width and additional CSS classes
 
-## 3. Navigation Components
+## 4. Navigation Components
 
 ### MainHeader
 - Main application header for authenticated pages
@@ -50,7 +60,7 @@ This documentation covers all custom React components found in the `/examples` f
 - Mobile-aware sidebar integration
 - Supports custom icons and navigation items array
 
-## 4. User Interface Components
+## 5. User Interface Components
 
 ### CopyButton
 - Button component for copying text to clipboard
@@ -65,7 +75,7 @@ This documentation covers all custom React components found in the `/examples` f
 - Loading states and error handling
 - Automatic redirect on logout
 
-## 5. Component Dependencies
+## 6. Component Dependencies
 
 ### Common Dependencies Across Components:
 - **shadcn/ui**: Extensive use of Button, Card, Sidebar, Avatar, DropdownMenu components
@@ -82,7 +92,7 @@ This documentation covers all custom React components found in the `/examples` f
 - **State Management**: Local state with React hooks where needed
 - **Error Handling**: Proper error boundaries and fallbacks
 
-## 6. Setup Requirements
+## 7. Setup Requirements
 
 ### Required Files:
 - `/public/Lolek-logo.png` - Company logo for headers and sidebar
@@ -96,7 +106,7 @@ This documentation covers all custom React components found in the `/examples` f
 - Supabase client configuration
 - Lucide React icons package
 
-## 7. Usage Context
+## 8. Usage Context
 
 These components are designed for a church management application ("Lolek Productions - Serving the Church") with features for:
 - Managing contacts, parishes, and campaigns

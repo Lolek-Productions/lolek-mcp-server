@@ -604,3 +604,201 @@ export default UserProfile;
 ```
 USAGE: Place in sidebar footer or header for user authentication features. Requires Supabase configuration.
 DEPENDENCIES: Supabase client, shadcn/ui Button/Avatar/DropdownMenu, Lucide React icons, Next.js navigation
+
+----------------------------------------
+
+TITLE: AppContextProvider Component
+DESCRIPTION: Application context provider that wraps the entire app with global state management. Provides centralized state for user authentication, application settings, and shared data across components using React Context API.
+SOURCE: /examples/AppContextProvider.tsx
+LANGUAGE: tsx
+CODE:
+```tsx
+import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
+import { supabase } from '@/lib/supabase/client';
+import { User } from '@supabase/supabase-js';
+
+interface AppState {
+  user: User | null;
+  loading: boolean;
+  error: string | null;
+  settings: {
+    theme: 'light' | 'dark' | 'system';
+    sidebarCollapsed: boolean;
+    notifications: boolean;
+  };
+}
+
+interface AppContextType {
+  state: AppState;
+  dispatch: React.Dispatch<AppAction>;
+  login: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  updateSettings: (settings: Partial<AppState['settings']>) => void;
+  clearError: () => void;
+}
+
+type AppAction =
+  | { type: 'SET_USER'; payload: User | null }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'UPDATE_SETTINGS'; payload: Partial<AppState['settings']> }
+  | { type: 'CLEAR_ERROR' }
+  | { type: 'TOGGLE_SIDEBAR' };
+
+const initialState: AppState = {
+  user: null,
+  loading: true,
+  error: null,
+  settings: {
+    theme: 'system',
+    sidebarCollapsed: false,
+    notifications: true,
+  },
+};
+
+const AppContext = createContext<AppContextType | undefined>(undefined);
+
+const appReducer = (state: AppState, action: AppAction): AppState => {
+  switch (action.type) {
+    case 'SET_USER':
+      return { ...state, user: action.payload, loading: false };
+    case 'SET_LOADING':
+      return { ...state, loading: action.payload };
+    case 'SET_ERROR':
+      return { ...state, error: action.payload, loading: false };
+    case 'UPDATE_SETTINGS':
+      return { 
+        ...state, 
+        settings: { ...state.settings, ...action.payload } 
+      };
+    case 'CLEAR_ERROR':
+      return { ...state, error: null };
+    case 'TOGGLE_SIDEBAR':
+      return { 
+        ...state, 
+        settings: { 
+          ...state.settings, 
+          sidebarCollapsed: !state.settings.sidebarCollapsed 
+        } 
+      };
+    default:
+      return state;
+  }
+};
+
+interface AppContextProviderProps {
+  children: ReactNode;
+}
+
+const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => {
+  const [state, dispatch] = useReducer(appReducer, initialState);
+
+  useEffect(() => {
+    // Get initial user session
+    const getInitialSession = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (error) throw error;
+        dispatch({ type: 'SET_USER', payload: session?.user ?? null });
+      } catch (error) {
+        dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Authentication error' });
+      }
+    };
+
+    getInitialSession();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        dispatch({ type: 'SET_USER', payload: session?.user ?? null });
+        
+        if (event === 'SIGNED_OUT') {
+          // Clear any cached data when user signs out
+          dispatch({ type: 'UPDATE_SETTINGS', payload: initialState.settings });
+        }
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Load settings from localStorage on mount
+    const savedSettings = localStorage.getItem('app-settings');
+    if (savedSettings) {
+      try {
+        const settings = JSON.parse(savedSettings);
+        dispatch({ type: 'UPDATE_SETTINGS', payload: settings });
+      } catch (error) {
+        console.error('Failed to load settings:', error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save settings to localStorage whenever they change
+    localStorage.setItem('app-settings', JSON.stringify(state.settings));
+  }, [state.settings]);
+
+  const login = async (email: string, password: string) => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      dispatch({ type: 'CLEAR_ERROR' });
+      
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) throw error;
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Login failed' });
+    }
+  };
+
+  const logout = async () => {
+    try {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+    } catch (error) {
+      dispatch({ type: 'SET_ERROR', payload: error instanceof Error ? error.message : 'Logout failed' });
+    }
+  };
+
+  const updateSettings = (newSettings: Partial<AppState['settings']>) => {
+    dispatch({ type: 'UPDATE_SETTINGS', payload: newSettings });
+  };
+
+  const clearError = () => {
+    dispatch({ type: 'CLEAR_ERROR' });
+  };
+
+  const value: AppContextType = {
+    state,
+    dispatch,
+    login,
+    logout,
+    updateSettings,
+    clearError,
+  };
+
+  return (
+    <AppContext.Provider value={value}>
+      {children}
+    </AppContext.Provider>
+  );
+};
+
+export const useAppContext = () => {
+  const context = useContext(AppContext);
+  if (context === undefined) {
+    throw new Error('useAppContext must be used within an AppContextProvider');
+  }
+  return context;
+};
+
+export default AppContextProvider;
+```
+USAGE: Wrap your entire application with this provider in your root layout or _app.tsx file. Access state and methods using useAppContext hook.
+DEPENDENCIES: Supabase client, Supabase auth types, React Context API, localStorage for settings persistence

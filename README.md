@@ -258,7 +258,7 @@ To connect Claude Code to this MCP server, you'll need to configure it in your C
 
 1a. ** Remove the MCP server**
 
-    claude mcp remove lolek-mcp
+   claude mcp remove lolek-mcp
 
 2. **Alternative: Manual Configuration**
    
