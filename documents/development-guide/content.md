@@ -1377,3 +1377,421 @@ These tools integrate seamlessly with the existing MCP server capabilities:
 - **Complete implementations** including error handling and TypeScript
 - **Cross-references** for understanding component relationships
 - **Practical guidance** for real-world usage scenarios
+
+----------------------------------------
+
+TITLE: Layout Components
+DESCRIPTION: Complete layout system providing application structure for different page types. Includes root layout with theming, authenticated main layout with sidebar, and public layout for marketing pages.
+SOURCE: /examples/layouts/
+
+## App Layout (Root Layout)
+**File**: `app-layout.tsx`
+**Purpose**: Root HTML layout with theme provider, analytics, and global styling
+**Usage**: Primary Next.js App Router layout component
+
+### Features
+- **Font Integration**: Geist font family with optimized loading
+- **Theme Support**: Next-themes integration with system theme detection
+- **Analytics**: Vercel Analytics integration for production
+- **Toast System**: Global toast notifications with shadcn/ui Toaster
+- **SEO Metadata**: Complete Open Graph and Twitter card setup
+
+### Code Structure
+```tsx
+import { Geist } from "next/font/google";
+import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/next"
+import { Toaster } from "@/components/ui/toaster";
+
+export const metadata = {
+  title: "Application Title",
+  description: "Application Description",
+  openGraph: { /* SEO config */ },
+  twitter: { /* Twitter card config */ }
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={geistSans.className} suppressHydrationWarning>
+      <body className="antialiased">
+        {process.env.NODE_ENV === "production" && <Analytics />}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+```
+
+### Usage Notes
+- Place in `app/layout.tsx` for Next.js App Router
+- Customize metadata for your application branding
+- Analytics only loads in production environment
+- Supports light/dark/system theme modes
+- Global toast positioning and styling
+
+## Main Layout (Authenticated Layout)
+**File**: `main-layout.jsx`
+**Purpose**: Layout for authenticated application pages with sidebar navigation
+**Usage**: Wrap authenticated page content with sidebar and main content area
+
+### Features
+- **Sidebar Integration**: Uses shadcn/ui SidebarProvider for responsive behavior
+- **Main Content Area**: Flexible container for page content
+- **Mobile Responsive**: Automatic sidebar collapse on mobile devices
+- **Clean Structure**: Minimal, focused layout for application pages
+
+### Code Structure
+```jsx
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { MainSidebar } from "@/components/main-sidebar";
+
+export default function MainLayout({children}) {
+  return (
+    <SidebarProvider>
+      <MainSidebar />
+      <div className="flex-1">
+        {children}
+      </div>
+    </SidebarProvider>
+  );
+}
+```
+
+### Usage Notes
+- Requires MainSidebar component from examples/components
+- SidebarProvider handles mobile/desktop state management
+- Children content fills remaining space after sidebar
+- Integrates with MainHeader component for breadcrumbs
+
+## Public Layout (Marketing Layout)
+**File**: `public-layout.jsx`
+**Purpose**: Layout for public-facing pages with header and footer
+**Usage**: Wrap marketing pages, landing pages, and authentication pages
+
+### Features
+- **Public Header**: Navigation with logo and login button
+- **Public Footer**: Branding and copyright information
+- **Simple Structure**: Header-content-footer layout pattern
+- **No Authentication**: Suitable for unauthenticated users
+
+### Code Structure
+```jsx
+import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
+
+export default function PublicLayout({ children }) {
+  return (
+    <>
+      <PublicHeader />
+      {children}
+      <PublicFooter />
+    </>
+  );
+}
+```
+
+### Usage Notes
+- Uses PublicHeader and PublicFooter from examples/components
+- No sidebar or complex navigation
+- Suitable for landing pages, about pages, login/signup
+- Header includes responsive mobile menu
+
+## Layout Usage Patterns
+
+### Next.js App Router Integration
+```
+app/
+├── layout.tsx                 # AppLayout (root)
+├── (auth)/
+│   ├── layout.tsx            # MainLayout (authenticated)
+│   └── dashboard/page.tsx    # Uses MainLayout
+└── (public)/
+    ├── layout.tsx            # PublicLayout (marketing)
+    └── about/page.tsx        # Uses PublicLayout
+```
+
+### Component Dependencies
+- **AppLayout**: next-themes, @vercel/analytics, shadcn/ui toaster
+- **MainLayout**: shadcn/ui sidebar, MainSidebar component
+- **PublicLayout**: PublicHeader, PublicFooter components
+
+### Implementation Example
+```tsx
+// app/(auth)/layout.tsx
+import MainLayout from "@/examples/layouts/main-layout";
+
+export default function AuthenticatedLayout({ children }) {
+  return <MainLayout>{children}</MainLayout>;
+}
+```
+
+### Best Practices
+- **Consistent Structure**: Use appropriate layout for page type
+- **Theme Integration**: Leverage theme provider in root layout
+- **Performance**: Analytics and heavy features only in production
+- **Accessibility**: Proper HTML structure and ARIA support
+- **Mobile First**: Responsive design across all layouts
+
+----------------------------------------
+
+TITLE: Page Components
+DESCRIPTION: Complete CRUD page templates and components for building data management interfaces. Includes list tables, edit forms, and page templates with authentication, search, filtering, and responsive design.
+SOURCE: /examples/pages/
+
+## EditForm Component
+**File**: `EditForm.tsx`
+**Purpose**: Reusable form component for creating and editing entities
+**Usage**: Handles both create and update operations with unified interface
+
+### Features
+- **Dual Mode**: Create new entities or edit existing ones
+- **Loading States**: Submit button shows loading during operations
+- **Form Validation**: Client-side validation with TypeScript
+- **Navigation Integration**: Automatic redirect after successful operations
+- **Error Handling**: Integrates with action result patterns
+
+### Code Structure
+```tsx
+interface NoteFormProps {
+  note?: {
+    id: string;
+    note: string;
+  };
+}
+
+export default function EditForm({ note }: NoteFormProps) {
+  const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [content, setContent] = useState(note?.note || "");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    // Form submission logic
+    let result;
+    if (note) {
+      result = await updateNote(note.id, values);
+    } else {
+      result = await createNote(values);
+    }
+    
+    if (result.success) {
+      router.push("/notes"); // Redirect to index page
+    }
+  };
+}
+```
+
+### Usage Notes
+- Pass existing entity for edit mode, omit for create mode
+- Follows redirect-to-index pattern after successful creation
+- Uses shadcn/ui form components (Button, Input, Textarea, Label)
+- Integrates with Server Actions for data operations
+- TypeScript interfaces ensure type safety
+
+## ListTable Component
+**File**: `ListTable.jsx`
+**Purpose**: Comprehensive data table with search, filtering, and actions
+**Usage**: Display lists of entities with CRUD operations
+
+### Features
+- **Search Functionality**: Real-time search across entity content
+- **Responsive Grid**: Card-based layout that adapts to screen size
+- **Action Buttons**: Delete operations with confirmation dialogs
+- **Empty States**: Helpful messaging when no data exists
+- **Toast Integration**: Success/error notifications using toast utilities
+- **Date Formatting**: Relative date display (Today, Yesterday, etc.)
+
+### Code Structure
+```jsx
+export default function ListTable({ notes, onUpdate }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const { handleResponse, error } = useNotify();
+
+  const filteredNotes = useMemo(() => {
+    return notes.filter(note => 
+      note.note.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [notes, searchTerm]);
+
+  const handleDelete = async () => {
+    const result = await deleteNote(noteToDelete);
+    handleResponse(result, { 
+      successTitle: "Note Deleted", 
+      errorTitle: "Delete Failed" 
+    });
+  };
+}
+```
+
+### Usage Notes
+- Requires toast utilities from examples/lib/toast-utils
+- Uses shadcn/ui Dialog for confirmation dialogs
+- Accepts onUpdate callback for custom refresh logic
+- Implements responsive card grid instead of traditional table
+- Search functionality with debounced filtering
+
+## Create Page Template
+**File**: `create-page.tsx`
+**Purpose**: Complete page template for entity creation
+**Usage**: Server component with authentication and proper layout structure
+
+### Features
+- **Authentication Check**: Redirects unauthenticated users to sign-in
+- **Breadcrumb Navigation**: Shows current location in app hierarchy
+- **Page Container**: Consistent layout with title and description
+- **Component Integration**: Uses reusable form components
+
+### Code Structure
+```tsx
+export default async function CreateNotePage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  return (
+    <>
+      <MainHeader 
+        breadcrumbs={[
+          { label: "Notes", href: "/notes" },
+          { label: "Create" }
+        ]} 
+      />
+      <PageContainer 
+        title="Create Note" 
+        description="Start a new note"
+        maxWidth="3xl"
+      >
+        <NoteForm />
+      </PageContainer>
+    </>
+  );
+}
+```
+
+### Usage Notes
+- Server component with async authentication
+- Uses Supabase auth with automatic redirection
+- Integrates MainHeader and PageContainer components
+- Customizable maxWidth for different content types
+
+## Edit Page Template
+**File**: `edit-page.jsx`
+**Purpose**: Complete page template for entity editing
+**Usage**: Server component with data fetching and error handling
+
+### Features
+- **Data Fetching**: Loads entity by ID with error handling
+- **404 Handling**: Automatic notFound() for missing entities
+- **Authentication**: Protects edit operations
+- **Form Pre-population**: Passes existing data to form component
+
+### Code Structure
+```jsx
+export default async function EditNotePage({ params }) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  const noteResult = await fetchNoteById(params.noteId);
+  
+  if (!noteResult.success || !noteResult.data) {
+    notFound();
+  }
+
+  return (
+    <>
+      <MainHeader breadcrumbs={[/* breadcrumb config */]} />
+      <PageContainer title="Edit Note">
+        <NoteForm note={note} />
+      </PageContainer>
+    </>
+  );
+}
+```
+
+### Usage Notes
+- Dynamic route parameter handling with params.noteId
+- Error boundaries with notFound() for missing data
+- Same form component used for both create and edit
+- Proper breadcrumb navigation showing context
+
+## List Page Template
+**File**: `list-page.jsx`
+**Purpose**: Complete page template for entity listing
+**Usage**: Server component with data loading and table integration
+
+### Features
+- **Data Loading**: Server-side data fetching with error handling
+- **Suspense Integration**: Loading states for async components
+- **Authentication**: Protects list access
+- **Table Integration**: Passes data to list table component
+
+### Code Structure
+```jsx
+export default async function ListPage() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  
+  if (!user) {
+    redirect("/sign-in");
+  }
+
+  const notesResult = await fetchNotes();
+  const notes = notesResult.success ? notesResult.data : [];
+
+  return (
+    <>
+      <MainHeader breadcrumbs={[{ label: "Notes" }]} />
+      <PageContainer title="Notes" maxWidth="5xl">
+        <Suspense fallback={<div>Loading notes...</div>}>
+          <NotesTable notes={notes} />
+        </Suspense>
+      </PageContainer>
+    </>
+  );
+}
+```
+
+### Usage Notes
+- Graceful error handling with fallback empty arrays
+- Suspense boundaries for loading states
+- Wider maxWidth (5xl) for table layouts
+- Server component pattern with data fetching
+
+## CRUD Implementation Pattern
+
+### Complete CRUD Structure
+```
+app/notes/
+├── page.jsx                  # ListPage template
+├── create/page.tsx           # CreatePage template
+├── [id]/edit/page.jsx       # EditPage template
+├── components/
+│   ├── NotesTable.jsx       # ListTable component
+│   └── NoteForm.tsx         # EditForm component
+└── actions.ts               # Server actions
+```
+
+### Integration Benefits
+- **Consistent UI**: All pages use same layout components
+- **Type Safety**: TypeScript interfaces across components
+- **Authentication**: Built-in auth checks and redirects
+- **Error Handling**: Comprehensive error states and messaging
+- **Performance**: Server components with optimal data loading
+- **Accessibility**: Proper HTML structure and ARIA support
+
+### Best Practices
+- **Component Reuse**: Same form for create/edit operations
+- **Navigation Patterns**: Consistent breadcrumbs and redirects
+- **Data Patterns**: Server actions with standardized result formats
+- **Toast Integration**: User feedback for all operations
+- **Mobile Responsive**: Card grids instead of complex tables

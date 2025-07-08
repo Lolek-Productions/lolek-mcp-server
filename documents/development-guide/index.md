@@ -216,3 +216,40 @@ The components include examples from a church management application (contacts, 
 - Consistent architectural patterns
 - Complete TypeScript implementations
 - Security and path validation features
+
+## 16. Layout Components
+
+### Application Layout System
+- Root layout with theme provider and analytics
+- Main layout for authenticated pages with sidebar
+- Public layout for marketing and auth pages
+
+### Layout Features
+- Theme integration with next-themes
+- Responsive sidebar behavior
+- Toast notification system
+- SEO metadata and social sharing
+
+### Next.js App Router Integration
+- Proper layout composition patterns
+- Route group organization
+- Component dependency management
+
+## 17. Page Components & CRUD Templates
+
+### Complete CRUD System
+- EditForm component for create/edit operations
+- ListTable with search and filtering
+- Page templates for list, create, and edit views
+
+### CRUD Page Templates
+- List page with authentication and data loading
+- Create page with proper breadcrumbs and layout
+- Edit page with entity fetching and error handling
+
+### Advanced Features
+- Server component patterns with async data
+- Toast integration for user feedback
+- Confirmation dialogs for destructive actions
+- Responsive card grids for mobile optimization
+- Real-time search and filtering functionality
