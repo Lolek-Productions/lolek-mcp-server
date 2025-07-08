@@ -877,9 +877,9 @@ const MyNewPage = () => {
 
 ## MCP Server Documentation Access
 Query this documentation through the MCP server tools:
-- `get-sections --topic=custom-components` - Get component sections  
+- `get-sections --topic=development-guide` - Get development sections  
 - `search-content --query="MainHeader" --scope=docs` - Search for specific components
-- `load-documentation-context` - Load all component guidance
+- `load-documentation-context` - Load all development guidance
 
 ----------------------------------------
 

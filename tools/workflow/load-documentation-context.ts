@@ -16,7 +16,7 @@ export const loadDocumentationContext: ToolDefinition = {
       const results: string[] = [];
       
       // Default essential topics for context loading
-      const defaultTopics = ["nextjs", "shadcn", "custom-components"];
+      const defaultTopics = ["nextjs", "shadcn", "development-guide"];
       const topicsToLoad = topics || defaultTopics;
       
       results.push("# AI Agent Context Loading\n");

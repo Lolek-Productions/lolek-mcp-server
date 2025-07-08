@@ -9,7 +9,7 @@ This file contains behavioral rules and constraints for the AI agent when workin
 - **DO NOT modify existing migration files** - Always create new migrations if database changes are absolutely necessary
 
 ### Component Usage
-- **Always use custom components before shadcn/ui components** - Check the `/examples` folder and `/docs/custom-components/` documentation first
+- **Always use custom components before shadcn/ui components** - Check the `/examples` folder and `/docs/development-guide/` documentation first
 - **Prefer existing custom components over creating new ones** - Extend or modify existing components when possible
 - **Only use shadcn/ui components when no custom alternative exists** - Document the reason for using shadcn/ui instead of custom components
 
@@ -26,7 +26,7 @@ This file contains behavioral rules and constraints for the AI agent when workin
 - **Create new files only when absolutely necessary** - Prefer editing existing files
 
 ### Documentation
-- **Update documentation when adding new components** - Keep `/docs/custom-components/` up to date
+- **Update documentation when adding new components** - Keep `/docs/development-guide/` up to date
 - **Add usage examples for new components** - Include practical implementation examples
 - **Document dependencies clearly** - List all required packages and setup steps
 

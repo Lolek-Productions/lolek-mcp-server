@@ -43,11 +43,11 @@ This Next.js-based Model Context Protocol (MCP) server provides documentation na
 4. **Agent Handles Execution** → Create checklist and track progress
 
 ## Documentation Available
-- **custom-components**: Pre-built React components + complete project setup guidance
+- **development-guide**: Pre-built React components + complete project setup guidance
 - **nextjs**: 685 Next.js framework documentation titles  
 - **shadcn**: 63 shadcn/ui component library titles
 
-### Custom Components Include:
+### Development Guide Includes:
 - Authentication workflows (login, signup, user profiles)
 - Navigation structures (headers, sidebars, breadcrumbs)
 - Layout containers (forms, pages, cards)

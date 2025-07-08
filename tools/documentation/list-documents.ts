@@ -38,10 +38,10 @@ export const listDocuments: ToolDefinition = {
         }
       }
       
-      // Sort topics to prioritize custom-components first
+      // Sort topics to prioritize development-guide first
       topics.sort((a, b) => {
-        if (a.name === 'custom-components') return -1;
-        if (b.name === 'custom-components') return 1;
+        if (a.name === 'development-guide') return -1;
+        if (b.name === 'development-guide') return 1;
         return a.name.localeCompare(b.name);
       });
       
@@ -59,7 +59,7 @@ ${topics.map(topic => {
 }).join('\n\n')}
 
 Workflow: Use get-document-section → get-document-titles → targeted searches
-Note: Tools default to 'custom-components' for component documentation`
+Note: Tools default to 'development-guide' for comprehensive development guidance`
         }]
       };
     } catch (error) {

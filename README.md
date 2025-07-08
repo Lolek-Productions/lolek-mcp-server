@@ -15,14 +15,14 @@ This MCP server provides efficient navigation tools for large documentation file
 #### 2. `get-document-section` - Section Retrieval  
 **Purpose**: Get one or more sections' content from a topic's index file  
 **Parameters**: 
-- `topic` (optional): "custom-components", "nextjs", "shadcn" (defaults to "custom-components")
+- `topic` (optional): "development-guide", "nextjs", "shadcn" (defaults to "development-guide")
 - `sectionName` (required): Name of the section(s) to retrieve. Use comma-separated values for multiple sections (e.g., "Navigation Components, Layout Components")
 **Usage**: Use after `list-docs` to get specific section content. Supports multiple sections in one request.
 
 #### 3. `get-document-titles` - Documentation Title Extraction and Search
 **Purpose**: Extract and search documentation titles from any topic's content files  
 **Parameters**: 
-- `topic` (optional): "custom-components", "nextjs", "shadcn" (defaults to "custom-components")
+- `topic` (optional): "development-guide", "nextjs", "shadcn" (defaults to "development-guide")
 - `file` (optional): "content", "index", "headings" (defaults to "content")
 - `type` (optional): "markdown" for # headings, "titles" for TITLE: lines (defaults to "titles")
 - `keywords` (optional): Search keywords to filter titles (case-insensitive, space-separated)

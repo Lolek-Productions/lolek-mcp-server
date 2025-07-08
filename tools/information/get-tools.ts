@@ -21,14 +21,14 @@ export const getTools: ToolDefinition = {
 ### get-document-section
 **Description:** Get one or more sections' content from a topic's index file
 **Parameters:**
-- topic (optional): "custom-components", "nextjs", "shadcn" (default: "custom-components")
+- topic (optional): "development-guide", "nextjs", "shadcn" (default: "development-guide")
 - sectionName (required): Name of section(s), comma-separated for multiple
 **Usage:** Get specific documentation sections
 
 ### get-document-titles
 **Description:** Extract and search documentation titles
 **Parameters:**
-- topic (optional): "custom-components", "nextjs", "shadcn" (default: "custom-components")
+- topic (optional): "development-guide", "nextjs", "shadcn" (default: "development-guide")
 - file (optional): "content", "index", "headings" (default: "content")
 - type (optional): "markdown", "titles" (default: "titles")
 - keywords (optional): Search keywords (space-separated)
