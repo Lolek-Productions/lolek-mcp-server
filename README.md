@@ -12,7 +12,7 @@ This MCP server is designed to help AI agents:
 - **Follow structured development workflows** with quality evaluation
 - **Build consistent applications** using established patterns and best practices
 
-## 🛠️ Available Tools
+## 🛠️ Available Tools (11 Total)
 
 ### Documentation Navigation Tools
 
@@ -64,6 +64,18 @@ This MCP server is designed to help AI agents:
 #### 9. `load-documentation-context` - Bulk Context Loading
 **Purpose**: Efficiently load all essential documentation context at once  
 **Usage**: Load comprehensive context including documentation headings, agent rules, and available tools
+
+### Example Management Tools
+
+#### 10. `list-examples` - Available Examples
+**Purpose**: List all available code examples organized by category  
+**Usage**: Discover available React components, contexts, library files, and scripts
+
+#### 11. `get-example` - Retrieve Example Code
+**Purpose**: Get the code content of a specific example file  
+**Parameters**: 
+- `file` (required): Path to example file (e.g., "components/PublicHeader.jsx", "contexts/AppContextProvider.tsx")
+**Usage**: Retrieve production-ready code examples with descriptions and usage notes
 
 ## 📊 Recommended Workflows
 
@@ -266,7 +278,12 @@ Claude, use get-workflow-template with type "feature" to help me plan a bulk con
 
 ### Finding Components
 ```
-Claude, use search-content to find navigation components for building a sidebar.
+Claude, use list-examples to see all available components, then use get-example to get the sidebar code.
+```
+
+### Getting Example Code
+```
+Claude, use get-example with file "components/main-sidebar.tsx" to get the sidebar component code.
 ```
 
 ## 🔍 Troubleshooting

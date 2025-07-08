@@ -18,89 +18,76 @@ export const getTools: ToolDefinition = {
 **Parameters:** None
 **Usage:** Discover what documentation is available
 
-### get-document-section
-**Description:** Get one or more sections' content from a topic's index file
-**Parameters:**
-- topic (optional): "development-guide", "nextjs", "shadcn" (default: "development-guide")
-- sectionName (required): Name of section(s), comma-separated for multiple
-**Usage:** Get specific documentation sections
-
-### get-document-titles
-**Description:** Extract and search documentation titles
-**Parameters:**
-- topic (optional): "development-guide", "nextjs", "shadcn" (default: "development-guide")
-- file (optional): "content", "index", "headings" (default: "content")
-- type (optional): "markdown", "titles" (default: "titles")
-- keywords (optional): Search keywords (space-separated)
-**Usage:** Find specific documentation by title search
-
 ### search-content
 **Description:** Search across all documentation and guides
 **Parameters:**
 - query (required): Search term or regex pattern
-- scope (optional): "all", "documents", "guides" (default: "all")
-- caseSensitive (optional): Boolean (default: false)
-- maxResults (optional): Number (default: 50)
+- scope (optional): "docs", "guides", "examples" (default: "docs")
+- limit (optional): Maximum results (default: 50)
 **Usage:** Full-text search across documentation
 
-## Introduction and Overview
+## Information & Context Tools
 
 ### get-introduction
 **Description:** Get introduction to Lolek MCP Server and its capabilities
 **Parameters:** None
 **Usage:** Learn about the server and how to use it
 
-### get-tools
-**Description:** List all available MCP tools with descriptions and parameters
-**Parameters:** None
-**Usage:** See this complete tool reference
-
 ### get-agent-rules
 **Description:** Get behavioral rules and constraints for the AI agent
 **Parameters:** None
 **Usage:** Review agent behavioral rules and project-specific constraints
 
-## Simple Planning Tools
+### get-tools
+**Description:** List all available MCP tools with descriptions and parameters
+**Parameters:** None
+**Usage:** See this complete tool reference
+
+## Workflow Management Tools
 
 ### get-workflows
-**Description:** Get all available development workflow types and descriptions
+**Description:** List all available development workflow types
 **Parameters:** None
-**Usage:** Explore available workflow options for planning
+**Usage:** Explore available workflow options (Module, Feature, Bug Fix, Commit)
 
-### get-preplanning-questions
-**Description:** Get strategic planning questions for development
+### get-workflow-template
+**Description:** Get complete workflow template with embedded questions and quality standards
 **Parameters:**
 - type (required): "module" or "feature"
-**Usage:** Start the planning process with structured questions
+**Usage:** Get comprehensive workflow with pre-planning questions and implementation steps
 
-### evaluate-preplanning-answers
-**Description:** Evaluate planning quality and provide feedback
+### evaluate-workflow-progress
+**Description:** Evaluate workflow progress and provide implementation guidance
 **Parameters:**
 - type (required): "module" or "feature"
-- answers (required): JSON formatted answers to planning questions
-**Usage:** Validate planning quality before implementation
+- currentStep (required): Current workflow step ID
+- stepProgress (required): Description of current progress
+- preplanningAnswers (optional): JSON answers for pre-planning evaluation
+**Usage:** Track progress through workflow steps and get quality feedback
 
-### generate-implementation-plan
-**Description:** Create detailed implementation plans from evaluated answers
-**Parameters:**
-- type (required): "module" or "feature"
-- answers (required): JSON formatted planning answers
-- evaluationScore (optional): Score from evaluation step
-**Usage:** Generate actionable implementation plan
+### load-documentation-context
+**Description:** Efficiently load all essential documentation context at once
+**Parameters:** None
+**Usage:** Load comprehensive context including documentation headings, agent rules, and available tools
 
-### create-simple-checklist
-**Description:** Create basic checklist file for development tracking
+## Example Management Tools
+
+### list-examples
+**Description:** List all available code examples organized by category
+**Parameters:** None
+**Usage:** Discover available React components, contexts, library files, and scripts
+
+### get-example
+**Description:** Get the code content of a specific example file
 **Parameters:**
-- type (required): "feature" or "module"
-- name (required): Name for the checklist
-- filePath (optional): Custom file path
-**Usage:** Generate markdown checklist for progress tracking
+- file (required): Path to example file (e.g., "components/PublicHeader.jsx", "contexts/AppContextProvider.tsx")
+**Usage:** Retrieve production-ready code examples with descriptions and usage notes
 
 ## Quick Start
-1. Use **get-introduction** to understand the server
+1. Use **load-documentation-context** to efficiently load all essential context
 2. Use **get-workflows** to explore planning options
-3. Use **get-preplanning-questions** to start planning
-4. Use **list-documents** to explore documentation`
+3. Use **get-workflow-template** to start structured development
+4. Use **list-examples** to discover available code components`
       }]
     };
   }
