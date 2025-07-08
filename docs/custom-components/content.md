@@ -805,6 +805,84 @@ DEPENDENCIES: Supabase client, Supabase auth types, React Context API, localStor
 
 ----------------------------------------
 
+TITLE: Component System Architecture
+DESCRIPTION: Overview of component architecture, navigation patterns, and implementation guidelines for custom components.
+
+## Component System Overview
+This documentation covers the component architecture used in application development, focusing on:
+- Navigation components (MainHeader, Sidebar, Breadcrumbs)
+- Layout patterns and integration workflows  
+- Common implementation problems and their solutions
+- Best practices for component development
+
+## MainHeader Component Architecture
+The primary navigation header that appears at the top of every page includes:
+- **Sidebar toggle button** - Controls sidebar open/close state
+- **Breadcrumb navigation** - Shows current page hierarchy  
+- **Responsive layout** - Adapts to different screen sizes
+
+## Breadcrumb System
+A dynamic navigation system that:
+- **Updates automatically** when pages load via useEffect hooks
+- **Supports dynamic content** (user names, IDs, etc.)
+- **Follows configuration** defined in breadcrumbConfig.js
+- **Integrates with React Context** for state management
+
+## Integration Pattern
+Every page in the main folder should follow this pattern:
+1. **Import MainLayout** - Provides consistent header/sidebar structure
+2. **Set up breadcrumbs** - Use useEffect to configure page hierarchy
+3. **Handle cleanup** - Clear breadcrumbs when component unmounts
+
+## Quick Start Implementation
+To implement MainHeader on a new page:
+
+```jsx
+import React, { useEffect } from 'react';
+import { useBreadcrumb } from '../contexts/BreadcrumbContext';
+import { getBreadcrumbItems } from '../config/breadcrumbConfig';
+import MainLayout from '../layouts/MainLayout';
+
+const MyNewPage = () => {
+  const { setBreadcrumbItems } = useBreadcrumb();
+
+  useEffect(() => {
+    const breadcrumbItems = getBreadcrumbItems('/main/my-new-page');
+    setBreadcrumbItems(breadcrumbItems);
+    
+    return () => setBreadcrumbItems([]);
+  }, [setBreadcrumbItems]);
+
+  return (
+    <MainLayout>
+      <h1>My New Page</h1>
+      {/* Page content */}
+    </MainLayout>
+  );
+};
+```
+
+## Best Practices
+1. **Always use MainLayout** for pages in the main folder
+2. **Set breadcrumbs in useEffect** with proper cleanup
+3. **Follow the breadcrumb configuration** pattern
+4. **Test mobile responsiveness** for all header implementations
+5. **Handle dynamic content** properly in breadcrumbs
+
+## Common Implementation Issues
+- **Breadcrumb update timing issues**: Ensure useEffect dependencies are correct
+- **Sidebar state synchronization problems**: Use consistent context providers
+- **Mobile responsiveness challenges**: Test across device sizes
+- **Z-index conflicts**: Maintain proper layering hierarchy
+
+## MCP Server Documentation Access
+Query this documentation through the MCP server tools:
+- `get-sections --topic=custom-components` - Get component sections  
+- `search-content --query="MainHeader" --scope=docs` - Search for specific components
+- `load-documentation-context` - Load all component guidance
+
+----------------------------------------
+
 TITLE: Technology Stack Details
 DESCRIPTION: Comprehensive technology stack and development guidelines for Next.js applications with Supabase integration.
 

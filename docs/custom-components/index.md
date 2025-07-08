@@ -42,7 +42,27 @@ Button component for copying text to clipboard with visual feedback
 ### UserProfile
 User profile dropdown with Supabase authentication and user management
 
-## 6. Component Dependencies
+## 6. Component System Architecture
+
+### Architecture Overview
+- Navigation components and layout patterns
+- MainHeader and breadcrumb system integration
+- Dynamic navigation with React Context
+- Component integration workflows
+
+### Implementation Patterns
+- MainLayout usage for consistent structure
+- Breadcrumb configuration and cleanup
+- useEffect hooks for navigation updates
+- Mobile-responsive design considerations
+
+### Best Practices
+- Always use MainLayout for main application pages
+- Set breadcrumbs in useEffect with proper cleanup
+- Follow breadcrumb configuration patterns
+- Test mobile responsiveness thoroughly
+
+## 7. Component Dependencies
 
 ### Common Dependencies
 - shadcn/ui components (Button, Card, Sidebar, Avatar, DropdownMenu)
@@ -58,7 +78,7 @@ User profile dropdown with Supabase authentication and user management
 - Compound component architecture
 - Error handling and loading states
 
-## 7. Technology Stack
+## 8. Technology Stack
 
 ### Frontend Stack
 - Next.js 15 (App Router)
@@ -76,7 +96,7 @@ User profile dropdown with Supabase authentication and user management
 - Maintain responsive design
 - Integrate with Supabase Auth
 
-## 8. Setup Requirements
+## 9. Setup Requirements
 
 ### Required Files
 - Company logo in public directory
@@ -93,7 +113,7 @@ User profile dropdown with Supabase authentication and user management
 - Schema documentation workflow
 - Database refresh procedures
 
-## 9. Authentication Configuration
+## 10. Authentication Configuration
 
 ### Authentication Setup
 - Supabase authentication provider
@@ -105,7 +125,7 @@ User profile dropdown with Supabase authentication and user management
 - Redirect URL configuration
 - User management procedures
 
-## 10. Data Architecture
+## 11. Data Architecture
 
 ### App Structure Options
 - Individual structure (user_id scoping)
@@ -119,7 +139,7 @@ User profile dropdown with Supabase authentication and user management
 - Consistent data scoping
 - Proper table relationships
 
-## 11. Infrastructure & Deployment
+## 12. Infrastructure & Deployment
 
 ### Version Control
 - GitHub integration
@@ -134,7 +154,7 @@ User profile dropdown with Supabase authentication and user management
 - NameCheap DNS setup
 - SSL certificate management
 
-## 12. Branding & Assets
+## 13. Branding & Assets
 
 ### Logo Design
 - Design tool recommendations
@@ -146,7 +166,7 @@ User profile dropdown with Supabase authentication and user management
 - Multi-platform testing
 - PWA support
 
-## 13. Purpose & Usage Context
+## 14. Purpose & Usage Context
 
 ### MCP Server Purpose
 This MCP server is designed to help AI agents build applications quickly and consistently by providing:
