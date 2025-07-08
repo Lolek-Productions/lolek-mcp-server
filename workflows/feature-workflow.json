@@ -3,6 +3,249 @@
   "description": "Complete workflow for developing a new feature from conception to deployment",
   "type": "feature",
   "totalSteps": 9,
+  "questions": {
+    "title": "Feature Pre-Planning Questions",
+    "description": "Essential questions to answer before implementing a new feature",
+    "questions": [
+      {
+        "id": "feature_description",
+        "question": "What specific feature are you planning to implement?",
+        "type": "text",
+        "required": true,
+        "guidance": "Provide a clear, concise description of the feature",
+        "examples": [
+          "Add bulk contact import from CSV files",
+          "Implement real-time chat notifications",
+          "Create advanced search with filters"
+        ]
+      },
+      {
+        "id": "user_story",
+        "question": "What is the user story for this feature?",
+        "type": "text",
+        "required": true,
+        "guidance": "Use format: As a [user type], I want [functionality] so that [benefit]",
+        "examples": [
+          "As a sales manager, I want to import contacts from CSV so that I can quickly add leads from trade shows",
+          "As a support agent, I want real-time notifications so that I can respond to customers immediately"
+        ]
+      },
+      {
+        "id": "acceptance_criteria",
+        "question": "What are the acceptance criteria for this feature?",
+        "type": "list",
+        "required": true,
+        "guidance": "List specific, testable conditions that must be met",
+        "examples": [
+          "Upload CSV files up to 10MB",
+          "Validate email format and phone numbers",
+          "Show progress bar during import",
+          "Display success/error summary after import"
+        ]
+      },
+      {
+        "id": "user_workflow",
+        "question": "Describe the user workflow for this feature",
+        "type": "text",
+        "required": true,
+        "guidance": "Step-by-step description of how users will interact with the feature",
+        "examples": [
+          "1. User clicks 'Import Contacts' button 2. Selects CSV file 3. Maps columns to fields 4. Reviews preview 5. Confirms import 6. Views results"
+        ]
+      },
+      {
+        "id": "technical_approach",
+        "question": "What is your planned technical approach for this specific feature?",
+        "type": "text",
+        "required": true,
+        "guidance": "Focus on feature-specific implementation. Standard architecture patterns are covered in the development guide.",
+        "examples": [
+          "Use file upload component, parse CSV with Papa Parse library, validate data server-side, batch insert to database",
+          "Implement WebSocket connection, create notification service, update UI with real-time events"
+        ]
+      },
+      {
+        "id": "affected_components",
+        "question": "Which existing components or modules will be affected beyond standard components?",
+        "type": "list",
+        "required": true,
+        "guidance": "Focus on feature-specific components. Standard UI components are available in the development guide.",
+        "examples": [
+          "ContactList component - add import button",
+          "ContactService - add import methods",
+          "Database - add import logging table",
+          "New: ImportDialog component"
+        ]
+      },
+      {
+        "id": "data_changes",
+        "question": "What data model changes are needed beyond standard schema?",
+        "type": "list",
+        "required": false,
+        "guidance": "Focus on feature-specific data changes. Standard database setup is covered in the development guide.",
+        "examples": [
+          "Add import_batch_id field to contacts table",
+          "Create import_logs table",
+          "Add indexes for bulk search performance"
+        ]
+      },
+      {
+        "id": "edge_cases",
+        "question": "What edge cases or error scenarios should be handled?",
+        "type": "list",
+        "required": true,
+        "guidance": "Consider failure modes and unusual inputs",
+        "examples": [
+          "Invalid CSV format or empty file",
+          "Duplicate email addresses",
+          "Network interruption during import",
+          "Very large files exceeding memory"
+        ]
+      },
+      {
+        "id": "testing_strategy",
+        "question": "How will you test this feature beyond standard testing practices?",
+        "type": "text",
+        "required": false,
+        "guidance": "Focus on feature-specific testing needs. Standard testing framework is mentioned in the development guide.",
+        "examples": [
+          "Unit tests for CSV parsing and validation, integration tests for full import workflow, manual testing with various CSV formats"
+        ]
+      },
+      {
+        "id": "rollback_plan",
+        "question": "What is your rollback plan if issues arise?",
+        "type": "text",
+        "required": true,
+        "guidance": "How to safely disable or revert the feature",
+        "examples": [
+          "Feature flag to disable import functionality, database rollback script for imports, clear error messaging to users"
+        ]
+      }
+    ]
+  },
+  "qualityStandards": {
+    "title": "Feature Quality Standards",
+    "description": "Quality criteria for evaluating feature pre-planning answers",
+    "scoring": {
+      "scale": 5,
+      "thresholds": {
+        "excellent": 4.5,
+        "good": 3.5,
+        "acceptable": 2.5,
+        "needs_improvement": 1.5,
+        "inadequate": 0
+      }
+    },
+    "criteria": [
+      {
+        "id": "feature_clarity",
+        "question_id": "feature_description",
+        "weight": 12,
+        "description": "How clear and specific is the feature description?",
+        "excellent": "Feature is clearly described with specific, actionable details",
+        "good": "Feature is mostly clear with minor ambiguity",
+        "acceptable": "Feature is somewhat clear but could be more specific",
+        "needs_improvement": "Feature description is vague or confusing",
+        "inadequate": "Feature description is unclear or missing"
+      },
+      {
+        "id": "user_story_quality",
+        "question_id": "user_story",
+        "weight": 12,
+        "description": "How well-crafted is the user story?",
+        "excellent": "User story follows proper format and clearly explains value",
+        "good": "User story is well-crafted with minor issues",
+        "acceptable": "User story is adequate but could be improved",
+        "needs_improvement": "User story is poorly written or incomplete",
+        "inadequate": "User story is missing or doesn't follow format"
+      },
+      {
+        "id": "acceptance_criteria_completeness",
+        "question_id": "acceptance_criteria",
+        "weight": 10,
+        "description": "How comprehensive are the acceptance criteria?",
+        "excellent": "Acceptance criteria are specific, testable, and comprehensive",
+        "good": "Acceptance criteria are mostly complete with minor gaps",
+        "acceptable": "Acceptance criteria are adequate but could be more detailed",
+        "needs_improvement": "Acceptance criteria are incomplete or vague",
+        "inadequate": "Acceptance criteria are missing or inadequate"
+      },
+      {
+        "id": "workflow_clarity",
+        "question_id": "user_workflow",
+        "weight": 12,
+        "description": "How clear is the user workflow?",
+        "excellent": "User workflow is detailed, logical, and easy to follow",
+        "good": "User workflow is clear with minor gaps",
+        "acceptable": "User workflow is basic but understandable",
+        "needs_improvement": "User workflow is unclear or illogical",
+        "inadequate": "User workflow is missing or confusing"
+      },
+      {
+        "id": "technical_approach_soundness",
+        "question_id": "technical_approach",
+        "weight": 12,
+        "description": "How sound is the technical approach?",
+        "excellent": "Technical approach is well-thought-out and feasible",
+        "good": "Technical approach is solid with minor concerns",
+        "acceptable": "Technical approach is basic but workable",
+        "needs_improvement": "Technical approach has significant issues",
+        "inadequate": "Technical approach is missing or unfeasible"
+      },
+      {
+        "id": "impact_assessment",
+        "question_id": "affected_components",
+        "weight": 10,
+        "description": "How well are affected components identified?",
+        "excellent": "All affected components are identified with clear impact",
+        "good": "Most affected components are identified",
+        "acceptable": "Some affected components are identified",
+        "needs_improvement": "Few affected components are identified",
+        "inadequate": "Affected components are not identified"
+      },
+      {
+        "id": "edge_case_consideration",
+        "question_id": "edge_cases",
+        "weight": 12,
+        "description": "How well are edge cases considered?",
+        "excellent": "Comprehensive edge case analysis with mitigation strategies",
+        "good": "Good edge case consideration with minor gaps",
+        "acceptable": "Basic edge case consideration",
+        "needs_improvement": "Limited edge case consideration",
+        "inadequate": "Edge cases not considered or identified"
+      },
+      {
+        "id": "testing_completeness",
+        "question_id": "testing_strategy",
+        "weight": 10,
+        "description": "How comprehensive is the testing strategy?",
+        "excellent": "Testing strategy covers all levels and scenarios",
+        "good": "Testing strategy is mostly comprehensive",
+        "acceptable": "Testing strategy is basic but adequate",
+        "needs_improvement": "Testing strategy is incomplete",
+        "inadequate": "Testing strategy is missing or inadequate"
+      },
+      {
+        "id": "risk_management",
+        "question_id": "rollback_plan",
+        "weight": 10,
+        "description": "How well is risk management addressed?",
+        "excellent": "Comprehensive rollback plan with clear procedures",
+        "good": "Good rollback plan with minor gaps",
+        "acceptable": "Basic rollback plan mentioned",
+        "needs_improvement": "Limited rollback planning",
+        "inadequate": "Rollback plan is missing or inadequate"
+      }
+    ],
+    "recommendations": {
+      "excellent": "Excellent feature planning! You're ready to proceed with implementation.",
+      "good": "Good feature planning with minor areas for improvement. Consider refining the highlighted areas before proceeding.",
+      "acceptable": "Acceptable feature planning but several areas need more detail. Please address the feedback before implementing.",
+      "needs_improvement": "The feature planning needs significant improvement. Please revise your answers based on the feedback provided.",
+      "inadequate": "The feature planning is inadequate. Please start over and provide more detailed, thoughtful answers."
+    }
+  },
   "steps": [
     {
       "id": "0_context_preparation",
@@ -31,7 +274,7 @@
     {
       "id": "1_preplanning",
       "name": "Pre-Planning",
-      "description": "Define and validate the feature concept",
+      "description": "Define and validate the feature concept using embedded questions and quality evaluation",
       "deliverables": [
         "Feature description and user story",
         "Acceptance criteria",
@@ -40,11 +283,10 @@
         "Quality-evaluated pre-planning document"
       ],
       "activities": [
-        "Use get-preplanning-questions tool for feature type",
-        "Answer all 10 pre-planning questions thoroughly",
-        "Use evaluate-preplanning-answers tool for quality assessment",
+        "Answer all 10 pre-planning questions thoroughly (see questions section above)",
+        "Use evaluate-workflow-progress tool for quality assessment with pre-planning answers",
         "Refine answers until achieving 3.5+ quality score",
-        "Use generate-implementation-plan tool"
+        "Implementation plan will be automatically generated upon quality approval"
       ],
       "exitCriteria": [
         "All required questions answered",

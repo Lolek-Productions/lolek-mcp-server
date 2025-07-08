@@ -184,7 +184,6 @@ You end up with:
 workflows/
 ├── feature-workflow.json       # Complete 8-step feature workflow
 ├── module-workflow.json        # Complete 11-step module workflow
-├── workflow-orchestrator.js    # Workflow session management
 ├── templates/                  # Pre-planning templates (used in step 1)
 │   ├── module/
 │   │   ├── questions.json      # 10 comprehensive module questions

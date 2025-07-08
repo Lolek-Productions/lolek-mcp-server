@@ -8,7 +8,9 @@
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:workflows": "jest workflows/__tests__ tools/workflow/__tests__",
+    "test:e2e-workflows": "node scripts/test-workflow-e2e.mjs"
   },
   "dependencies": {
     "@vercel/mcp-adapter": "0.8.2",

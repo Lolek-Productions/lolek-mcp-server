@@ -71,8 +71,38 @@ This will hide the "Legacy Auth System" and "Deprecated OAuth Flow" sections whe
 mkdir documents/your-topic
 ```
 
-### Step 2: Create index.md
-Create an index.md with the navigation structure:
+### Step 2: Create content.md
+Create a content.md file with all your detailed documentation:
+
+```markdown
+# Your Topic Documentation
+
+## Getting Started
+Detailed getting started guide with code examples...
+
+## Core Concepts
+In-depth explanation of concepts...
+
+## Implementation Guide
+Complete implementation details...
+
+## Advanced Features
+Advanced usage patterns and examples...
+```
+
+### Step 3: Generate index.md Automatically
+Instead of manually creating the index.md file, use this prompt with your AI agent:
+
+**Prompt**: "Evaluate all the information inside the content.md file, extract the titles from each section, group the titles by topic, and place the grouping and the list of all the titles in a file called index.md."
+
+This will automatically:
+- Extract all section headings from your content.md
+- Group related sections by topic
+- Create a properly structured index.md navigation file
+- Ensure consistency between your content and navigation structure
+
+### Alternative: Manual index.md Creation
+If you prefer to create index.md manually, follow this structure:
 
 ```markdown
 # Your Topic Documentation
@@ -87,25 +117,6 @@ Overview of main concepts
 Step-by-step implementation
 
 <!-- IGNORE: Work in Progress Section -->
-```
-
-### Step 3: Create content.md
-Add detailed content with matching section headers:
-
-```markdown
-# Your Topic Documentation
-
-## 1. Getting Started
-Detailed getting started guide with code examples...
-
-## 2. Core Concepts
-In-depth explanation of concepts...
-
-## 3. Implementation Guide
-Complete implementation details...
-
-## Work in Progress Section
-This section will be filtered out due to IGNORE directive
 ```
 
 ## Best Practices

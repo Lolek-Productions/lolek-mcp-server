@@ -11,13 +11,13 @@ export const getWorkflows: ToolDefinition = {
         "module": {
           name: "Module Development Workflow",
           description: "Complete workflow for developing new modules with architecture, implementation, and deployment steps",
-          steps: 11,
+          steps: 12,
           use_case: "Building new major features or standalone modules"
         },
         "feature": {
           name: "Feature Development Workflow", 
           description: "Streamlined workflow for adding features to existing modules",
-          steps: 8,
+          steps: 9,
           use_case: "Adding functionality to existing systems"
         },
         "bug": {
@@ -51,16 +51,17 @@ ${workflowList}
 ## How to Use Workflows
 
 1. **Choose a workflow type** based on your development needs
-2. **Use get-preplanning-questions** with type "module" or "feature" to start planning
-3. **Follow the simple planning flow** to create quality implementation plans
-4. **Use create-simple-checklist** to track your progress
+2. **Use get-workflow-template** with type "module" or "feature" to get the complete workflow
+3. **Use evaluate-workflow-progress** to track your progress through workflow steps
+4. **Follow the embedded quality guidelines** for thorough planning
 
-## Planning vs Execution
-- **Planning workflows** help you think through requirements and approach
-- **Execution checklists** help you track implementation progress
-- **Focus on quality planning** before jumping into implementation
+## Workflow Process
+- **Get complete workflow** with get-workflow-template (includes embedded questions and standards)
+- **Progress tracking** with evaluate-workflow-progress for step-by-step guidance
+- **Quality evaluation** automatically included in the workflow steps
+- **Implementation planning** generated automatically when quality standards are met
 
-*For detailed workflow steps, these are available in the planning tools when you're ready to implement.*`
+*Each workflow template contains all questions, standards, and step details in one consolidated file.*`
         }]
       };
     } catch (error) {

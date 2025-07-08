@@ -13,12 +13,8 @@ import {
 } from "../../tools/information";
 import { 
   getWorkflows,
-  createSimpleChecklist,
-  getPreplanningQuestions,
-  evaluatePreplanningAnswers,
-  generateImplementationPlan,
-  getWorkflowTemplates,
-  validateChecklistProgress,
+  getWorkflowTemplate,
+  evaluateWorkflowProgress,
   loadDocumentationContext
 } from "../../tools/workflow";
 import { ToolDefinition, ToolContext } from "../../tools/types";
@@ -50,12 +46,8 @@ const handler = createMcpHandler(
     registerTool(getAgentRules);
     registerTool(getTools);
     registerTool(getWorkflows);
-    registerTool(createSimpleChecklist);
-    registerTool(getPreplanningQuestions);
-    registerTool(evaluatePreplanningAnswers);
-    registerTool(generateImplementationPlan);
-    registerTool(getWorkflowTemplates);
-    registerTool(validateChecklistProgress);
+    registerTool(getWorkflowTemplate);
+    registerTool(evaluateWorkflowProgress);
     registerTool(loadDocumentationContext);
   },
   {
