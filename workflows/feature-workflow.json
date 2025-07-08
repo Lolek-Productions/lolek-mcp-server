@@ -2,7 +2,7 @@
   "name": "Feature Development Workflow",
   "description": "Complete workflow for developing a new feature from conception to deployment",
   "type": "feature",
-  "totalSteps": 9,
+  "totalSteps": 10,
   "questions": {
     "title": "Feature Pre-Planning Questions",
     "description": "Essential questions to answer before implementing a new feature",
@@ -322,6 +322,31 @@
       ]
     },
     {
+      "id": "2_5_database_structure",
+      "name": "Database Structure Review",
+      "description": "Review and validate database structure requirements against current schema",
+      "deliverables": [
+        "Database schema analysis",
+        "Required schema changes identified",
+        "Supabase migration scripts",
+        "Updated database documentation"
+      ],
+      "activities": [
+        "Review current database structure in database.md",
+        "Identify any required additions or modifications for the feature",
+        "Discuss proposed changes with user if any are needed",
+        "Provide user with specific migration SQL code to run in Supabase dashboard",
+        "Wait for user confirmation that database changes have been applied",
+        "Run generate-database-docs script to update documentation"
+      ],
+      "exitCriteria": [
+        "Database structure reviewed",
+        "All required schema changes identified",
+        "User has applied any necessary database changes",
+        "Database documentation updated"
+      ]
+    },
+    {
       "id": "3_setup",
       "name": "Development Setup",
       "description": "Prepare development environment and structure",
@@ -448,7 +473,7 @@
       ]
     },
     {
-      "id": "8_monitoring",
+      "id": "9_monitoring",
       "name": "Post-Deployment Monitoring",
       "description": "Monitor feature performance and user adoption",
       "deliverables": [
@@ -502,6 +527,10 @@
     {
       "step": "2_design",
       "checkpoint": "Design approval from stakeholders"
+    },
+    {
+      "step": "2_5_database_structure",
+      "checkpoint": "Database changes applied and documentation updated"
     },
     {
       "step": "4_implementation", 
