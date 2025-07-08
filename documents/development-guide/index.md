@@ -112,6 +112,7 @@ User profile dropdown with Supabase authentication and user management
 - PostgreSQL hosted at Supabase
 - Schema documentation workflow
 - Database refresh procedures
+- Automated database documentation generator script
 
 ## 10. Authentication Configuration
 

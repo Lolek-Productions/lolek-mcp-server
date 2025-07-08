@@ -951,13 +951,73 @@ DESCRIPTION: Complete setup requirements for development environment and project
 - **Schema Reference**: View the current schema at `/DATABASE.md`
 - **Important**: Always refresh database docs before starting development to ensure you have the latest schema
 
-## Refresh the Database Structure
-Run the following file to refresh the schema for the postgres database hosted at Supabase:
+## Database Documentation Generator
+A comprehensive script that automatically generates database schema documentation by querying Supabase's REST API and creating a complete DATABASE.md file.
+
+### Quick Usage
 ```bash
-/scripts/generate-database-docs.sh
+./scripts/generate-database-docs.sh
 ```
-Once this file is run, you can view the schema at `DATABASE.md`
-Find the example at `/DATABASE.md`
+
+### What the Script Does
+- **Automatically discovers tables** from the live Supabase database via REST API
+- **Generates comprehensive documentation** including table schemas, column types, and accessibility status
+- **Requires only environment variables** - no database client tools needed
+- **Creates read-only output** to prevent accidental edits
+- **Provides security information** about RLS (Row Level Security) implementation
+
+### Requirements
+- Environment variables: `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- curl command (standard on most systems)
+- Optional: jq for enhanced JSON parsing (fallback parsing included)
+
+### Script Features
+- **Dynamic Table Discovery**: Fetches actual table list from information_schema
+- **Schema Analysis**: Extracts column information from OpenAPI definitions
+- **Accessibility Testing**: Checks which tables are accessible via public API
+- **Error Handling**: Graceful fallbacks when API calls fail
+- **Security-First**: Uses only public endpoints with anonymous key
+- **Output Protection**: Sets generated file to read-only (chmod 444)
+
+### Generated Documentation Structure
+The script creates a DATABASE.md file containing:
+- **Database Overview**: High-level architecture description
+- **Tables Overview**: List of all discovered tables
+- **Table Schemas**: Detailed column information with types and constraints
+- **Security Information**: RLS implementation details
+- **Data Types Reference**: Common PostgreSQL types used
+- **Development Notes**: Schema management and migration guidance
+
+### Environment Setup
+The script automatically loads environment variables from:
+1. `.env.local` in current directory
+2. `../.env.local` in parent directory
+3. System environment variables
+
+### Output Example
+```markdown
+# Database Schema Documentation
+*Generated automatically - do not edit manually*
+**Generated on:** Mon Jan 8 15:30:45 UTC 2024
+**Method:** Supabase REST API
+
+## Database Overview
+This PostgreSQL database supports a liturgical management application...
+
+### Table: `contacts`
+**Column Schema:**
+| Column | Type | Nullable | Default |
+|--------|------|----------|---------|
+| `id` | uuid | NO | uuid_generate_v4() |
+| `email` | text | YES | none |
+| `created_at` | timestamp | NO | timezone('utc'::text, now()) |
+```
+
+### Best Practices
+- **Run before development**: Always refresh database docs before starting new features
+- **Regular updates**: Re-run when database schema changes
+- **Version control**: Commit the generated DATABASE.md to track schema evolution
+- **Team coordination**: Share updated docs with team members after schema changes
 
 ----------------------------------------
 
