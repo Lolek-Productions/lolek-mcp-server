@@ -1384,8 +1384,13 @@ TITLE: Layout Components
 DESCRIPTION: Complete layout system providing application structure for different page types. Includes root layout with theming, authenticated main layout with sidebar, and public layout for marketing pages.
 SOURCE: /examples/layouts/
 
+**Important**: In actual Next.js implementation, these files are named `layout.tsx` and placed in specific route groups:
+- `app-layout.tsx` → `app/layout.tsx` (root layout)
+- `main-layout.jsx` → `app/(main)/layout.tsx` (authenticated layout)  
+- `public-layout.jsx` → `app/(public)/layout.tsx` (public layout)
+
 ## App Layout (Root Layout)
-**File**: `app-layout.tsx`
+**File**: `app-layout.tsx` (Example) → `app/layout.tsx` (Implementation)
 **Purpose**: Root HTML layout with theme provider, analytics, and global styling
 **Usage**: Primary Next.js App Router layout component
 
@@ -1426,14 +1431,14 @@ export default function RootLayout({ children }) {
 ```
 
 ### Usage Notes
-- Place in `app/layout.tsx` for Next.js App Router
+- Place in `app/layout.tsx` for Next.js App Router (root layout)
 - Customize metadata for your application branding
 - Analytics only loads in production environment
 - Supports light/dark/system theme modes
 - Global toast positioning and styling
 
 ## Main Layout (Authenticated Layout)
-**File**: `main-layout.jsx`
+**File**: `main-layout.jsx` (Example) → `app/(main)/layout.tsx` (Implementation)
 **Purpose**: Layout for authenticated application pages with sidebar navigation
 **Usage**: Wrap authenticated page content with sidebar and main content area
 
@@ -1461,13 +1466,14 @@ export default function MainLayout({children}) {
 ```
 
 ### Usage Notes
+- Place in `app/(main)/layout.tsx` for authenticated route group
 - Requires MainSidebar component from examples/components
 - SidebarProvider handles mobile/desktop state management
 - Children content fills remaining space after sidebar
 - Integrates with MainHeader component for breadcrumbs
 
 ## Public Layout (Marketing Layout)
-**File**: `public-layout.jsx`
+**File**: `public-layout.jsx` (Example) → `app/(public)/layout.tsx` (Implementation)
 **Purpose**: Layout for public-facing pages with header and footer
 **Usage**: Wrap marketing pages, landing pages, and authentication pages
 
@@ -1494,6 +1500,7 @@ export default function PublicLayout({ children }) {
 ```
 
 ### Usage Notes
+- Place in `app/(public)/layout.tsx` for public route group
 - Uses PublicHeader and PublicFooter from examples/components
 - No sidebar or complex navigation
 - Suitable for landing pages, about pages, login/signup
@@ -1504,33 +1511,56 @@ export default function PublicLayout({ children }) {
 ### Next.js App Router Integration
 ```
 app/
-├── layout.tsx                 # AppLayout (root)
-├── (auth)/
-│   ├── layout.tsx            # MainLayout (authenticated)
-│   └── dashboard/page.tsx    # Uses MainLayout
+├── layout.tsx                 # Root layout (app-layout.tsx example)
+├── (main)/
+│   ├── layout.tsx            # Authenticated layout (main-layout.jsx example)
+│   └── dashboard/page.tsx    # Uses authenticated layout
 └── (public)/
-    ├── layout.tsx            # PublicLayout (marketing)
-    └── about/page.tsx        # Uses PublicLayout
+    ├── layout.tsx            # Public layout (public-layout.jsx example)
+    └── about/page.tsx        # Uses public layout
 ```
 
 ### Component Dependencies
-- **AppLayout**: next-themes, @vercel/analytics, shadcn/ui toaster
-- **MainLayout**: shadcn/ui sidebar, MainSidebar component
-- **PublicLayout**: PublicHeader, PublicFooter components
+- **Root Layout** (app/layout.tsx): next-themes, @vercel/analytics, shadcn/ui toaster
+- **Main Layout** (app/(main)/layout.tsx): shadcn/ui sidebar, MainSidebar component
+- **Public Layout** (app/(public)/layout.tsx): PublicHeader, PublicFooter components
 
 ### Implementation Example
 ```tsx
-// app/(auth)/layout.tsx
-import MainLayout from "@/examples/layouts/main-layout";
+// app/(main)/layout.tsx - Authenticated pages
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { MainSidebar } from "@/components/main-sidebar";
 
-export default function AuthenticatedLayout({ children }) {
-  return <MainLayout>{children}</MainLayout>;
+export default function MainLayout({ children }) {
+  return (
+    <SidebarProvider>
+      <MainSidebar />
+      <div className="flex-1">
+        {children}
+      </div>
+    </SidebarProvider>
+  );
+}
+
+// app/(public)/layout.tsx - Public pages  
+import PublicHeader from "@/components/PublicHeader";
+import PublicFooter from "@/components/PublicFooter";
+
+export default function PublicLayout({ children }) {
+  return (
+    <>
+      <PublicHeader />
+      {children}
+      <PublicFooter />
+    </>
+  );
 }
 ```
 
 ### Best Practices
-- **Consistent Structure**: Use appropriate layout for page type
-- **Theme Integration**: Leverage theme provider in root layout
+- **Route Groups**: Use `(main)` and `(public)` route groups for layout organization
+- **Layout Naming**: All layout files must be named `layout.tsx` in Next.js App Router
+- **Theme Integration**: Leverage theme provider in root layout only
 - **Performance**: Analytics and heavy features only in production
 - **Accessibility**: Proper HTML structure and ARIA support
 - **Mobile First**: Responsive design across all layouts
