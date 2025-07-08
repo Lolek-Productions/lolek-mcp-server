@@ -92,7 +92,32 @@ This documentation covers all custom React components found in the `/examples` f
 - **State Management**: Local state with React hooks where needed
 - **Error Handling**: Proper error boundaries and fallbacks
 
-## 7. Setup Requirements
+## 7. Recommended Technology Stack
+
+### Frontend Stack
+- **Framework**: Next.js 15 (App Router) - See [Next.js documentation](../nextjs/) for implementation details
+- **Language**: TypeScript for type safety and developer experience
+- **Styling**: Tailwind CSS for utility-first styling
+- **Components**: shadcn/ui components - See [shadcn/ui documentation](../shadcn/) for usage patterns
+
+### Backend Stack
+- **Database & Auth**: Supabase (PostgreSQL + Authentication)
+- **Authentication**: Supabase Auth with server-side session management
+- **API**: Server Actions for secure data operations
+
+### UI Library
+- **Component System**: Radix UI primitives with shadcn/ui styling
+- **Icons**: Lucide React for consistent iconography
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+
+### Development Guidelines
+- **Always use custom components** before falling back to shadcn/ui components
+- **Follow TypeScript patterns** established in existing components
+- **Maintain responsive design** across all new components
+- **Integrate with Supabase Auth** for user-facing features
+- **Use consistent design patterns** from existing component library
+
+## 8. Setup Requirements
 
 ### Required Files:
 - `/public/Lolek-logo.png` - Company logo for headers and sidebar
@@ -106,7 +131,14 @@ This documentation covers all custom React components found in the `/examples` f
 - Supabase client configuration
 - Lucide React icons package
 
-## 8. Usage Context
+### Database Setup:
+- **Database**: PostgreSQL hosted at Supabase
+- **Schema Documentation**: Create and run `/scripts/generate-database-docs.sh` to refresh the database schema
+- **Schema Reference**: Generated schema will be available at `/DATABASE.md`
+- **Setup Required**: The database documentation script and DATABASE.md file need to be created
+- **Important**: Always refresh database docs before starting development to ensure you have the latest schema
+
+## 9. Usage Context
 
 These components are designed for a church management application ("Lolek Productions - Serving the Church") with features for:
 - Managing contacts, parishes, and campaigns
