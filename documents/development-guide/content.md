@@ -892,6 +892,25 @@ DESCRIPTION: Comprehensive technology stack and development guidelines for Next.
 - **Styling**: Tailwind CSS for utility-first styling
 - **Components**: shadcn/ui components - See [shadcn/ui documentation](../shadcn/) for usage patterns
 
+## Project Structure
+```
+src/
+├── app/                     # Next.js App Router
+│   ├── (main)/             # Main app route group
+│   │   ├── layout.tsx      # Main layout wrapper
+│   │   └── contacts/       # Contacts feature
+│   │       ├── page.tsx    # Contact list
+│   │       ├── [id]/       # Dynamic contact detail
+│   │       └── create/     # Create new contact
+│   ├── (public)/           # Public routes group
+│   │   ├── layout.tsx      # Public layout
+│   │   ├── page.tsx        # Public homepage
+│   │   └── about/          # About page
+│   └── (print)/            # Print-specific routes
+├── components/             # Reusable components
+└── lib/                    # Utility functions
+```
+
 ## Backend Stack
 - **Database & Auth**: Supabase (PostgreSQL + Authentication)
 - **Authentication**: Supabase Auth with server-side session management
