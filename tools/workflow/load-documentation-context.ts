@@ -25,10 +25,10 @@ export const loadDocumentationContext: ToolDefinition = {
       // Load documentation headings from each topic
       for (const topic of topicsToLoad) {
         try {
-          const topicPath = join(process.cwd(), "docs", topic);
+          const topicPath = join(process.cwd(), "documents", topic);
           const indexPath = join(topicPath, "index.md");
           
-          if (readdirSync(process.cwd() + "/docs").includes(topic)) {
+          if (readdirSync(process.cwd() + "/documents").includes(topic)) {
             try {
               const indexContent = readFileSync(indexPath, "utf-8");
               
@@ -74,7 +74,7 @@ export const loadDocumentationContext: ToolDefinition = {
           results.push("## Project Structure Overview\n");
           
           // Key directories to highlight
-          const keyDirs = ["app", "components", "lib", "tools", "docs", "workflows"];
+          const keyDirs = ["app", "components", "lib", "tools", "documents", "workflows"];
           const projectRoot = process.cwd();
           
           for (const dir of keyDirs) {
@@ -111,7 +111,7 @@ export const loadDocumentationContext: ToolDefinition = {
       results.push("## Available MCP Tools Summary\n");
       results.push(`
 **Documentation Tools:**
-- list-docs: See available documentation topics
+- list-documents: See available documentation topics
 - get-sections: Browse topic areas and headings
 - search-content: Search across documentation
 

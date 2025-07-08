@@ -38,7 +38,7 @@ export const getTools: ToolDefinition = {
 **Description:** Search across all documentation and guides
 **Parameters:**
 - query (required): Search term or regex pattern
-- scope (optional): "all", "docs", "guides" (default: "all")
+- scope (optional): "all", "documents", "guides" (default: "all")
 - caseSensitive (optional): Boolean (default: false)
 - maxResults (optional): Number (default: 50)
 **Usage:** Full-text search across documentation

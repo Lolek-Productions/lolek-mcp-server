@@ -34,7 +34,7 @@ export const searchContent: ToolDefinition = {
           let indexContent = null;
           if (category === "docs" && topic) {
             try {
-              const indexPath = join(process.cwd(), "docs", topic, "index.md");
+              const indexPath = join(process.cwd(), "documents", topic, "index.md");
               indexContent = readFileSync(indexPath, "utf-8");
             } catch (error) {
               // No index file, continue without it
@@ -75,7 +75,7 @@ export const searchContent: ToolDefinition = {
       
       // Search in docs directory
       if (scope === "all" || scope === "docs") {
-        const docsPath = join(process.cwd(), "docs");
+        const docsPath = join(process.cwd(), "documents");
         try {
           const topics = readdirSync(docsPath, { withFileTypes: true })
             .filter(dirent => dirent.isDirectory())
@@ -88,7 +88,7 @@ export const searchContent: ToolDefinition = {
             
             for (const file of files) {
               const filePath = join(topicPath, file);
-              const relativePath = `docs/${topic}/${file}`;
+              const relativePath = `documents/${topic}/${file}`;
               searchInFile(filePath, relativePath, "docs", topic);
             }
           }

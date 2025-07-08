@@ -23,33 +23,33 @@ This is a Next.js-based MCP (Model Context Protocol) server that provides docume
 ### Key Components
 - **Main Route Handler**: `app/[transport]/route.ts` - Contains MCP server configuration and tool definitions
 - **Documentation Tools**: Three primary tools for efficient doc navigation:
-  - `list-docs` - Discover available documentation topics
-  - `get-sections` - Browse high-level topic areas  
-  - `get-headings` - Extract specific content from docs
+  - `list-documents` - Discover available documentation topics
+  - `get-document-section` - Browse high-level topic areas  
+  - `get-document-titles` - Extract specific content from documents
 - **Workflow Helper**: `tools/workflow-helper.js` - CLI tool for accessing development workflows and templates
 
 ### Data Structure
-- **Documentation**: `docs/` directory with topic-based organization
-  - `docs/nextjs/` - Next.js documentation (685 titles)
-  - `docs/shadcn/` - shadcn/ui documentation (63 titles)
+- **Documentation**: `documents/` directory with topic-based organization
+  - `documents/nextjs/` - Next.js documentation (685 titles)
+  - `documents/shadcn/` - shadcn/ui documentation (63 titles)
   - Each topic has `content.md` and `index.md` files
 - **Development Guides**: `guides/` directory with comprehensive development guides (8 chapters)
 
 ### Tool Navigation Pattern
 The MCP server implements a three-step navigation workflow:
-1. `list-docs` → See available topics
-2. `get-sections` → Browse topic areas
-3. `get-headings` → Extract specific content
+1. `list-documents` → See available topics
+2. `get-document-section` → Browse topic areas
+3. `get-document-titles` → Extract specific content
 
 This pattern provides token efficiency and better context management for large documentation sets.
 
 ### Development Architecture
-- **Next.js 15.2.4** with TypeScript and React 19 - See [Next.js documentation](docs/nextjs/) for detailed framework guidance
+- **Next.js 15.2.4** with TypeScript and React 19 - See [Next.js documentation](documents/nextjs/) for detailed framework guidance
 - **Vercel MCP Adapter** for MCP protocol integration
 - **Redis support** for SSE transport (requires `REDIS_URL` environment variable)
 - **Fluid compute** recommended for Vercel deployment
 - **pnpm** as package manager
-- **shadcn/ui** for component library - See [shadcn/ui documentation](docs/shadcn/) for component usage
+- **shadcn/ui** for component library - See [shadcn/ui documentation](documents/shadcn/) for component usage
 
 ### Testing and Validation
 - Test clients available in `scripts/` directory
@@ -66,7 +66,7 @@ When adding new tools to the MCP server:
 4. Test with `scripts/test-client.mjs`
 
 ### Documentation Structure
-- **docs/**: Framework reference documentation (Next.js, shadcn/ui)
+- **documents/**: Framework reference documentation (Next.js, shadcn/ui)
 - **guides/**: Project-specific development patterns and workflows
 - **Cross-references**: Guides reference docs instead of duplicating technical information
 - Use TITLE: lines for content extraction
@@ -74,6 +74,6 @@ When adding new tools to the MCP server:
 - Maintain clear separation between content.md and index.md files
 
 ### Framework Integration
-- Refer to [Next.js documentation](docs/nextjs/) for framework-specific patterns
-- Refer to [shadcn/ui documentation](docs/shadcn/) for component implementation
-- Focus guides on project-specific applications rather than duplicating framework docs
+- Refer to [Next.js documentation](documents/nextjs/) for framework-specific patterns
+- Refer to [shadcn/ui documentation](documents/shadcn/) for component implementation
+- Focus guides on project-specific applications rather than duplicating framework documents

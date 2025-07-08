@@ -9,7 +9,7 @@ export const listDocuments: ToolDefinition = {
   inputSchema: {},
   handler: async ({}) => {
     try {
-      const docsPath = join(process.cwd(), "docs");
+      const docsPath = join(process.cwd(), "documents");
       const entries = readdirSync(docsPath, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name); // Filter topics
@@ -66,7 +66,7 @@ Note: Tools default to 'development-guide' for comprehensive development guidanc
       return {
         content: [{
           type: "text" as const,
-          text: `Error reading docs directory: ${error instanceof Error ? error.message : String(error)}`
+          text: `Error reading documents directory: ${error instanceof Error ? error.message : String(error)}`
         }]
       };
     }
