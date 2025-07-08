@@ -232,36 +232,131 @@ Note: Tools default to 'custom-components' for component documentation`
       }
     );
     
+    // Introduction Tool
+    server.tool(
+      "get-introduction",
+      "Get an introduction to the Lolek MCP Server and its capabilities",
+      {},
+      async () => {
+        return {
+          content: [{
+            type: "text",
+            text: `# Welcome to Lolek MCP Server
+
+## Overview
+Lolek MCP Server is a Next.js-based Model Context Protocol (MCP) server that provides documentation navigation and simple planning workflow tools. It's designed to help developers efficiently navigate documentation and create quality implementation plans.
+
+## Core Capabilities
+
+### 📚 Documentation Navigation (4 tools)
+- **list-docs**: Discover available documentation topics
+- **get-document-section**: Get specific sections from documentation
+- **get-document-titles**: Search and extract documentation titles
+- **search-content**: Search across all documentation
+
+### 🎯 Simple Planning Workflow (5 tools)
+- **get-workflows**: See all available workflow types
+- **get-preplanning-questions**: Get structured planning questions
+- **evaluate-preplanning-answers**: Validate planning quality
+- **generate-implementation-plan**: Create detailed implementation plans
+- **create-simple-checklist**: Generate progress tracking checklists
+
+## Simple Planning Flow
+1. **User + Agent Interact** → Use planning questions to create solid foundation
+2. **Agent Creates Plan** → Evaluate answers and generate implementation plan
+3. **User Reviews Plan** → Review the generated plan for accuracy
+4. **Agent Handles Execution** → Create checklist and track progress
+
+## Documentation Available
+- **custom-components**: 9 React components for Next.js applications
+- **nextjs**: 685 Next.js framework documentation titles
+- **shadcn**: 63 shadcn/ui component library titles
+
+## Getting Started
+1. Use \`get-workflows\` to see available workflow types
+2. Use \`get-preplanning-questions\` to start planning
+3. Use \`list-docs\` to explore available documentation
+
+## Architecture
+- **Next.js 15.2.4** with TypeScript
+- **Vercel MCP Adapter** for protocol integration
+- **Content Filtering** with IGNORE directives
+- **Client-side approach** for persistent workflow tracking
+
+*This server focuses on simplicity and essential functionality for effective planning and documentation navigation.*`
+          }]
+        };
+      }
+    );
+    
     // Workflow Helper Tools
     server.tool(
-      "get-workflow",
-      "Get development workflow steps for specific workflow types (module, feature, bug, commit)",
-      {
-        type: z.enum(["module", "feature", "bug", "commit"]).describe("The workflow type to retrieve")
-      },
-      async ({ type }) => {
+      "get-workflows",
+      "Get all available development workflow types and their descriptions",
+      {},
+      async () => {
         try {
-          const workflow = workflowHelper.getWorkflow(type);
-          if (!workflow) {
-            return {
-              content: [{
-                type: "text",
-                text: `Workflow type "${type}" not found. Available types: module, feature, bug, commit`
-              }]
-            };
-          }
-          
+          const workflows = {
+            "module": {
+              name: "Module Development Workflow",
+              description: "Complete workflow for developing new modules with architecture, implementation, and deployment steps",
+              steps: 11,
+              use_case: "Building new major features or standalone modules"
+            },
+            "feature": {
+              name: "Feature Development Workflow", 
+              description: "Streamlined workflow for adding features to existing modules",
+              steps: 8,
+              use_case: "Adding functionality to existing systems"
+            },
+            "bug": {
+              name: "Bug Fix Workflow",
+              description: "Systematic approach to identifying, fixing, and testing bug fixes",
+              steps: 6,
+              use_case: "Resolving issues and defects"
+            },
+            "commit": {
+              name: "Commit Workflow",
+              description: "Best practices for code commits, testing, and version control",
+              steps: 4,
+              use_case: "Daily development and code management"
+            }
+          };
+
+          const workflowList = Object.entries(workflows).map(([key, workflow]) => 
+            `## ${workflow.name} (${key})
+**Steps:** ${workflow.steps}
+**Use Case:** ${workflow.use_case}
+**Description:** ${workflow.description}
+`
+          ).join('\n');
+
           return {
             content: [{
               type: "text",
-              text: workflow
+              text: `# Available Development Workflows
+
+${workflowList}
+## How to Use Workflows
+
+1. **Choose a workflow type** based on your development needs
+2. **Use get-preplanning-questions** with type "module" or "feature" to start planning
+3. **Follow the simple planning flow** to create quality implementation plans
+4. **Use create-simple-checklist** to track your progress
+
+## Planning vs Execution
+- **Planning workflows** help you think through requirements and approach
+- **Execution checklists** help you track implementation progress
+- **Focus on quality planning** before jumping into implementation
+
+*For detailed workflow steps, these are available in the planning tools when you're ready to implement.*`
             }]
           };
         } catch (error) {
           return {
             content: [{
               type: "text",
-              text: `Error retrieving workflow: ${error instanceof Error ? error.message : String(error)}`
+              text: `Error retrieving workflows: ${error instanceof Error ? error.message : String(error)}`
             }]
           };
         }
@@ -872,8 +967,11 @@ Each template creates a complete markdown checklist file that you can track loca
         "search-content": {
           description: "Search for specific content across all documentation and guides with regex support",
         },
-        "get-workflow": {
-          description: "Get development workflow steps for specific workflow types (module, feature, bug, commit)",
+        "get-introduction": {
+          description: "Get an introduction to the Lolek MCP Server and its capabilities",
+        },
+        "get-workflows": {
+          description: "Get all available development workflow types and their descriptions",
         },
         "create-simple-checklist": {
           description: "Create a simple completion checklist file for feature or module development",

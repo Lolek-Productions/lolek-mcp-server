@@ -10,14 +10,25 @@
 | **get-document-titles** | Extract and search documentation titles | topic, file, type, keywords | ✅ ACTIVE |
 | **search-content** | Search across all documentation | query, scope, caseSensitive, maxResults | ✅ ACTIVE |
 
+### Introduction and Overview
+| Tool Name | Purpose | Parameters | Status |
+|-----------|---------|------------|---------|
+| **get-introduction** | Get introduction to Lolek MCP Server | None | ✅ ACTIVE |
+
 ### Simple Planning Tools
 | Tool Name | Purpose | Parameters | Status |
 |-----------|---------|------------|---------|
-| **get-workflow** | Get available workflow types | type (module/feature/bug/commit) | ✅ ACTIVE |
+| **get-workflows** | Get all available workflow types and descriptions | None | ✅ ACTIVE |
 | **get-preplanning-questions** | Get strategic planning questions | type (module/feature) | ✅ ACTIVE |
 | **evaluate-preplanning-answers** | Evaluate planning quality | type, answers (JSON) | ✅ ACTIVE |
 | **generate-implementation-plan** | Create implementation plans | type, answers, evaluationScore | ✅ ACTIVE |
 | **create-simple-checklist** | Create basic checklist file | type, name, filePath | ✅ ACTIVE |
+
+## Getting Started
+
+1. **Introduction** → Use `get-introduction` to understand the server capabilities
+2. **Explore workflows** → Use `get-workflows` to see available workflow types
+3. **Start planning** → Use `get-preplanning-questions` for structured planning
 
 ## Simple Planning Flow
 
@@ -28,6 +39,7 @@
 
 ## Tool Categories Summary
 
+- **Introduction**: 1 tool - Server overview and capabilities
 - **Documentation Navigation**: 4 tools - Reference and information lookup
 - **Simple Planning**: 5 tools - Streamlined planning workflow
 
@@ -39,6 +51,6 @@
 - **Functionality**: ✅ All tools serve distinct purposes without overlap
 - **Simplicity**: ✅ Focused on essential planning workflow only
 
-## Total Active Tools: 9
+## Total Active Tools: 10
 
 Clean, focused architecture supporting documentation navigation and simple planning workflow without unnecessary complexity.
