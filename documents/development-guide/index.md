@@ -108,6 +108,12 @@ User profile dropdown with Supabase authentication and user management
 - Tailwind CSS configured
 - Supabase client configuration
 
+### Creating New Applications
+- Use Supabase template as starting point
+- Pre-configured authentication and database structure
+- Consistent architecture across applications
+- Built-in security and best practices
+
 ### Database Setup
 - PostgreSQL hosted at Supabase
 - Schema documentation workflow

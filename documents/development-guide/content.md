@@ -945,6 +945,23 @@ DESCRIPTION: Complete setup requirements for development environment and project
 - Supabase client configuration
 - Lucide React icons package
 
+## Creating New Applications
+
+**Important**: When creating a new application, use the Supabase template as your starting point.
+
+### Supabase Template Setup
+- Navigate to Supabase dashboard and create a new project
+- Use the "Create from template" option when available
+- This provides pre-configured authentication, database structure, and environment settings
+- Ensures consistent setup across all applications
+- Includes proper Row Level Security (RLS) policies and authentication flows
+
+### Benefits of Using Templates
+- **Consistent Architecture**: All applications follow the same patterns
+- **Pre-configured Security**: RLS policies and authentication already set up
+- **Faster Development**: Skip manual configuration and focus on features
+- **Best Practices**: Templates include proven security and performance configurations
+
 ## Database Setup
 - **Database**: PostgreSQL hosted at Supabase
 - **Schema Documentation**: Run `/scripts/generate-database-docs.sh` to refresh the database schema
