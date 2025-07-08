@@ -1,325 +1,288 @@
-# Next.js MCP Server with Documentation Navigation
+# Lolek MCP Server
 
-**Uses `@vercel/mcp-adapter`**
+**Next.js MCP Server with Documentation Navigation and Development Workflows**
 
-This MCP server provides efficient navigation tools for large documentation files, designed to help AI models traverse content without loading massive files all at once.
+This comprehensive MCP (Model Context Protocol) server provides AI agents with efficient documentation navigation tools and structured development workflows. Built with Next.js and the `@vercel/mcp-adapter`, it helps AI agents build applications quickly and consistently by providing pre-built components, development guidance, and workflow management.
 
-## Available Tools
+## 🎯 Purpose
+
+This MCP server is designed to help AI agents:
+- **Navigate large documentation efficiently** without loading massive files
+- **Access pre-built, production-ready React components** for rapid development
+- **Follow structured development workflows** with quality evaluation
+- **Build consistent applications** using established patterns and best practices
+
+## 🛠️ Available Tools
 
 ### Documentation Navigation Tools
 
-#### 1. `list-docs` - Document Discovery
-**Purpose**: Discover what documentation topics are available  
-**Usage**: Start here to see available topics
+#### 1. `list-documents` - Document Discovery
+**Purpose**: Discover available documentation topics  
+**Usage**: Start here to see all available documentation categories
 
-#### 2. `get-document-section` - Section Retrieval  
-**Purpose**: Get one or more sections' content from a topic's index file  
+#### 2. `search-content` - Content Search  
+**Purpose**: Search across all documentation with filtering and context  
 **Parameters**: 
-- `topic` (optional): "development-guide", "nextjs", "shadcn" (defaults to "development-guide")
-- `sectionName` (required): Name of the section(s) to retrieve. Use comma-separated values for multiple sections (e.g., "Navigation Components, Layout Components")
-**Usage**: Use after `list-docs` to get specific section content. Supports multiple sections in one request.
+- `query` (required): Search terms
+- `scope` (optional): "docs", "guides", "examples" (defaults to "docs")
+- `limit` (optional): Maximum results (default 50)
+**Usage**: Search for specific topics, components, or implementation patterns
 
-#### 3. `get-document-titles` - Documentation Title Extraction and Search
-**Purpose**: Extract and search documentation titles from any topic's content files  
+
+### Information & Context Tools
+
+#### 3. `get-introduction` - Server Introduction
+**Purpose**: Get detailed information about this MCP server's capabilities
+
+#### 4. `get-agent-rules` - Agent Behavioral Rules
+**Purpose**: Retrieve guidelines for AI agent behavior and best practices
+
+#### 5. `get-tools` - Tool Reference
+**Purpose**: Get comprehensive information about all available MCP tools
+
+### Workflow Management Tools
+
+#### 6. `get-workflows` - Available Workflows
+**Purpose**: List all available development workflow types  
+**Returns**: Module, Feature, Bug Fix, and Commit workflows with descriptions
+
+#### 7. `get-workflow-template` - Workflow Templates
+**Purpose**: Get complete workflow template with embedded questions and quality standards  
 **Parameters**: 
-- `topic` (optional): "development-guide", "nextjs", "shadcn" (defaults to "development-guide")
-- `file` (optional): "content", "index", "headings" (defaults to "content")
-- `type` (optional): "markdown" for # headings, "titles" for TITLE: lines (defaults to "titles")
-- `keywords` (optional): Search keywords to filter titles (case-insensitive, space-separated)
-**Usage**: Extract titles and optionally filter by keywords for targeted searches
+- `type` (required): "module" or "feature"
+**Usage**: Get comprehensive workflow with pre-planning questions, quality evaluation criteria, and implementation steps
 
-### Simple Planning Tools
-
-#### 4. `get-workflow` - Get Available Workflow Types
-**Purpose**: See what workflow types are available for planning  
+#### 8. `evaluate-workflow-progress` - Progress Evaluation
+**Purpose**: Evaluate workflow progress and provide implementation guidance  
 **Parameters**: 
-- `type`: "module", "feature", "bug", or "commit"
-**Usage**: Discover workflow options for your planning needs
+- `type` (required): "module" or "feature"
+- `currentStep` (required): Current workflow step ID
+- `stepProgress` (required): Description of current progress
+- `preplanningAnswers` (optional): JSON answers for pre-planning evaluation
+**Usage**: Track progress through workflow steps and get quality feedback
 
-#### 5. `get-preplanning-questions` - Get Planning Questions
-**Purpose**: Get structured questions to help create a solid plan  
-**Parameters**: 
-- `type`: "module" or "feature"
-**Usage**: Start the planning process with guided questions
+#### 9. `load-documentation-context` - Bulk Context Loading
+**Purpose**: Efficiently load all essential documentation context at once  
+**Usage**: Load comprehensive context including documentation headings, agent rules, and available tools
 
-#### 6. `evaluate-preplanning-answers` - Evaluate Plan Quality
-**Purpose**: Evaluate your planning answers for quality and completeness  
-**Parameters**: 
-- `type`: "module" or "feature"
-- `answers`: JSON formatted answers to planning questions
-**Usage**: Ensure your plan meets quality standards before implementation
-
-#### 7. `generate-implementation-plan` - Create Implementation Plan
-**Purpose**: Generate a detailed implementation plan from your evaluated answers  
-**Parameters**: 
-- `type`: "module" or "feature"
-- `answers`: JSON formatted planning answers
-- `evaluationScore` (optional): Score from evaluation step
-**Usage**: Convert planning into actionable implementation steps
-
-#### 8. `create-simple-checklist` - Create Simple Checklist
-**Purpose**: Generate a basic checklist file for tracking progress  
-**Parameters**: 
-- `type`: "feature" or "module"
-- `name`: Name for the checklist
-- `filePath` (optional): Custom file path
-**Usage**: Create a simple markdown checklist for progress tracking
-
-### Pre-Planning Tools (Used within workflows)
-
-#### 8. `get-preplanning-questions` - Get Pre-Planning Questions
-**Purpose**: Get structured questions for module or feature pre-planning  
-**Parameters**: `type`: "module" or "feature"  
-**Usage**: Start pre-planning process by getting relevant questions
-
-#### 9. `evaluate-preplanning-answers` - Evaluate Pre-Planning
-**Purpose**: Evaluate answers against quality standards and provide feedback  
-**Parameters**: 
-- `type`: "module" or "feature"
-- `answers`: JSON formatted answers to the pre-planning questions
-**Usage**: Get quality assessment and feedback on your pre-planning
-
-#### 10. `generate-implementation-plan` - Generate Implementation Plan
-**Purpose**: Create detailed implementation plan from evaluated pre-planning  
-**Parameters**: 
-- `type`: "module" or "feature"
-- `answers`: JSON formatted pre-planning answers
-- `evaluationScore` (optional): Score from evaluation step
-**Usage**: Generate actionable implementation plan after quality evaluation
-
-## Recommended Workflows
+## 📊 Recommended Workflows
 
 ### Documentation Navigation Workflow
 ```
-1. list-docs              → See available topics
-2. get-document-section   → Browse topic areas (single or multiple sections)
-3. get-document-titles    → Extract documentation titles (with optional keyword search)
-4. Targeted searches      → Find exact information
+1. load-documentation-context → Load all essential context efficiently
+   OR
+   1. list-documents → See available topics
+   2. search-content → Find specific information with context
+
+2. Use specific tools as needed:
+   - get-introduction → Server overview
+   - get-agent-rules → Behavioral guidelines
+   - get-tools → Tool reference
 ```
 
-### Simple Planning Workflow
+### Development Planning Workflow
 
-#### The Simple 4-Step Planning Process
+#### Feature Development (9 Steps)
 ```
-1. User + Agent Interact         → Use get-preplanning-questions to get structured questions
-2. Agent Creates Plan            → Use evaluate-preplanning-answers + generate-implementation-plan
-3. User Reviews Plan             → Review the generated implementation plan
-4. Agent Handles Execution       → Use create-simple-checklist for progress tracking
-```
-
-#### Example: Feature Development
-```
-1. get-preplanning-questions     → Get feature planning questions
-2. Answer questions together     → User and agent collaborate on answers
-3. evaluate-preplanning-answers  → Validate quality of planning
-4. generate-implementation-plan  → Create detailed implementation plan
-5. create-simple-checklist       → Generate tracking checklist
+1. get-workflows → See available workflow types
+2. get-workflow-template (type: "feature") → Get complete feature workflow
+3. Answer pre-planning questions (embedded in workflow)
+4. evaluate-workflow-progress → Get quality evaluation and implementation plan
+5. Follow workflow steps with progress tracking
+6. Use evaluate-workflow-progress for each step guidance
 ```
 
-#### Example: Module Development
+#### Module Development (12 Steps)
 ```
-1. get-preplanning-questions     → Get module planning questions  
-2. Answer questions together     → User and agent collaborate on answers
-3. evaluate-preplanning-answers  → Validate quality of planning
-4. generate-implementation-plan  → Create detailed implementation plan
-5. create-simple-checklist       → Generate tracking checklist
-```
-
-## Documentation Structure
-
-```
-docs/
-├── nextjs/
-│   ├── content.md    # 685 Next.js titles
-│   └── index.md      # 20 organized sections
-└── shadcn/
-    ├── content.md    # 63 shadcn/ui titles  
-    └── index.md      # 10 organized sections
+1. get-workflows → See available workflow types
+2. get-workflow-template (type: "module") → Get complete module workflow
+3. Answer pre-planning questions (embedded in workflow)
+4. evaluate-workflow-progress → Get quality evaluation and implementation plan
+5. Follow workflow steps with progress tracking
+6. Use evaluate-workflow-progress for each step guidance
 ```
 
-This approach provides **token efficiency**, **faster navigation**, and **better context management** for large documentation sets.
+## 📁 Documentation Structure
 
-## Pre-Planning System
-
-The MCP server includes a comprehensive pre-planning system designed to help developers thoroughly plan modules and features before implementation.
-
-### How It Works
-
-1. **Question Templates**: Structured questions for modules and features that cover all critical aspects
-2. **Quality Standards**: Automated evaluation against predefined quality criteria with scoring
-3. **Implementation Plans**: Generated detailed plans based on quality-evaluated answers
-
-### Example Usage in Your Project
-
-When working in your "widget" project and wanting to build a "contacts" module:
-
-#### Simple Planning Flow
 ```
-1. Claude, use get-preplanning-questions with type "module" to help me plan the contacts module
-2. [Work together to answer the planning questions]
-3. Claude, use evaluate-preplanning-answers to check our planning quality
-4. Claude, use generate-implementation-plan to create the detailed plan
-5. Claude, use create-simple-checklist to create a tracking checklist
+documents/
+├── README.md                    # Documentation system overview
+├── development-guide/           # Comprehensive development guidance
+│   ├── content.md              # Complete component library and setup guides
+│   └── index.md                # Navigation structure
+├── nextjs/                     # Next.js framework documentation
+│   ├── content.md              # 685+ Next.js implementation details
+│   └── index.md                # Organized sections for navigation
+├── shadcn/                     # shadcn/ui component library
+│   ├── content.md              # 63+ component usage patterns
+│   └── index.md                # Component categories
+└── supabase/                   # Supabase integration guides
+    ├── content.md              # Authentication and database patterns
+    └── index.md                # Supabase service categories
 ```
 
-#### For a Feature
-For a smaller feature like "bulk contact import":
-```
-1. Claude, use get-preplanning-questions with type "feature" for bulk contact import
-2. [Answer the planning questions together]
-3. Claude, evaluate our answers and create the implementation plan
-4. Claude, create a simple checklist for tracking progress
-```
+## 🔄 Workflow System
 
-#### The Result
-You end up with:
-- A quality-validated implementation plan
-- A simple checklist file for tracking progress
-- No complex server-side state management
-- Clear, actionable next steps
+The MCP server includes a consolidated workflow system with embedded planning:
 
 ### Workflow Structure
-
 ```
 workflows/
-├── feature-workflow.json       # Complete 8-step feature workflow
-├── module-workflow.json        # Complete 11-step module workflow
-├── templates/                  # Pre-planning templates (used in step 1)
-│   ├── module/
-│   │   ├── questions.json      # 10 comprehensive module questions
-│   │   └── quality-standards.json # Scoring criteria and feedback
-│   └── feature/
-│       ├── questions.json      # 10 focused feature questions
-│       └── quality-standards.json # Feature-specific quality standards
-├── quality/                    # Quality evaluation criteria
-│   └── evaluation-criteria.json
-└── examples/                   # Good vs poor planning examples
-    ├── module-examples.json
-    └── feature-examples.json
+├── feature-workflow.json       # Complete 9-step feature workflow
+├── module-workflow.json        # Complete 12-step module workflow
+└── __tests__/                  # Comprehensive test suite
+    └── workflow-templates.test.js
 ```
 
-### Quality Evaluation
+### Quality Evaluation System
 
-The system evaluates pre-planning answers on a 5-point scale:
-- **Excellent (4.5+)**: Ready for implementation planning
-- **Good (3.5-4.4)**: Minor improvements needed
+Each workflow includes embedded quality standards that evaluate pre-planning on a 5-point scale:
+- **Excellent (4.5+)**: Ready for implementation
+- **Good (3.5-4.4)**: Minor improvements needed  
 - **Acceptable (2.5-3.4)**: Needs more detail
 - **Needs Improvement (1.5-2.4)**: Significant revision required
 - **Inadequate (0-1.4)**: Start over with more thought
 
-### Benefits
+### Implementation Plan Generation
 
-- **Consistency**: Ensures all critical aspects are considered
-- **Quality**: Prevents poorly planned implementations
-- **Efficiency**: Reduces rework and implementation issues
-- **Learning**: Helps developers improve planning skills over time
+When pre-planning quality score ≥ 3.5, the system automatically generates:
+- Detailed implementation steps
+- Component breakdown
+- Testing strategy
+- Risk mitigation plan
+- Success criteria
 
-## Usage
+## 🧩 Component Library
 
-This sample app uses the [Vercel MCP Adapter](https://www.npmjs.com/package/@vercel/mcp-adapter) that allows you to drop in an MCP server on a group of routes in any Next.js project.
+The development guide includes production-ready React components:
 
-Update `app/[transport]/route.ts` with your tools, prompts, and resources following the [MCP TypeScript SDK documentation](https://github.com/modelcontextprotocol/typescript-sdk/tree/main?tab=readme-ov-file#server).
+### Navigation & Layout
+- **MainHeader** - Application header with breadcrumbs
+- **MainSidebar** - Navigation sidebar with collapsible sections
+- **PublicHeader/Footer** - Public page navigation
+- **PageContainer** - Consistent page layouts
 
-## Notes for running on Vercel
+### UI Components  
+- **CenteredFormCard** - Form container with responsive design
+- **CopyButton** - Clipboard functionality with feedback
+- **CollapsibleNavSection** - Expandable navigation groups
+- **UserProfile** - Authentication dropdown with Supabase
 
-- To use the SSE transport, requires a Redis attached to the project under `process.env.REDIS_URL`
-- Make sure you have [Fluid compute](https://vercel.com/docs/functions/fluid-compute) enabled for efficient execution
-//From the website: As of April 23, 2025, fluid compute is enabled by default for new projects.
-- After enabling Fluid compute, open `app/route.ts` and adjust `maxDuration` to 800 if you using a Vercel Pro or Enterprise account
-- [Deploy the Next.js MCP template](https://vercel.com/templates/next.js/model-context-protocol-mcp-with-next-js)
+### Context & State
+- **AppContextProvider** - Global state management with Supabase auth
 
-## Sample Client
+## 🚀 Technology Stack
 
-`script/test-client.mjs` contains a sample client to try invocations.
+- **Framework**: Next.js 15 (App Router) with TypeScript
+- **Styling**: Tailwind CSS with shadcn/ui components
+- **Authentication**: Supabase Auth with server-side sessions
+- **Database**: PostgreSQL via Supabase
+- **Icons**: Lucide React
+- **Testing**: Jest with comprehensive workflow testing
 
-```sh
-node scripts/test-client.mjs https://mcp-server-flax.vercel.app
+## 📦 Content Filtering System
+
+The MCP server implements intelligent content filtering:
+- **IGNORE directives** in index.md files filter out sections from content.md
+- **Token efficiency** by preventing AI agents from seeing outdated content
+- **Dynamic filtering** applied during content retrieval
+
+## 🔧 Development Tools
+
+### Database Documentation Generator
+Automated script that generates comprehensive database schema documentation:
+```bash
+./scripts/generate-database-docs.sh
+```
+- Discovers tables via Supabase REST API
+- Documents schemas, column types, and constraints
+- Checks RLS (Row Level Security) implementation
+- Creates read-only DATABASE.md output
+
+### Testing Framework
+```bash
+npm test                    # Run all tests
+npm run test:workflows     # Test workflow system
+npm run test:e2e-workflows # End-to-end workflow testing
 ```
 
-## Connecting Claude Code to this MCP Server
+## 📡 Deployment & Usage
 
-To connect Claude Code to this MCP server, you'll need to configure it in your Claude Code settings.
+### Vercel Deployment
+- Uses `@vercel/mcp-adapter` for Next.js integration
+- Requires **Fluid compute** for efficient execution
+- SSE transport requires Redis via `REDIS_URL` environment variable
+- Deploy using the [Next.js MCP template](https://vercel.com/templates/next.js/model-context-protocol-mcp-with-next-js)
 
-### Prerequisites
-- Claude Code installed and running
-- This MCP server deployed (e.g., on Vercel)
-- Server URL (e.g., `https://mcp-server-flax.vercel.app`)
+### Testing the Server
+```bash
+# Test MCP tools
+node scripts/test-client.mjs <server-url>
 
-### Configuration Steps
-
-1. **Add MCP Server using Claude Code CLI**
-   
-   Use the following Claude Code command to add this MCP server:
-
-   ```bash
-   claude mcp add --transport http lolek-mcp https://mcp-server-flax.vercel.app/mcp
-   ```
-
-1a. ** Remove the MCP server**
-
-   claude mcp remove lolek-mcp
-
-2. **Alternative: Manual Configuration**
-   
-   If you prefer to manually configure, add the following to your Claude Code MCP settings:
-
-   ```json
-   {
-     "mcpServers": {
-       "lolek-mcp-server": {
-         "transport": {
-           "type": "http",
-           "url": "https://mcp-server-flax.vercel.app/mcp"
-         }
-       }
-     }
-   }
-   ```
-
-3. **Verify Configuration**
-   
-   List your configured MCP servers:
-   ```bash
-   claude mcp list
-   ```
-
-   Get details for a specific server:
-   ```bash
-   claude mcp get lolek-mcp-server
-   ```
-
-### Checking MCP Server Status
-
-Within Claude Code, you can check the status of your MCP servers:
-
-1. **Use the `/mcp` command in Claude Code:**
-   ```
-   /mcp
-   ```
-   This opens an interactive menu where you can:
-   - View connection status for all servers
-   - View server capabilities
-   - Authenticate or clear authentication for servers
-
-2. **Check from command line:**
-   ```bash
-   claude mcp list
-   ```
-
-### Usage in Claude Code
-
-Once connected, you can use the three documentation navigation tools described above.
-
-Example usage:
-```
-Claude, use the list-docs tool to see what documentation is available.
+# Test end-to-end workflows  
+npm run test:e2e-workflows
 ```
 
-### Troubleshooting
+### Claude Code Integration
 
-- Ensure your server URL is correct and accessible
-- Check that the MCP server is properly deployed and running
-- Verify the configuration syntax in your Claude Code settings
-- Check Claude Code logs for any connection errors
+#### Quick Setup
+```bash
+# Add MCP server
+claude mcp add --transport http lolek-mcp https://your-server-url.vercel.app/mcp
 
+# Verify configuration
+claude mcp list
 
+# Remove if needed
+claude mcp remove lolek-mcp
+```
+
+#### Manual Configuration
+Add to Claude Code MCP settings:
+```json
+{
+  "mcpServers": {
+    "lolek-mcp-server": {
+      "transport": {
+        "type": "http", 
+        "url": "https://your-server-url.vercel.app/mcp"
+      }
+    }
+  }
+}
+```
+
+## 🎯 Example Usage
+
+### Quick Start with Documentation
+```
+Claude, use load-documentation-context to get all essential context, then help me build a contact management feature.
+```
+
+### Feature Planning
+```
+Claude, use get-workflow-template with type "feature" to help me plan a bulk contact import feature.
+```
+
+### Finding Components
+```
+Claude, use search-content to find navigation components for building a sidebar.
+```
+
+## 🔍 Troubleshooting
+
+- **Server Connection**: Verify URL accessibility and proper deployment
+- **Tool Errors**: Check that all required parameters are provided
+- **Quality Evaluation**: Ensure pre-planning answers are in valid JSON format
+- **Build Issues**: Run `npm run build` to check for compilation errors
+
+## 📄 Additional Resources
+
+- [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
+- [Vercel MCP Adapter](https://www.npmjs.com/package/@vercel/mcp-adapter)
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+
+---
+
+**Built with ❤️ by Lolek Productions**  
+*Empowering AI agents with structured development workflows and comprehensive documentation navigation.*
