@@ -2,8 +2,35 @@
   "name": "Module Development Workflow",
   "description": "Complete workflow for developing a new module from conception to deployment",
   "type": "module",
-  "totalSteps": 11,
+  "totalSteps": 12,
   "steps": [
+    {
+      "id": "0_context_preparation",
+      "name": "Context Preparation",
+      "description": "Load documentation context and prepare AI agent knowledge base",
+      "deliverables": [
+        "Documentation headings loaded into context",
+        "Available tools and components identified",
+        "Agent rules and constraints understood",
+        "Project structure familiarized",
+        "Existing module patterns analyzed"
+      ],
+      "activities": [
+        "Use load-documentation-context tool to efficiently load all essential context",
+        "Alternative: Use individual tools (list-docs, get-sections, get-agent-rules, get-tools) for specific context",
+        "Review loaded documentation headings and available components",
+        "Understand agent behavioral constraints",
+        "Analyze existing module patterns and architecture",
+        "Familiarize with project structure and development conventions"
+      ],
+      "exitCriteria": [
+        "Documentation context loaded",
+        "Agent rules understood",
+        "Available tools identified",
+        "Project patterns familiarized",
+        "Architecture context established"
+      ]
+    },
     {
       "id": "1_preplanning",
       "name": "Pre-Planning & Requirements",
@@ -338,6 +365,10 @@
     }
   ],
   "checkpoints": [
+    {
+      "step": "0_context_preparation",
+      "checkpoint": "Documentation context, agent rules, and project patterns loaded"
+    },
     {
       "step": "1_preplanning",
       "checkpoint": "Business case and pre-planning approved (score ≥ 3.5)"

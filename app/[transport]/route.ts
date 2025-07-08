@@ -25,7 +25,8 @@ import {
   evaluatePreplanningAnswers,
   generateImplementationPlan,
   getWorkflowTemplates,
-  validateChecklistProgress
+  validateChecklistProgress,
+  loadDocumentationContext
 } from "../../tools/workflow";
 import { ToolDefinition, ToolContext } from "../../tools/types";
 
@@ -65,6 +66,7 @@ const handler = createMcpHandler(
     registerTool(generateImplementationPlan);
     registerTool(getWorkflowTemplates);
     registerTool(validateChecklistProgress);
+    registerTool(loadDocumentationContext);
   },
   {
     capabilities: {

@@ -2,8 +2,32 @@
   "name": "Feature Development Workflow",
   "description": "Complete workflow for developing a new feature from conception to deployment",
   "type": "feature",
-  "totalSteps": 8,
+  "totalSteps": 9,
   "steps": [
+    {
+      "id": "0_context_preparation",
+      "name": "Context Preparation",
+      "description": "Load documentation context and prepare AI agent knowledge base",
+      "deliverables": [
+        "Documentation headings loaded into context",
+        "Available tools and components identified",
+        "Agent rules and constraints understood",
+        "Project structure familiarized"
+      ],
+      "activities": [
+        "Use load-documentation-context tool to efficiently load all essential context",
+        "Alternative: Use individual tools (list-docs, get-sections, get-agent-rules, get-tools) for specific context",
+        "Review loaded documentation headings and available components",
+        "Understand agent behavioral constraints",
+        "Familiarize with available MCP tools for development workflow"
+      ],
+      "exitCriteria": [
+        "Documentation context loaded",
+        "Agent rules understood",
+        "Available tools identified",
+        "Project familiarity established"
+      ]
+    },
     {
       "id": "1_preplanning",
       "name": "Pre-Planning",
@@ -225,6 +249,10 @@
     }
   ],
   "checkpoints": [
+    {
+      "step": "0_context_preparation",
+      "checkpoint": "Documentation context and agent rules loaded"
+    },
     {
       "step": "1_preplanning",
       "checkpoint": "Pre-planning quality score ≥ 3.5"

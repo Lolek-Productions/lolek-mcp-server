@@ -5,3 +5,4 @@ export { evaluatePreplanningAnswers } from './evaluate-preplanning-answers';
 export { generateImplementationPlan } from './generate-implementation-plan';
 export { getWorkflowTemplates } from './get-workflow-templates';
 export { validateChecklistProgress } from './validate-checklist-progress';
+export { loadDocumentationContext } from './load-documentation-context';
