@@ -1,14 +1,7 @@
 import { createMcpHandler } from "@vercel/mcp-adapter";
-import { z } from "zod";
-import { readFileSync, readdirSync } from "fs";
-import { join } from "path";
 
-// Import WorkflowHelper for development workflow tools
-const WorkflowHelper = require("../../lib/workflow-helper.js");
-const WorkflowOrchestrator = require("../../workflows/workflow-orchestrator.js");
 const ContentFilter = require("../../lib/content-filter.js");
 
-// Import extracted tools
 import { 
   listDocuments,
   searchContent
@@ -32,14 +25,11 @@ import { ToolDefinition, ToolContext } from "../../tools/types";
 
 const handler = createMcpHandler(
   async (server) => {
-    // Initialize WorkflowHelper instance
-    const workflowHelper = new WorkflowHelper();
     // Initialize ContentFilter instance
     const contentFilter = new ContentFilter();
     
     // Tool context for passing dependencies
     const toolContext: ToolContext = {
-      workflowHelper,
       contentFilter
     };
     

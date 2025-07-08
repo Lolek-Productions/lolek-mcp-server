@@ -17,6 +17,5 @@ export interface ToolDefinition {
 }
 
 export interface ToolContext {
-  workflowHelper: any;
   contentFilter: any;
 }
