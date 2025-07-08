@@ -57,12 +57,11 @@
       "question": "What external systems or APIs will this module integrate with?",
       "type": "list",
       "required": false,
-      "guidance": "Include both internal modules and external services",
+      "guidance": "Include both internal modules and external services. Note: Authentication, UI components, and deployment are covered in the development guide.",
       "examples": [
         "Email service (SendGrid, Mailgun)",
         "CRM system (Salesforce, HubSpot)",
-        "Authentication module",
-        "Notification service"
+        "Third-party APIs (payment, analytics)"
       ]
     },
     {
@@ -79,26 +78,26 @@
     },
     {
       "id": "security_considerations",
-      "question": "What security and privacy considerations are important?",
+      "question": "What additional security and privacy considerations are important for this module?",
       "type": "list",
-      "required": true,
-      "guidance": "Consider data protection, access control, compliance",
+      "required": false,
+      "guidance": "Focus on module-specific security needs. Basic authentication and security setup is covered in the development guide.",
       "examples": [
-        "PII data encryption at rest and in transit",
-        "Role-based access control",
-        "GDPR compliance for contact data",
-        "Audit logging for data changes"
+        "PII data encryption for sensitive fields",
+        "Special compliance requirements (GDPR, HIPAA)",
+        "Module-specific audit logging needs",
+        "Data retention policies"
       ]
     },
     {
       "id": "ui_requirements",
-      "question": "What are the key user interface requirements?",
+      "question": "What are the key user interface requirements specific to this module?",
       "type": "text",
       "required": true,
-      "guidance": "Describe the main UI components and user workflows",
+      "guidance": "Focus on module-specific UI needs. Standard components and patterns are available in the development guide.",
       "examples": [
         "Dashboard with contact overview, search bar, filterable list",
-        "Mobile-responsive design for field use",
+        "Specialized data visualization components",
         "Bulk action capabilities for mass updates"
       ]
     },
@@ -117,13 +116,13 @@
     },
     {
       "id": "constraints",
-      "question": "What constraints or limitations should be considered?",
+      "question": "What constraints or limitations should be considered beyond the standard tech stack?",
       "type": "list",
       "required": false,
-      "guidance": "Technical, business, or resource constraints",
+      "guidance": "Focus on module-specific constraints. Standard tech stack and architecture patterns are defined in the development guide.",
       "examples": [
-        "Must use existing database schema",
-        "Limited to current technology stack",
+        "Must integrate with legacy system",
+        "Specific performance requirements",
         "Budget constraint of $X",
         "Must be completed within 3 months"
       ]

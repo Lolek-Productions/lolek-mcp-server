@@ -51,10 +51,10 @@
     },
     {
       "id": "technical_approach",
-      "question": "What is your planned technical approach?",
+      "question": "What is your planned technical approach for this specific feature?",
       "type": "text",
       "required": true,
-      "guidance": "High-level description of how you'll implement this feature",
+      "guidance": "Focus on feature-specific implementation. Standard architecture patterns are covered in the development guide.",
       "examples": [
         "Use file upload component, parse CSV with Papa Parse library, validate data server-side, batch insert to database",
         "Implement WebSocket connection, create notification service, update UI with real-time events"
@@ -62,10 +62,10 @@
     },
     {
       "id": "affected_components",
-      "question": "Which existing components or modules will be affected?",
+      "question": "Which existing components or modules will be affected beyond standard components?",
       "type": "list",
       "required": true,
-      "guidance": "List components that need modification or new components to create",
+      "guidance": "Focus on feature-specific components. Standard UI components are available in the development guide.",
       "examples": [
         "ContactList component - add import button",
         "ContactService - add import methods",
@@ -75,10 +75,10 @@
     },
     {
       "id": "data_changes",
-      "question": "What data model changes are needed?",
+      "question": "What data model changes are needed beyond standard schema?",
       "type": "list",
       "required": false,
-      "guidance": "New tables, fields, or schema modifications",
+      "guidance": "Focus on feature-specific data changes. Standard database setup is covered in the development guide.",
       "examples": [
         "Add import_batch_id field to contacts table",
         "Create import_logs table",
@@ -100,10 +100,10 @@
     },
     {
       "id": "testing_strategy",
-      "question": "How will you test this feature?",
+      "question": "How will you test this feature beyond standard testing practices?",
       "type": "text",
-      "required": true,
-      "guidance": "Describe unit tests, integration tests, and user testing approach",
+      "required": false,
+      "guidance": "Focus on feature-specific testing needs. Standard testing framework is mentioned in the development guide.",
       "examples": [
         "Unit tests for CSV parsing and validation, integration tests for full import workflow, manual testing with various CSV formats"
       ]
