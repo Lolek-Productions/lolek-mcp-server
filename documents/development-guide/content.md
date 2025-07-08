@@ -1,6 +1,6 @@
 TITLE: PublicFooter Component
 DESCRIPTION: Simple footer component for public-facing pages with company branding and copyright information. Provides consistent footer layout across all public pages.
-SOURCE: /examples/PublicFooter.jsx
+SOURCE: /examples/components/PublicFooter.jsx
 LANGUAGE: jsx
 CODE:
 ```jsx
@@ -27,7 +27,7 @@ DEPENDENCIES: None (pure React component)
 
 TITLE: PublicHeader Component
 DESCRIPTION: Navigation header for public pages with responsive mobile menu, logo, navigation links, and login button. Handles mobile menu state and provides consistent public page navigation.
-SOURCE: /examples/PublicHeader.jsx
+SOURCE: /examples/components/PublicHeader.jsx
 LANGUAGE: jsx
 CODE:
 ```jsx
@@ -116,7 +116,7 @@ DEPENDENCIES: shadcn/ui Button, Next.js Link/Image, Lucide React Menu icon
 
 TITLE: CenteredFormCard Component
 DESCRIPTION: Reusable centered card container for forms and content. Provides consistent centered layout with customizable max-width and card styling using shadcn/ui components.
-SOURCE: /examples/CenteredFormCard.tsx
+SOURCE: /examples/components/centered-form-card.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -173,7 +173,7 @@ DEPENDENCIES: shadcn/ui Card components, cn utility function
 
 TITLE: CollapsibleNavSection Component
 DESCRIPTION: Collapsible navigation section for sidebar menus with expand/collapse animation. Integrates with sidebar context for mobile behavior and supports custom icons and navigation items.
-SOURCE: /examples/CollapsibleNavSection.tsx
+SOURCE: /examples/components/collapsible-nav-section.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -246,7 +246,7 @@ DEPENDENCIES: Radix UI Collapsible, shadcn/ui Sidebar components, Lucide React i
 
 TITLE: CopyButton Component
 DESCRIPTION: Button component for copying text to clipboard with visual feedback. Shows "Copied!" state for 2 seconds after successful copy operation with error handling for clipboard failures.
-SOURCE: /examples/CopyButton.tsx
+SOURCE: /examples/components/copy-button.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -311,7 +311,7 @@ DEPENDENCIES: shadcn/ui Button, Lucide React Copy/Check icons, cn utility functi
 
 TITLE: MainHeader Component
 DESCRIPTION: Main application header with sidebar trigger and breadcrumb navigation. Provides consistent header layout for authenticated application pages with optional sidebar toggle and dynamic breadcrumbs.
-SOURCE: /examples/MainHeader.tsx
+SOURCE: /examples/components/main-header.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -366,7 +366,7 @@ DEPENDENCIES: shadcn/ui Breadcrumb and Sidebar components
 
 TITLE: MainSidebar Component
 DESCRIPTION: Main application sidebar with navigation and user profile. Provides organized navigation groups for application features with company branding, collapsible sections, and user profile integration.
-SOURCE: /examples/MainSidebar.tsx
+SOURCE: /examples/components/main-sidebar.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -465,7 +465,7 @@ DEPENDENCIES: shadcn/ui Sidebar components, CollapsibleNavSection, UserProfile, 
 
 TITLE: PageContainer Component
 DESCRIPTION: Page layout container with optional card wrapper for consistent page layouts. Provides page title, description, and optional card wrapping for form-like content with customizable max-width.
-SOURCE: /examples/PageContainer.tsx
+SOURCE: /examples/components/page-container.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -522,7 +522,7 @@ DEPENDENCIES: CenteredFormCard component, cn utility function
 
 TITLE: UserProfile Component
 DESCRIPTION: User profile dropdown with authentication integration for Supabase. Displays user avatar with email initials, dropdown menu with settings and logout functionality, and handles loading states.
-SOURCE: /examples/UserProfile.tsx
+SOURCE: /examples/components/user-profile.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx
@@ -609,7 +609,7 @@ DEPENDENCIES: Supabase client, shadcn/ui Button/Avatar/DropdownMenu, Lucide Reac
 
 TITLE: AppContextProvider Component
 DESCRIPTION: Application context provider that wraps the entire app with global state management. Provides centralized state for user authentication, application settings, and shared data across components using React Context API.
-SOURCE: /examples/AppContextProvider.tsx
+SOURCE: /examples/contexts/AppContextProvider.tsx
 LANGUAGE: tsx
 CODE:
 ```tsx

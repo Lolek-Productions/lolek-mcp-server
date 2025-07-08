@@ -26,12 +26,6 @@ import Image from "next/image"
 import { UserProfile } from "@/components/user-profile"
 import { CollapsibleNavSection } from "@/components/collapsible-nav-section"
 
-
-
-
-
-
-
 export function MainSidebar() {
   const { isMobile, setOpenMobile } = useSidebar()
 

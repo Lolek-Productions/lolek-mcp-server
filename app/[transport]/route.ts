@@ -17,6 +17,10 @@ import {
   evaluateWorkflowProgress,
   loadDocumentationContext
 } from "../../tools/workflow";
+import {
+  listExamples,
+  getExample
+} from "../../tools/examples";
 import { ToolDefinition, ToolContext } from "../../tools/types";
 
 const handler = createMcpHandler(
@@ -49,6 +53,8 @@ const handler = createMcpHandler(
     registerTool(getWorkflowTemplate);
     registerTool(evaluateWorkflowProgress);
     registerTool(loadDocumentationContext);
+    registerTool(listExamples);
+    registerTool(getExample);
   },
   {
     capabilities: {
