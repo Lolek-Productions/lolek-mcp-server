@@ -1259,3 +1259,121 @@ All components follow consistent design patterns and can be easily adapted for o
 - Updating branding and styling
 - Changing authentication providers or workflows
 - Adapting data models for different business domains
+
+----------------------------------------
+
+TITLE: Example Management Tools
+DESCRIPTION: MCP tools for discovering and retrieving code examples from the organized examples directory structure. Provides efficient access to production-ready React components, utility functions, and development scripts.
+
+## Overview
+The MCP server includes two specialized tools for managing and accessing code examples stored in the `/examples` directory. These tools provide organized access to all available components, contexts, library files, and scripts.
+
+## Tool: list-examples
+**Purpose**: Discover all available code examples organized by category
+**Parameters**: None required
+**Returns**: Organized listing of all example files by category
+
+### Categories Provided
+- **🧩 Components**: React components (JSX/TSX files)
+- **🔄 Contexts**: React context providers and state management
+- **📜 Scripts**: Development and utility scripts
+- **📚 Library Files**: Utility functions and service configurations
+
+### Usage Example
+```
+Claude, use list-examples to see all available code examples.
+```
+
+### Sample Output Structure
+```
+## 🧩 Components
+- `components/PublicHeader.jsx` - Public Header
+- `components/main-sidebar.tsx` - Main Sidebar
+- `components/copy-button.tsx` - Copy Button
+
+## 🔄 Contexts
+- `contexts/AppContextProvider.tsx` - App Context Provider
+
+## 📜 Scripts  
+- `scripts/generate-database-docs.sh` - Database Documentation Generator
+
+## 📚 Library Files
+### supabase/
+- `lib/supabase/client.ts` - Supabase Client Configuration
+- `lib/supabase/server.ts` - Supabase Server Configuration
+```
+
+## Tool: get-example
+**Purpose**: Retrieve the complete source code of a specific example file
+**Parameters**: 
+- `file` (required): Path to the example file relative to `/examples` directory
+
+### Features Provided
+- **Complete source code** with syntax highlighting
+- **File description** explaining the component's purpose
+- **Usage notes** with implementation guidance
+- **Related files** showing cross-references
+- **Dependencies** listing required packages
+
+### Usage Examples
+```
+Claude, use get-example with file "components/PublicHeader.jsx" to get the header component.
+
+Claude, use get-example with file "contexts/AppContextProvider.tsx" to see the context implementation.
+
+Claude, use get-example with file "lib/supabase/client.ts" to get the Supabase configuration.
+```
+
+### Output Structure
+Each `get-example` call returns:
+1. **File metadata** (path, description)
+2. **Complete source code** with proper syntax highlighting  
+3. **Usage notes** with practical implementation guidance
+4. **Related files** for discovering connected components
+5. **Dependencies** and setup requirements
+
+## Directory Structure
+The examples are organized in a clear hierarchy:
+```
+examples/
+├── components/          # React UI components
+│   ├── PublicHeader.jsx
+│   ├── main-sidebar.tsx
+│   └── [other components...]
+├── contexts/           # React context providers
+│   └── AppContextProvider.tsx
+├── lib/               # Utility libraries
+│   ├── supabase/      # Supabase configurations
+│   ├── actions/       # Server actions
+│   └── utils.ts       # Utility functions
+└── scripts/           # Development scripts
+    └── generate-database-docs.sh
+```
+
+## Integration with Development Workflow
+These tools integrate seamlessly with the existing MCP server capabilities:
+
+### Discovery Workflow
+1. **`list-examples`** → See all available examples
+2. **`get-example`** → Retrieve specific code
+3. **`search-content`** → Find related documentation
+4. **`get-workflow-template`** → Get development workflows
+
+### Best Practices
+- **Start with list-examples** to discover available components
+- **Use get-example** to retrieve complete implementations
+- **Check usage notes** for proper integration guidance
+- **Review related files** to understand component dependencies
+- **Reference documentation** for additional context
+
+## Security Features
+- **Path validation** ensures files remain within examples directory
+- **Read-only access** prevents accidental modifications
+- **Organized structure** makes discovery safe and predictable
+
+## Development Benefits
+- **Rapid prototyping** with production-ready components
+- **Consistent patterns** following established architecture
+- **Complete implementations** including error handling and TypeScript
+- **Cross-references** for understanding component relationships
+- **Practical guidance** for real-world usage scenarios

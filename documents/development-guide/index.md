@@ -191,3 +191,28 @@ The components include examples from a church management application (contacts, 
 - **Consistent Patterns**: Follow established TypeScript, styling, and architectural patterns
 - **Complete Stack**: From database setup to deployment, all guidance is provided
 - **Best Practices**: Security, accessibility, and performance considerations built-in
+
+## 15. Example Management Tools
+
+### MCP Tools for Code Discovery
+- list-examples tool for discovering available components
+- get-example tool for retrieving complete source code
+- Organized access to React components, contexts, and utilities
+
+### Example Categories
+- Components directory with UI elements
+- Contexts for state management patterns
+- Library files for Supabase and utilities
+- Scripts for development automation
+
+### Integration Workflow
+- Discovery through list-examples
+- Code retrieval via get-example
+- Cross-references with related components
+- Usage guidance and implementation notes
+
+### Development Benefits
+- Rapid prototyping with production-ready code
+- Consistent architectural patterns
+- Complete TypeScript implementations
+- Security and path validation features
