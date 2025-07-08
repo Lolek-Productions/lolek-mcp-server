@@ -12,43 +12,58 @@ This MCP server provides efficient navigation tools for large documentation file
 **Purpose**: Discover what documentation topics are available  
 **Usage**: Start here to see available topics
 
-#### 2. `get-sections` - Topic Navigation  
-**Purpose**: Get high-level topic areas from documentation  
-**Parameters**: `topic` (optional): "nextjs", "shadcn"  
-**Usage**: Use after `list-docs` to see topic areas
-
-#### 3. `get-headings` - Content Extraction
-**Purpose**: Extract specific content from documentation  
+#### 2. `get-document-section` - Section Retrieval  
+**Purpose**: Get one or more sections' content from a topic's index file  
 **Parameters**: 
-- `topic` (optional): "nextjs", "shadcn"
-- `file` (optional): "content", "index", "headings" 
-- `type` (optional): "markdown" for # headings, "titles" for TITLE: lines
+- `topic` (optional): "custom-components", "nextjs", "shadcn" (defaults to "custom-components")
+- `sectionName` (required): Name of the section(s) to retrieve. Use comma-separated values for multiple sections (e.g., "Navigation Components, Layout Components")
+**Usage**: Use after `list-docs` to get specific section content. Supports multiple sections in one request.
 
-### Complete Development Workflows
+#### 3. `get-document-titles` - Documentation Title Extraction and Search
+**Purpose**: Extract and search documentation titles from any topic's content files  
+**Parameters**: 
+- `topic` (optional): "custom-components", "nextjs", "shadcn" (defaults to "custom-components")
+- `file` (optional): "content", "index", "headings" (defaults to "content")
+- `type` (optional): "markdown" for # headings, "titles" for TITLE: lines (defaults to "titles")
+- `keywords` (optional): Search keywords to filter titles (case-insensitive, space-separated)
+**Usage**: Extract titles and optionally filter by keywords for targeted searches
 
-#### 4. `list-available-workflows` - List Available Workflows
-**Purpose**: See all available development workflows  
-**Usage**: Start here to see what workflows are available
+### Simple Planning Tools
 
-#### 5. `start-workflow` - Start Development Workflow
-**Purpose**: Begin a complete development workflow (feature or module)  
+#### 4. `get-workflow` - Get Available Workflow Types
+**Purpose**: See what workflow types are available for planning  
+**Parameters**: 
+- `type`: "module", "feature", "bug", or "commit"
+**Usage**: Discover workflow options for your planning needs
+
+#### 5. `get-preplanning-questions` - Get Planning Questions
+**Purpose**: Get structured questions to help create a solid plan  
+**Parameters**: 
+- `type`: "module" or "feature"
+**Usage**: Start the planning process with guided questions
+
+#### 6. `evaluate-preplanning-answers` - Evaluate Plan Quality
+**Purpose**: Evaluate your planning answers for quality and completeness  
+**Parameters**: 
+- `type`: "module" or "feature"
+- `answers`: JSON formatted answers to planning questions
+**Usage**: Ensure your plan meets quality standards before implementation
+
+#### 7. `generate-implementation-plan` - Create Implementation Plan
+**Purpose**: Generate a detailed implementation plan from your evaluated answers  
+**Parameters**: 
+- `type`: "module" or "feature"
+- `answers`: JSON formatted planning answers
+- `evaluationScore` (optional): Score from evaluation step
+**Usage**: Convert planning into actionable implementation steps
+
+#### 8. `create-simple-checklist` - Create Simple Checklist
+**Purpose**: Generate a basic checklist file for tracking progress  
 **Parameters**: 
 - `type`: "feature" or "module"
-- `name`: Name of the feature/module
-- `project` (optional): Project name
-**Usage**: Start guided development process
-
-#### 6. `get-workflow-step` - Get Step Details
-**Purpose**: Get detailed information about a specific workflow step  
-**Parameters**: 
-- `sessionId`: Workflow session ID
-- `stepId`: Specific step ID
-**Usage**: Get guidance for current workflow step
-
-#### 7. `get-workflow-progress` - View Progress
-**Purpose**: See complete workflow overview and progress  
-**Parameters**: `sessionId`: Workflow session ID  
-**Usage**: Track progress and see all steps
+- `name`: Name for the checklist
+- `filePath` (optional): Custom file path
+**Usage**: Create a simple markdown checklist for progress tracking
 
 ### Pre-Planning Tools (Used within workflows)
 
@@ -76,43 +91,38 @@ This MCP server provides efficient navigation tools for large documentation file
 
 ### Documentation Navigation Workflow
 ```
-1. list-docs          → See available topics
-2. get-sections       → Browse topic areas  
-3. get-headings       → Extract specific content
-4. Targeted searches  → Find exact information
+1. list-docs              → See available topics
+2. get-document-section   → Browse topic areas (single or multiple sections)
+3. get-document-titles    → Extract documentation titles (with optional keyword search)
+4. Targeted searches      → Find exact information
 ```
 
-### Complete Development Workflows
+### Simple Planning Workflow
 
-#### Feature Development Workflow (8 steps)
+#### The Simple 4-Step Planning Process
 ```
-1. start-workflow              → Start feature workflow
-2. get-workflow-step          → Get step-by-step guidance
-   └─ Step 1: Pre-Planning    → Use pre-planning tools for quality validation
-   └─ Step 2: Design          → Create technical and UI designs  
-   └─ Step 3: Setup           → Prepare development environment
-   └─ Step 4: Implementation  → Build core functionality
-   └─ Step 5: Integration     → Test and integrate with system
-   └─ Step 6: Review          → Code review and QA
-   └─ Step 7: Deployment      → Deploy to production
-   └─ Step 8: Monitoring      → Monitor performance and adoption
+1. User + Agent Interact         → Use get-preplanning-questions to get structured questions
+2. Agent Creates Plan            → Use evaluate-preplanning-answers + generate-implementation-plan
+3. User Reviews Plan             → Review the generated implementation plan
+4. Agent Handles Execution       → Use create-simple-checklist for progress tracking
 ```
 
-#### Module Development Workflow (11 steps)
+#### Example: Feature Development
 ```
-1. start-workflow                 → Start module workflow
-2. get-workflow-step             → Get step-by-step guidance
-   └─ Step 1: Pre-Planning       → Use pre-planning tools for quality validation
-   └─ Step 2: Architecture       → Design complete system architecture
-   └─ Step 3: Setup              → Set up project infrastructure
-   └─ Step 4: Data Layer         → Implement database and data access
-   └─ Step 5: API Layer          → Build business logic and APIs
-   └─ Step 6: UI Implementation  → Create user interface
-   └─ Step 7: Integration        → Integrate with existing systems
-   └─ Step 8: Testing            → Comprehensive testing
-   └─ Step 9: Documentation      → Create documentation and training
-   └─ Step 10: Deployment        → Deploy to production
-   └─ Step 11: Monitoring        → Post-launch monitoring and support
+1. get-preplanning-questions     → Get feature planning questions
+2. Answer questions together     → User and agent collaborate on answers
+3. evaluate-preplanning-answers  → Validate quality of planning
+4. generate-implementation-plan  → Create detailed implementation plan
+5. create-simple-checklist       → Generate tracking checklist
+```
+
+#### Example: Module Development
+```
+1. get-preplanning-questions     → Get module planning questions  
+2. Answer questions together     → User and agent collaborate on answers
+3. evaluate-preplanning-answers  → Validate quality of planning
+4. generate-implementation-plan  → Create detailed implementation plan
+5. create-simple-checklist       → Generate tracking checklist
 ```
 
 ## Documentation Structure
@@ -143,26 +153,30 @@ The MCP server includes a comprehensive pre-planning system designed to help dev
 
 When working in your "widget" project and wanting to build a "contacts" module:
 
-#### Complete Module Workflow
+#### Simple Planning Flow
 ```
-Claude, use the start-workflow tool to start a module workflow for "contacts" in project "widget"
-```
-
-Claude Code will guide you through the complete 11-step process, starting with:
-```
-Claude, use the get-workflow-step tool to get details for step 1
-```
-
-#### Just Pre-Planning (if you only want planning)
-```
-Claude, use the get-preplanning-questions tool with type "module" to help me plan the contacts module.
+1. Claude, use get-preplanning-questions with type "module" to help me plan the contacts module
+2. [Work together to answer the planning questions]
+3. Claude, use evaluate-preplanning-answers to check our planning quality
+4. Claude, use generate-implementation-plan to create the detailed plan
+5. Claude, use create-simple-checklist to create a tracking checklist
 ```
 
-#### Complete Feature Workflow  
+#### For a Feature
 For a smaller feature like "bulk contact import":
 ```
-Claude, use the start-workflow tool to start a feature workflow for "bulk-contact-import" in project "widget"
+1. Claude, use get-preplanning-questions with type "feature" for bulk contact import
+2. [Answer the planning questions together]
+3. Claude, evaluate our answers and create the implementation plan
+4. Claude, create a simple checklist for tracking progress
 ```
+
+#### The Result
+You end up with:
+- A quality-validated implementation plan
+- A simple checklist file for tracking progress
+- No complex server-side state management
+- Clear, actionable next steps
 
 ### Workflow Structure
 
