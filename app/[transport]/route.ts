@@ -36,15 +36,22 @@ const handler = createMcpHandler(
     // Helper function to register extracted tools
     const registerTool = (toolDef: ToolDefinition) => {
       // Convert ZodObject to ZodRawShape if needed
-      const schema = toolDef.inputSchema instanceof z.ZodObject 
-        ? toolDef.inputSchema.shape 
-        : toolDef.inputSchema;
+      let schema;
+      if (toolDef.inputSchema instanceof z.ZodObject) {
+        schema = toolDef.inputSchema.shape;
+      } else if (toolDef.inputSchema instanceof z.ZodOptional) {
+        // Handle optional schemas by extracting the inner object
+        const innerSchema = toolDef.inputSchema.unwrap();
+        schema = innerSchema instanceof z.ZodObject ? innerSchema.shape : innerSchema;
+      } else {
+        schema = toolDef.inputSchema;
+      }
       
       server.tool(
         toolDef.name,
         toolDef.description,
         schema,
-        async (params: any) => await toolDef.handler(params, toolContext)
+        async (params: any) => await toolDef.handler(params || {}, toolContext)
       );
     };
     

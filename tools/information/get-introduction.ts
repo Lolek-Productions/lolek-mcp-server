@@ -4,8 +4,8 @@ import { ToolDefinition } from "../types";
 export const getIntroduction: ToolDefinition = {
   name: "get-introduction",
   description: "Get an introduction to the Lolek MCP Server and its capabilities",
-  inputSchema: z.object({}),
-  handler: async () => {
+  inputSchema: z.object({}).optional(),
+  handler: async (params) => {
     return {
       content: [{
         type: "text" as const,
