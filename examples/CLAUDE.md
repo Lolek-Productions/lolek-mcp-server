@@ -32,14 +32,14 @@ This is a Next.js 15 application with TypeScript, featuring:
 - **Middleware** for authentication protection
 
 ### Key Directories
-- `app/` - Next.js App Router pages and layouts
+- `src/app/` - Next.js App Router pages and layouts
   - `(main)/` - Authenticated user pages
   - `(public)/` - Public pages (landing, login, etc.)
   - `(print)/` - Print-optimized pages
-- `components/` - Reusable UI components
-- `lib/` - Utility functions and configurations
-- `hooks/` - Custom React hooks
-- `types/` - TypeScript type definitions
+- `src/components/` - Reusable UI components
+- `src/lib/` - Utility functions and configurations
+- `src/hooks/` - Custom React hooks
+- `src/types/` - TypeScript type definitions
 
 ### Authentication Flow
 1. User visits protected route
@@ -61,7 +61,7 @@ When creating new components:
 ### Database Operations
 - Use Supabase client for browser operations
 - Use Supabase server client for server-side operations
-- Implement Row Level Security (RLS) policies
+- Implement Row Level Security (RLS) policies (preferred)
 - Use TypeScript for database types
 - Handle errors gracefully with try/catch
 
@@ -110,13 +110,6 @@ Required environment variables:
 # Supabase
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-
-# Database
-DATABASE_URL=your_database_url
-
-# Optional: Redis for sessions
-REDIS_URL=your_redis_url
 ```
 
 ### Build Process
