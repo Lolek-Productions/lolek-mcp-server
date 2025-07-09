@@ -254,7 +254,7 @@ Add to Claude Code MCP settings:
 ```json
 {
   "mcpServers": {
-    "lolek-mcp-server": {
+    "lolek-mcp": {
       "transport": {
         "type": "http", 
         "url": "https://mcp-server-flax.vercel.app/mcp"
@@ -263,6 +263,25 @@ Add to Claude Code MCP settings:
   }
 }
 ```
+
+### Windsurf Integration
+
+Add to Windsurf MCP configuration:
+```json
+{
+  "mcpServers": {
+    "lolek-mcp": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp-server-flax.vercel.app/mcp"
+      ]
+    }
+  }
+}
+```
+
+This configuration uses `mcp-remote` to connect to the deployed MCP server.
 
 ## 🎯 Example Usage
 
