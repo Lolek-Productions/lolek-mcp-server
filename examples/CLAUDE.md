@@ -2,6 +2,29 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 🚨 CRITICAL: Lolek MCP Server Dependency
+
+**ALWAYS REFER TO THE LOLEK-MCP SERVER FOR ALL DEVELOPMENT DECISIONS**
+
+- **Before starting any task**: Use `get-introduction` to understand available tools and capabilities
+- **For all development planning**: Use `get-workflow-template` to follow established workflows
+- **For code examples**: Use `list-examples` and `get-example` to access proven patterns
+- **For behavioral rules**: Use `get-agent-rules` to understand project constraints
+- **For documentation**: Use `list-documents` and `search-content` to find relevant information
+
+### User Permission Required for Deviations
+
+**IF YOU WANT TO GO OUTSIDE LOLEK-MCP SERVER PARAMETERS, YOU MUST ASK THE USER FIRST**
+
+Examples requiring user permission:
+- Using different technology stacks than specified
+- Ignoring workflow steps or quality standards
+- Creating custom solutions when examples exist
+- Bypassing agent rules or best practices
+- Using deprecated packages or patterns
+
+**Do not assume - always consult the lolek-mcp server first, then ask the user if you need to deviate.**
+
 ## Development Commands
 
 ### Core Commands
@@ -51,21 +74,30 @@ This is a Next.js 15 application with TypeScript, featuring:
 ## Development Patterns
 
 ### Component Creation
+**ALWAYS check `list-examples` and `get-agent-rules` before creating components**
+
 When creating new components:
-1. Use TypeScript with proper prop typing
-2. Follow existing naming conventions (PascalCase for components)
-3. Include proper imports and exports
-4. Add error boundaries for complex components
-5. Use shadcn/ui components when available
+1. **First**: Use `list-examples` to find existing component patterns
+2. **Then**: Use `get-agent-rules` to understand component usage rules
+3. Use TypeScript with proper prop typing
+4. Follow existing naming conventions (PascalCase for components)
+5. Include proper imports and exports
+6. Add error boundaries for complex components
+7. Use shadcn/ui components when available (but check agent rules first)
 
 ### Database Operations
+**ALWAYS check `get-agent-rules` for database constraints before making changes**
+
 - Use Supabase client for browser operations
 - Use Supabase server client for server-side operations
 - Implement Row Level Security (RLS) policies (preferred)
 - Use TypeScript for database types
 - Handle errors gracefully with try/catch
+- **NEVER create Supabase migrations without checking agent rules first**
 
 ### API Routes and Server Actions
+**ALWAYS use `list-examples` to find existing patterns before creating new routes**
+
 - Prefer Server Actions over API routes for mutations
 - Use proper TypeScript typing for all functions
 - Implement proper error handling
@@ -195,17 +227,28 @@ npm run analyze
 
 ## Best Practices Summary
 
-1. **Always use TypeScript** - Strict typing prevents runtime errors
-2. **Follow component patterns** - Use existing components as templates
-3. **Implement proper error handling** - Handle all possible error states
-4. **Write tests** - Test critical functionality and edge cases
-5. **Use consistent formatting** - Follow ESLint and Prettier rules
-6. **Document complex logic** - Add comments for non-obvious code
-7. **Optimize performance** - Use React best practices and lazy loading
-8. **Secure by default** - Implement authentication and validation
-9. **Monitor and log** - Track errors and performance in production
-10. **Keep dependencies updated** - Regularly update packages for security
+1. **ALWAYS consult lolek-mcp server first** - Use `get-introduction`, `get-agent-rules`, and `list-examples` before starting any task
+2. **Ask user permission for deviations** - Never go outside established parameters without explicit user approval
+3. **Follow established workflows** - Use `get-workflow-template` for all development planning
+4. **Use existing patterns** - Check `list-examples` before creating new components or solutions
+5. **Respect agent rules** - Use `get-agent-rules` to understand project constraints and behavioral guidelines
+6. **Always use TypeScript** - Strict typing prevents runtime errors
+7. **Follow component patterns** - Use existing components as templates
+8. **Implement proper error handling** - Handle all possible error states
+9. **Write tests** - Test critical functionality and edge cases
+10. **Use consistent formatting** - Follow ESLint and Prettier rules
+11. **Document complex logic** - Add comments for non-obvious code
+12. **Optimize performance** - Use React best practices and lazy loading
+13. **Secure by default** - Implement authentication and validation
+14. **Monitor and log** - Track errors and performance in production
+15. **Keep dependencies updated** - Regularly update packages for security
 
 ---
 
-*This CLAUDE.md file should be customized for each project's specific requirements and conventions.*
+## 🔑 Key Reminder
+
+**Claude must ALWAYS refer to the lolek-mcp server to ensure every step is in agreement with its parameters. If the agent wants to go outside these parameters, it must ask the user first.**
+
+**Never assume, never bypass, never deviate without permission.**
+
+*This CLAUDE.md file should be customized for each project's specific requirements and conventions, but the lolek-mcp server dependency is non-negotiable.*
