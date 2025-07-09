@@ -12,6 +12,7 @@ This file contains behavioral rules and constraints for the AI agent when workin
 - **Always use custom components before shadcn/ui components** - Check the `/examples` folder and `/documents/development-guide/` documentation first
 - **Prefer existing custom components over creating new ones** - Extend or modify existing components when possible
 - **Only use shadcn/ui components when no custom alternative exists** - Document the reason for using shadcn/ui instead of custom components
+- **Use 'shadcn' package, not 'shadcn-ui'** - The 'shadcn-ui' package is deprecated. Always use the 'shadcn' package instead
 
 ### Component-Specific Rules
 - **For Toast notifications - always use shadcn/ui Toast components** - Use shadcn/ui for all toast messaging needs

@@ -21,26 +21,32 @@ Lolek MCP Server is designed to **help AI agents build applications quickly and 
 ## Overview
 This Next.js-based Model Context Protocol (MCP) server provides documentation navigation, planning workflow tools, and comprehensive development guidance. It accelerates application development by offering proven patterns, components, and setup procedures.
 
-## Core Capabilities
+## Complete Tool List
 
-### 📚 Documentation Navigation (4 tools)
+### 📚 Documentation Navigation
 - **list-documents**: Discover available documentation topics
-- **get-document-section**: Get specific sections from documentation
-- **get-document-titles**: Search and extract documentation titles
-- **search-content**: Search across all documentation
+- **search-content**: Search across all documentation using keywords
 
-### 🎯 Simple Planning Workflow (5 tools)
-- **get-workflows**: See all available workflow types
-- **get-preplanning-questions**: Get structured planning questions
-- **evaluate-preplanning-answers**: Validate planning quality
-- **generate-implementation-plan**: Create detailed implementation plans
-- **create-simple-checklist**: Generate progress tracking checklists
+### 🎯 Workflow Management
+- **get-workflows**: See all available workflow types (feature/module development)
+- **get-workflow-template**: Get a specific workflow template with all steps and guidance
+- **evaluate-workflow-progress**: Evaluate progress on a workflow by checking step completion
+- **load-documentation-context**: Load relevant documentation context for workflow steps
+
+### 📖 Information & Rules
+- **get-introduction**: Get an introduction to the Lolek MCP Server and its capabilities
+- **get-agent-rules**: Get behavioral rules and constraints for AI agents
+- **get-tools**: Get information about available tools (deprecated - use get-introduction instead)
+
+### 🔧 Code Examples
+- **list-examples**: List all available code examples organized by category
+- **get-example**: Get the code content of a specific example file from the examples directory
 
 ## Simple Planning Flow
-1. **User + Agent Interact** → Use planning questions to create solid foundation
-2. **Agent Creates Plan** → Evaluate answers and generate implementation plan
+1. **User + Agent Interact** → Use workflow templates to create solid foundation
+2. **Agent Creates Plan** → Evaluate progress and generate implementation guidance
 3. **User Reviews Plan** → Review the generated plan for accuracy
-4. **Agent Handles Execution** → Create checklist and track progress
+4. **Agent Handles Execution** → Track progress through workflow steps
 
 ## Documentation Available
 - **development-guide**: Pre-built React components + complete project setup guidance
@@ -56,9 +62,10 @@ This Next.js-based Model Context Protocol (MCP) server provides documentation na
 
 ## Getting Started
 1. Use \`get-workflows\` to see available workflow types
-2. Use \`get-preplanning-questions\` to start planning
+2. Use \`get-workflow-template\` to get detailed workflow guidance
 3. Use \`list-documents\` to explore available documentation
-4. Use \`get-agent-rules\` to review behavioral constraints
+4. Use \`list-examples\` to see available code examples
+5. Use \`get-agent-rules\` to review behavioral constraints
 
 ## Agent Rules
 This server includes behavioral rules for AI agents working on the project:

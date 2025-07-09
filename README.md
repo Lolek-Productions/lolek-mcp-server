@@ -12,84 +12,28 @@ This MCP server is designed to help AI agents:
 - **Follow structured development workflows** with quality evaluation
 - **Build consistent applications** using established patterns and best practices
 
-## 🛠️ Available Tools (11 Total)
+## 🛠️ Available Tools
 
-### Documentation Navigation Tools
+For a complete list of all 11 available tools and their descriptions, use the `get-introduction` tool. The tools are organized into categories:
 
-#### 1. `list-documents` - Document Discovery
-**Purpose**: Discover available documentation topics  
-**Usage**: Start here to see all available documentation categories
-
-#### 2. `search-content` - Content Search  
-**Purpose**: Search across all documentation with filtering and context  
-**Parameters**: 
-- `query` (required): Search terms
-- `scope` (optional): "docs", "guides", "examples" (defaults to "docs")
-- `limit` (optional): Maximum results (default 50)
-**Usage**: Search for specific topics, components, or implementation patterns
-
-
-### Information & Context Tools
-
-#### 3. `get-introduction` - Server Introduction
-**Purpose**: Get detailed information about this MCP server's capabilities
-
-#### 4. `get-agent-rules` - Agent Behavioral Rules
-**Purpose**: Retrieve guidelines for AI agent behavior and best practices
-
-#### 5. `get-tools` - Tool Reference
-**Purpose**: Get comprehensive information about all available MCP tools
-
-### Workflow Management Tools
-
-#### 6. `get-workflows` - Available Workflows
-**Purpose**: List all available development workflow types  
-**Returns**: Module, Feature, Bug Fix, and Commit workflows with descriptions
-
-#### 7. `get-workflow-template` - Workflow Templates
-**Purpose**: Get complete workflow template with embedded questions and quality standards  
-**Parameters**: 
-- `type` (required): "module" or "feature"
-**Usage**: Get comprehensive workflow with pre-planning questions, quality evaluation criteria, and implementation steps
-
-#### 8. `evaluate-workflow-progress` - Progress Evaluation
-**Purpose**: Evaluate workflow progress and provide implementation guidance  
-**Parameters**: 
-- `type` (required): "module" or "feature"
-- `currentStep` (required): Current workflow step ID
-- `stepProgress` (required): Description of current progress
-- `preplanningAnswers` (optional): JSON answers for pre-planning evaluation
-**Usage**: Track progress through workflow steps and get quality feedback
-
-#### 9. `load-documentation-context` - Bulk Context Loading
-**Purpose**: Efficiently load all essential documentation context at once  
-**Usage**: Load comprehensive context including documentation headings, agent rules, and available tools
-
-### Example Management Tools
-
-#### 10. `list-examples` - Available Examples
-**Purpose**: List all available code examples organized by category  
-**Usage**: Discover available React components, contexts, library files, and scripts
-
-#### 11. `get-example` - Retrieve Example Code
-**Purpose**: Get the code content of a specific example file  
-**Parameters**: 
-- `file` (required): Path to example file (e.g., "components/PublicHeader.jsx", "contexts/AppContextProvider.tsx")
-**Usage**: Retrieve production-ready code examples with descriptions and usage notes
+- **Documentation Navigation**: Tools for discovering and searching documentation
+- **Workflow Management**: Tools for managing development workflows and progress tracking
+- **Information & Rules**: Tools for server information and agent behavioral guidelines
+- **Code Examples**: Tools for browsing and retrieving code examples
 
 ## 📊 Recommended Workflows
 
 ### Documentation Navigation Workflow
 ```
-1. load-documentation-context → Load all essential context efficiently
+1. get-introduction → Get server overview and complete tool list
+2. load-documentation-context → Load all essential context efficiently
    OR
    1. list-documents → See available topics
    2. search-content → Find specific information with context
 
-2. Use specific tools as needed:
-   - get-introduction → Server overview
+3. Use specific tools as needed:
    - get-agent-rules → Behavioral guidelines
-   - get-tools → Tool reference
+   - list-examples → Available code examples
 ```
 
 ### Development Planning Workflow
@@ -287,7 +231,7 @@ This configuration uses `mcp-remote` to connect to the deployed MCP server.
 
 ### Quick Start with Documentation
 ```
-Claude, use load-documentation-context to get all essential context, then help me build a contact management feature.
+Claude, use get-introduction to understand the server capabilities, then use load-documentation-context to get all essential context for building a contact management feature.
 ```
 
 ### Feature Planning
