@@ -20,6 +20,9 @@ export const listExamples: ToolDefinition = {
         scripts: [] as string[],
         contexts: [] as string[],
         lib: [] as string[],
+        hooks: [] as string[],
+        layouts: [] as string[],
+        pages: [] as string[],
         documentation: [] as string[],
         other: [] as string[]
       };
@@ -36,7 +39,7 @@ export const listExamples: ToolDefinition = {
           directories.push(item);
           
           // Get contents of known directories
-          if (item === "components" || item === "contexts" || item === "lib" || item === "scripts") {
+          if (item === "components" || item === "contexts" || item === "lib" || item === "scripts" || item === "hooks" || item === "layouts" || item === "pages") {
             const subItems = readdirSync(itemPath);
             categories[item as keyof typeof categories] = subItems;
           }
@@ -116,6 +119,33 @@ export const listExamples: ToolDefinition = {
         output += "\n";
       }
       
+      // Hooks directory
+      if (categories.hooks.length > 0) {
+        output += "## 🪝 Hooks\n";
+        categories.hooks.forEach(hook => {
+          output += `- \`hooks/${hook}\` - ${formatHookName(hook)}\n`;
+        });
+        output += "\n";
+      }
+      
+      // Layouts directory
+      if (categories.layouts.length > 0) {
+        output += "## 🗂️ Layouts\n";
+        categories.layouts.forEach(layout => {
+          output += `- \`layouts/${layout}\` - ${formatLayoutName(layout)}\n`;
+        });
+        output += "\n";
+      }
+      
+      // Pages directory
+      if (categories.pages.length > 0) {
+        output += "## 📄 Pages\n";
+        categories.pages.forEach(page => {
+          output += `- \`pages/${page}\` - ${formatPageName(page)}\n`;
+        });
+        output += "\n";
+      }
+      
       // Other files
       if (categories.other.length > 0) {
         output += "## 📄 Other Files\n";
@@ -186,4 +216,29 @@ function formatDocumentationName(name: string): string {
   }
   
   return formatComponentName(name.replace(/\.(md|txt)$/, ''));
+}
+
+function formatHookName(name: string): string {
+  if (name === "use-mobile.ts") return "Mobile device breakpoint detection hook";
+  if (name === "use-toast.ts") return "Toast notification management hook";
+  
+  return formatComponentName(name.replace(/\.(ts|js)$/, ''));
+}
+
+function formatLayoutName(name: string): string {
+  if (name === "app-layout.tsx") return "Root application layout with global providers";
+  if (name === "main-layout.jsx") return "Main authenticated application layout";
+  if (name === "public-layout.jsx") return "Public pages layout component";
+  
+  return formatComponentName(name.replace(/\.(tsx|jsx)$/, ''));
+}
+
+function formatPageName(name: string): string {
+  if (name === "EditForm.tsx") return "Reusable form component for editing entities";
+  if (name === "ListTable.jsx") return "Data table component for listing entities";
+  if (name === "create-page.tsx") return "Complete page template for creating entities";
+  if (name === "edit-page.jsx") return "Complete page template for editing entities";
+  if (name === "list-page.jsx") return "Complete page template for listing entities";
+  
+  return formatComponentName(name.replace(/\.(tsx|jsx)$/, ''));
 }
