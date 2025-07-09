@@ -40,9 +40,8 @@ const handler = createMcpHandler(
       if (toolDef.inputSchema instanceof z.ZodObject) {
         schema = toolDef.inputSchema.shape;
       } else if (toolDef.inputSchema instanceof z.ZodOptional) {
-        // Handle optional schemas by extracting the inner object
-        const innerSchema = toolDef.inputSchema.unwrap();
-        schema = innerSchema instanceof z.ZodObject ? innerSchema.shape : innerSchema;
+        // For optional schemas, register with no required parameters
+        schema = {};
       } else {
         schema = toolDef.inputSchema;
       }
