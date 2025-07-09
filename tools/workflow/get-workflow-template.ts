@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { ToolDefinition, ToolContext } from "../types";
 
@@ -11,8 +11,32 @@ export const getWorkflowTemplate: ToolDefinition = {
   },
   handler: async ({ type }, context) => {
     try {
-      // Load the consolidated workflow template
+      // Try to load the markdown workflow first
+      const markdownPath = join(process.cwd(), "workflows", `${type}-workflow.md`);
+      
+      if (existsSync(markdownPath)) {
+        // Read the markdown workflow file
+        const workflowContent = readFileSync(markdownPath, "utf-8");
+        
+        return {
+          content: [{
+            type: "text",
+            text: workflowContent
+          }]
+        };
+      }
+      
+      // Fallback to JSON if markdown doesn't exist
       const workflowPath = join(process.cwd(), "workflows", `${type}-workflow.json`);
+      if (!existsSync(workflowPath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `Workflow template for '${type}' not found. Available workflows can be seen with get-workflows tool.`
+          }]
+        };
+      }
+      
       const workflow = JSON.parse(readFileSync(workflowPath, "utf-8"));
       
       // Format the workflow with embedded questions and implementation plan template

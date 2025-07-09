@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { readFileSync, existsSync } from "fs";
+import { join } from "path";
 import { ToolDefinition } from "../types";
 
 export const getWorkflows: ToolDefinition = {
@@ -7,32 +9,60 @@ export const getWorkflows: ToolDefinition = {
   inputSchema: {},
   handler: async () => {
     try {
-      const workflows = {
-        "module": {
-          name: "Module Development Workflow",
-          description: "Complete workflow for developing new modules with architecture, implementation, and deployment steps",
-          steps: 12,
+      // Read workflows from markdown files
+      const workflowsDir = join(process.cwd(), "workflows");
+      const workflows: Record<string, any> = {};
+
+      // Module workflow
+      const moduleWorkflowPath = join(workflowsDir, "module-workflow.md");
+      if (existsSync(moduleWorkflowPath)) {
+        const moduleContent = readFileSync(moduleWorkflowPath, "utf-8");
+        const moduleTitle = moduleContent.match(/^# (.+)$/m)?.[1] || "Module Development Workflow";
+        const moduleDescription = moduleContent.match(/## Introduction[\s\S]*?\n\n(.+?)\n\n/)?.[1] || "Complete workflow for developing new modules with architecture, implementation, and deployment steps";
+        const moduleSteps = (moduleContent.match(/\*\*Total Steps:\*\* (\d+)/)?.[1]) || "13";
+        
+        workflows["module"] = {
+          name: moduleTitle,
+          description: moduleDescription.replace(/\n/g, " ").trim(),
+          steps: parseInt(moduleSteps),
           use_case: "Building new major features or standalone modules"
-        },
-        "feature": {
-          name: "Feature Development Workflow", 
-          description: "Streamlined workflow for adding features to existing modules",
-          steps: 9,
+        };
+      }
+
+      // Feature workflow
+      const featureWorkflowPath = join(workflowsDir, "feature-workflow.md");
+      if (existsSync(featureWorkflowPath)) {
+        const featureContent = readFileSync(featureWorkflowPath, "utf-8");
+        const featureTitle = featureContent.match(/^# (.+)$/m)?.[1] || "Feature Development Workflow";
+        const featureDescription = featureContent.match(/## Introduction[\s\S]*?\n\n(.+?)\n\n/)?.[1] || "Streamlined workflow for adding features to existing modules";
+        const featureSteps = (featureContent.match(/\*\*Total Steps:\*\* (\d+)/)?.[1]) || "10";
+        
+        workflows["feature"] = {
+          name: featureTitle,
+          description: featureDescription.replace(/\n/g, " ").trim(),
+          steps: parseInt(featureSteps),
           use_case: "Adding functionality to existing systems"
-        },
-        "bug": {
+        };
+      }
+
+      // Legacy workflows (if no markdown exists, use hardcoded values)
+      if (!workflows["bug"]) {
+        workflows["bug"] = {
           name: "Bug Fix Workflow",
           description: "Systematic approach to identifying, fixing, and testing bug fixes",
           steps: 6,
           use_case: "Resolving issues and defects"
-        },
-        "commit": {
+        };
+      }
+      
+      if (!workflows["commit"]) {
+        workflows["commit"] = {
           name: "Commit Workflow",
           description: "Best practices for code commits, testing, and version control",
           steps: 4,
           use_case: "Daily development and code management"
-        }
-      };
+        };
+      }
 
       const workflowList = Object.entries(workflows).map(([key, workflow]) => 
         `## ${workflow.name} (${key})

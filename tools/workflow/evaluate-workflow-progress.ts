@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import { ToolDefinition, ToolContext } from "../types";
 
@@ -14,9 +14,26 @@ export const evaluateWorkflowProgress: ToolDefinition = {
   },
   handler: async ({ type, currentStep, stepProgress, preplanningAnswers }, context) => {
     try {
-      // Load the workflow template
-      const workflowPath = join(process.cwd(), "workflows", `${type}-workflow.json`);
-      const workflow = JSON.parse(readFileSync(workflowPath, "utf-8"));
+      let workflow: any;
+      
+      // Try to load markdown workflow first
+      const markdownPath = join(process.cwd(), "workflows", `${type}-workflow.md`);
+      if (existsSync(markdownPath)) {
+        const markdownContent = readFileSync(markdownPath, "utf-8");
+        workflow = parseMarkdownWorkflow(markdownContent, type);
+      } else {
+        // Fallback to JSON workflow
+        const workflowPath = join(process.cwd(), "workflows", `${type}-workflow.json`);
+        if (!existsSync(workflowPath)) {
+          return {
+            content: [{
+              type: "text",
+              text: `Workflow for '${type}' not found. Available workflows can be seen with get-workflows tool.`
+            }]
+          };
+        }
+        workflow = JSON.parse(readFileSync(workflowPath, "utf-8"));
+      }
       
       // Find the current step
       const step = workflow.steps.find((s: any) => s.id === currentStep);
@@ -271,4 +288,47 @@ ${answers.scope ? answers.scope.map((feature: string, index: number) => `- [ ] $
 **Estimated Timeline:** 1-3 weeks
 **Key Dependencies:** ${answers.affected_components ? answers.affected_components.join(", ") : "none identified"}`;
   }
+}
+
+// Helper function to parse markdown workflow into JSON-like structure
+function parseMarkdownWorkflow(content: string, type: string): any {
+  const workflow: any = {
+    name: content.match(/^# (.+)$/m)?.[1] || "Workflow",
+    type: type,
+    steps: [],
+    qualityStandards: {
+      criteria: [],
+      recommendations: {}
+    }
+  };
+
+  // Parse workflow steps - using manual parsing for compatibility
+  const stepRegex = /### Step (\d+(?:\.\d+)?): (.+?)\n\*\*ID:\*\* ([^\n]+?)\s+\n\*\*Name:\*\* ([^\n]+?)\s+\n\*\*Description:\*\* ([^\n]+)/g;
+  let stepMatch;
+  
+  while ((stepMatch = stepRegex.exec(content)) !== null) {
+    const [, stepNumber, stepTitle, stepId, stepName, stepDescription] = stepMatch;
+    
+    workflow.steps.push({
+      id: stepId.trim(),
+      name: stepName.trim(),
+      description: stepDescription.trim(),
+      deliverables: [], // Simplified for now
+      activities: [],   // Simplified for now
+      exitCriteria: []  // Simplified for now
+    });
+  }
+
+  // For markdown workflows, use simplified quality standards
+  // Full quality evaluation will be handled by reading the markdown directly
+  workflow.qualityStandards.criteria = []; // Will be populated when JSON fallback is used
+  workflow.qualityStandards.recommendations = {
+    excellent: "Excellent planning! You're ready to proceed with implementation.",
+    good: "Good planning with minor areas for improvement.",
+    acceptable: "Acceptable planning but several areas need more detail.",
+    needs_improvement: "The planning needs significant improvement.",
+    inadequate: "The planning is inadequate. Please start over."
+  };
+
+  return workflow;
 }
