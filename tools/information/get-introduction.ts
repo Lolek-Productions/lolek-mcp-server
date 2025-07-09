@@ -59,13 +59,15 @@ This Next.js-based Model Context Protocol (MCP) server provides documentation na
 - Layout containers (forms, pages, cards)
 - UI interactions (copy buttons, collapsible sections)
 - Complete technology stack and setup guidance
+- **CLAUDE.md Example**: Comprehensive template showing how to configure Claude Code for your project with development commands, architecture overview, and best practices
 
 ## Getting Started
 1. Use \`get-workflows\` to see available workflow types
 2. Use \`get-workflow-template\` to get detailed workflow guidance
 3. Use \`list-documents\` to explore available documentation
-4. Use \`list-examples\` to see available code examples
-5. Use \`get-agent-rules\` to review behavioral constraints
+4. Use \`list-examples\` to see available code examples (including CLAUDE.md template)
+5. Use \`get-example\` with file "CLAUDE.md" to get the Claude Code configuration template
+6. Use \`get-agent-rules\` to review behavioral constraints
 
 ## Agent Rules
 This server includes behavioral rules for AI agents working on the project:

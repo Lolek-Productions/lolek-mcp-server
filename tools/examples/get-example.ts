@@ -119,7 +119,8 @@ function getFileDescription(file: string): string {
     'lib/supabase/server.ts': 'Supabase server configuration for server-side operations',
     'lib/supabase/middleware.ts': 'Supabase middleware for authentication and route protection',
     'lib/actions/contacts.ts': 'Server actions for contact management operations',
-    'scripts/generate-database-docs.sh': 'Automated script for generating database schema documentation from Supabase REST API'
+    'scripts/generate-database-docs.sh': 'Automated script for generating database schema documentation from Supabase REST API',
+    'CLAUDE.md': 'Comprehensive Claude Code configuration example with development commands, architecture overview, and best practices'
   };
   
   return descriptions[file] || 'Code example file';
@@ -140,7 +141,8 @@ function getUsageNotes(file: string, extension: string): string | null {
     'lib/supabase/client.ts': 'Import this client for browser-side Supabase operations. Configure with your project URL and anon key.',
     'lib/supabase/server.ts': 'Import this for server-side operations that require elevated permissions.',
     'lib/supabase/middleware.ts': 'Add to your middleware.ts file for automatic route protection and authentication.',
-    'scripts/generate-database-docs.sh': 'Run with `./scripts/generate-database-docs.sh` to generate DATABASE.md with current schema information.'
+    'scripts/generate-database-docs.sh': 'Run with `./scripts/generate-database-docs.sh` to generate DATABASE.md with current schema information.',
+    'CLAUDE.md': 'Place in your project root directory to provide Claude Code with project-specific guidance, development commands, and architectural context. Customize the content to match your project\'s specific requirements and conventions.'
   };
   
   return usageMap[file] || null;

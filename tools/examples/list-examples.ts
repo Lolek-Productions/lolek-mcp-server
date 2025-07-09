@@ -7,7 +7,7 @@ export const listExamples: ToolDefinition = {
   name: "list-examples",
   description: "List all available code examples organized by category (components, scripts, contexts, lib)",
   inputSchema: z.object({}),
-  handler: async () => {
+  handler: async (params) => {
     try {
       const examplesPath = join(process.cwd(), "examples");
       
@@ -20,6 +20,7 @@ export const listExamples: ToolDefinition = {
         scripts: [] as string[],
         contexts: [] as string[],
         lib: [] as string[],
+        documentation: [] as string[],
         other: [] as string[]
       };
       
@@ -41,12 +42,26 @@ export const listExamples: ToolDefinition = {
           }
         } else {
           files.push(item);
-          categories.other.push(item);
+          // Special handling for documentation files
+          if (item.toUpperCase() === 'CLAUDE.MD') {
+            categories.documentation.push(item);
+          } else {
+            categories.other.push(item);
+          }
         }
       });
       
       // Build organized output
       let output = "# Available Code Examples\n\n";
+      
+      // Documentation files
+      if (categories.documentation.length > 0) {
+        output += "## 📋 Documentation Examples\n";
+        categories.documentation.forEach(doc => {
+          output += `- \`${doc}\` - ${formatDocumentationName(doc)}\n`;
+        });
+        output += "\n";
+      }
       
       // Components directory
       if (categories.components.length > 0) {
@@ -163,4 +178,12 @@ function formatLibName(name: string): string {
   if (name === "contacts.ts") return "Contact Actions";
   
   return formatComponentName(name.replace(/\.(ts|js)$/, ''));
+}
+
+function formatDocumentationName(name: string): string {
+  if (name.toUpperCase() === 'CLAUDE.MD') {
+    return "Claude Code configuration and best practices example";
+  }
+  
+  return formatComponentName(name.replace(/\.(md|txt)$/, ''));
 }
