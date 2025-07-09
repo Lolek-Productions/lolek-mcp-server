@@ -6,12 +6,12 @@ import { ToolDefinition, ToolContext } from "../types";
 export const evaluateWorkflowProgress: ToolDefinition = {
   name: "evaluate-workflow-progress",
   description: "Evaluate progress on a workflow by checking step completion and providing guidance",
-  inputSchema: {
+  inputSchema: z.object({
     type: z.enum(["module", "feature"]).describe("The type of workflow being evaluated"),
     currentStep: z.string().describe("The current step ID (e.g., '1_preplanning', '2_design')"),
     stepProgress: z.string().describe("Description of progress made on the current step"),
     preplanningAnswers: z.string().optional().describe("Pre-planning answers in JSON format (required for step 1_preplanning)")
-  },
+  }),
   handler: async ({ type, currentStep, stepProgress, preplanningAnswers }, context) => {
     try {
       let workflow: any;

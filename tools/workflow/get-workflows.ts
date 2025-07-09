@@ -6,7 +6,7 @@ import { ToolDefinition } from "../types";
 export const getWorkflows: ToolDefinition = {
   name: "get-workflows",
   description: "Get all available development workflow types and their descriptions",
-  inputSchema: {},
+  inputSchema: z.object({}),
   handler: async () => {
     try {
       // Read workflows from markdown files

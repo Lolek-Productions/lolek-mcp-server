@@ -4,7 +4,7 @@ import { ToolDefinition } from "../types";
 export const getTools: ToolDefinition = {
   name: "get-tools",
   description: "List all available MCP tools with their descriptions and parameters",
-  inputSchema: {},
+  inputSchema: z.object({}),
   handler: async () => {
     return {
       content: [{

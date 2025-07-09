@@ -6,9 +6,9 @@ import { ToolDefinition } from "../types";
 export const getExample: ToolDefinition = {
   name: "get-example",
   description: "Get the code content of a specific example file from the examples directory",
-  inputSchema: {
+  inputSchema: z.object({
     file: z.string().describe("Path to the example file (e.g., 'components/PublicHeader.jsx', 'contexts/AppContextProvider.tsx', 'lib/supabase/client.ts')")
-  },
+  }),
   handler: async (params) => {
     try {
       const { file } = params;

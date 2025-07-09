@@ -6,12 +6,12 @@ import { ToolDefinition, ToolContext } from "../types";
 export const searchContent: ToolDefinition = {
   name: "search-content",
   description: "Search for specific content across all documentation and guides with content filtering applied",
-  inputSchema: {
+  inputSchema: z.object({
     query: z.string().describe("The search term or regex pattern to find"),
     scope: z.enum(["all", "docs", "guides"]).optional().describe("Where to search: 'all' (default), 'docs' only, or 'guides' only"),
     caseSensitive: z.boolean().optional().describe("Whether search should be case sensitive (default: false)"),
     maxResults: z.number().optional().describe("Maximum number of results to return (default: 50)")
-  },
+  }),
   handler: async ({ query, scope = "all", caseSensitive = false, maxResults = 50 }, context) => {
     try {
       const results: Array<{

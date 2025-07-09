@@ -6,9 +6,9 @@ import { ToolDefinition, ToolContext } from "../types";
 export const getWorkflowTemplate: ToolDefinition = {
   name: "get-workflow-template",
   description: "Get a specific workflow template with all steps, questions, and implementation guidance",
-  inputSchema: {
+  inputSchema: z.object({
     type: z.enum(["module", "feature"]).describe("The type of workflow template to retrieve")
-  },
+  }),
   handler: async ({ type }, context) => {
     try {
       // Try to load the markdown workflow first

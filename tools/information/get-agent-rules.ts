@@ -6,7 +6,7 @@ import { ToolDefinition } from "../types";
 export const getAgentRules: ToolDefinition = {
   name: "get-agent-rules",
   description: "Get behavioral rules and constraints for the AI agent",
-  inputSchema: {},
+  inputSchema: z.object({}),
   handler: async () => {
     try {
       const rulesPath = join(process.cwd(), "agent-rules.md");

@@ -1,4 +1,5 @@
 import { createMcpHandler } from "@vercel/mcp-adapter";
+import { z } from "zod";
 
 const ContentFilter = require("../../lib/content-filter.js");
 
@@ -35,10 +36,15 @@ const handler = createMcpHandler(
     
     // Helper function to register extracted tools
     const registerTool = (toolDef: ToolDefinition) => {
+      // Convert ZodObject to ZodRawShape if needed
+      const schema = toolDef.inputSchema instanceof z.ZodObject 
+        ? toolDef.inputSchema.shape 
+        : toolDef.inputSchema;
+      
       server.tool(
         toolDef.name,
         toolDef.description,
-        toolDef.inputSchema,
+        schema,
         async (params: any) => await toolDef.handler(params, toolContext)
       );
     };

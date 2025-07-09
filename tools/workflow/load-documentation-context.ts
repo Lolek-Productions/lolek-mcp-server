@@ -6,11 +6,11 @@ import { ToolDefinition, ToolContext } from "../types";
 export const loadDocumentationContext: ToolDefinition = {
   name: "load-documentation-context",
   description: "Load essential documentation headings and project context to prepare AI agent",
-  inputSchema: {
+  inputSchema: z.object({
     topics: z.array(z.string()).optional().describe("Specific documentation topics to load (defaults to essential topics)"),
     includeProjectStructure: z.boolean().optional().describe("Whether to include project structure analysis (default: true)"),
     includeAgentRules: z.boolean().optional().describe("Whether to include agent rules and constraints (default: true)")
-  },
+  }),
   handler: async ({ topics, includeProjectStructure = true, includeAgentRules = true }, context) => {
     try {
       const results: string[] = [];

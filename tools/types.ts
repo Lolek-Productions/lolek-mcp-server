@@ -12,7 +12,7 @@ export interface McpToolResult {
 export interface ToolDefinition {
   name: string;
   description: string;
-  inputSchema: Record<string, z.ZodType<any>>;
+  inputSchema: Record<string, z.ZodType<any>> | z.ZodObject<any>;
   handler: (params: any, context?: ToolContext) => Promise<McpToolResult>;
 }
 

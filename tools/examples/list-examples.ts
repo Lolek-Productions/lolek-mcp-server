@@ -6,7 +6,7 @@ import { ToolDefinition } from "../types";
 export const listExamples: ToolDefinition = {
   name: "list-examples",
   description: "List all available code examples organized by category (components, scripts, contexts, lib)",
-  inputSchema: {},
+  inputSchema: z.object({}),
   handler: async () => {
     try {
       const examplesPath = join(process.cwd(), "examples");

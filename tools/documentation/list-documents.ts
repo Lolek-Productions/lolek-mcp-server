@@ -6,7 +6,7 @@ import { ToolDefinition, McpToolResult } from "../types";
 export const listDocuments: ToolDefinition = {
   name: "list-documents",
   description: "List all available documentation files with content filtering applied",
-  inputSchema: {},
+  inputSchema: z.object({}),
   handler: async ({}) => {
     try {
       const docsPath = join(process.cwd(), "documents");
