@@ -10,7 +10,8 @@ import {
 import { 
   getIntroduction, 
   getAgentRules,
-  getTools 
+  getTools,
+  getClaudeRules
 } from "../../tools/information";
 import { 
   getWorkflows,
@@ -63,6 +64,7 @@ const handler = createMcpHandler(
     registerTool(getIntroduction);
     registerTool(getAgentRules);
     registerTool(getTools);
+    registerTool(getClaudeRules);
     registerTool(getWorkflows);
     registerTool(getWorkflowTemplate);
     registerTool(evaluateWorkflowProgress);
