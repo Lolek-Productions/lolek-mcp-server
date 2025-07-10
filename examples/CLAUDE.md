@@ -2,28 +2,51 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 🚨 CRITICAL: Lolek MCP Server Dependency
+## 🚨 CRITICAL: Lolek MCP Server Dependency - ABSOLUTE REQUIREMENT
 
-**ALWAYS REFER TO THE LOLEK-MCP SERVER FOR ALL DEVELOPMENT DECISIONS**
+**YOU ARE NOT ALLOWED TO DO ANYTHING OUTSIDE THE LOLEK-MCP SERVER WITHOUT EXPLICIT USER PERMISSION**
 
-- **Before starting any task**: Use `get-introduction` to understand available tools and capabilities
-- **For all development planning**: Use `get-workflow-template` to follow established workflows
-- **For code examples**: Use `list-examples` and `get-example` to access proven patterns
-- **For behavioral rules**: Use `get-agent-rules` to understand project constraints
-- **For documentation**: Use `list-documents` and `search-content` to find relevant information
+### MANDATORY First Steps - DO NOT SKIP
+1. **IMMEDIATELY RUN**: `get-introduction` 
+2. **THEN RUN**: `get-tools` (as instructed by introduction)
+3. **THEN RUN**: `list-examples` (as instructed by introduction)
+4. **THEN RUN**: `get-agent-rules`
 
-### User Permission Required for Deviations
+**YOU CANNOT PROCEED WITHOUT COMPLETING THESE STEPS**
 
-**IF YOU WANT TO GO OUTSIDE LOLEK-MCP SERVER PARAMETERS, YOU MUST ASK THE USER FIRST**
+### 🔒 STRICT OPERATING CONSTRAINTS
 
-Examples requiring user permission:
-- Using different technology stacks than specified
-- Ignoring workflow steps or quality standards
-- Creating custom solutions when examples exist
-- Bypassing agent rules or best practices
-- Using deprecated packages or patterns
+**EVERYTHING YOU DO MUST COME FROM THE LOLEK-MCP SERVER**
 
-**Do not assume - always consult the lolek-mcp server first, then ask the user if you need to deviate.**
+❌ **FORBIDDEN WITHOUT PERMISSION:**
+- Creating ANY file not shown in examples
+- Using ANY technology not in the examples
+- Implementing ANY pattern not in the workflows
+- Installing ANY package not in package.json examples
+- Writing ANY code structure not demonstrated
+- Making ANY architectural decision not documented
+- Using ANY component not in the examples
+- Following ANY tutorial or guide from outside
+- Assuming ANY best practice not explicitly stated
+
+✅ **REQUIRED BEHAVIOR:**
+- **ALWAYS** check lolek-mcp server FIRST
+- **ALWAYS** use examples as templates
+- **ALWAYS** follow workflows exactly
+- **ALWAYS** respect agent rules
+- **NEVER** assume or improvise
+
+### User Permission Protocol
+
+**When you need to deviate, use this EXACT format:**
+```
+🚨 MCP DEVIATION REQUEST:
+I need to [specific action] which is outside the MCP server parameters.
+Reason: [why it's necessary]
+May I proceed with this deviation?
+```
+
+**DO NOT PROCEED WITHOUT A CLEAR "YES" FROM THE USER**
 
 ## Development Commands
 
@@ -227,28 +250,43 @@ npm run analyze
 
 ## Best Practices Summary
 
-1. **ALWAYS consult lolek-mcp server first** - Use `get-introduction`, `get-agent-rules`, and `list-examples` before starting any task
-2. **Ask user permission for deviations** - Never go outside established parameters without explicit user approval
-3. **Follow established workflows** - Use `get-workflow-template` for all development planning
-4. **Use existing patterns** - Check `list-examples` before creating new components or solutions
-5. **Respect agent rules** - Use `get-agent-rules` to understand project constraints and behavioral guidelines
-6. **Always use TypeScript** - Strict typing prevents runtime errors
-7. **Follow component patterns** - Use existing components as templates
-8. **Implement proper error handling** - Handle all possible error states
-9. **Write tests** - Test critical functionality and edge cases
-10. **Use consistent formatting** - Follow ESLint and Prettier rules
-11. **Document complex logic** - Add comments for non-obvious code
-12. **Optimize performance** - Use React best practices and lazy loading
-13. **Secure by default** - Implement authentication and validation
-14. **Monitor and log** - Track errors and performance in production
-15. **Keep dependencies updated** - Regularly update packages for security
+### 🔴 ABSOLUTE REQUIREMENTS (NON-NEGOTIABLE)
+1. **RUN `get-introduction` FIRST** - This is MANDATORY, not optional
+2. **RUN `get-tools` and `list-examples` IMMEDIATELY** - As instructed by introduction
+3. **NEVER act outside MCP server** - Everything must come from MCP examples/docs
+4. **ALWAYS ask permission for deviations** - Use the exact deviation request format
+5. **NO assumptions or improvisation** - If it's not in MCP, ask the user
+
+### Development Practices (AFTER completing mandatory steps)
+6. **Follow established workflows** - Use `get-workflow-template` exactly as shown
+7. **Use existing patterns only** - Never create new patterns without permission
+8. **Respect all agent rules** - No exceptions without user approval
+9. **Copy from examples** - Don't write from scratch
+10. **Use exact file structures** - As shown in examples
+11. **Install only documented packages** - Nothing beyond what's in examples
+12. **Follow TypeScript patterns** - Exactly as demonstrated
+13. **Implement error handling** - Only as shown in examples
+14. **Write tests** - Only using patterns from examples
+15. **Use consistent formatting** - As demonstrated in MCP server
 
 ---
 
-## 🔑 Key Reminder
+## 🔑 FINAL CRITICAL REMINDER
 
-**Claude must ALWAYS refer to the lolek-mcp server to ensure every step is in agreement with its parameters. If the agent wants to go outside these parameters, it must ask the user first.**
+### YOU ARE NOT ALLOWED TO:
+- ❌ Create ANY code not shown in examples
+- ❌ Use ANY approach not documented
+- ❌ Make ANY decision not in MCP server
+- ❌ Skip the mandatory first steps
+- ❌ Proceed without user permission for deviations
 
-**Never assume, never bypass, never deviate without permission.**
+### YOU MUST ALWAYS:
+- ✅ Run `get-introduction`, then `get-tools`, then `list-examples` FIRST
+- ✅ Check MCP server before EVERY action
+- ✅ Use EXACT examples as templates
+- ✅ Ask permission for ANY deviation
+- ✅ Follow this CLAUDE.md without exception
 
-*This CLAUDE.md file should be customized for each project's specific requirements and conventions, but the lolek-mcp server dependency is non-negotiable.*
+**FAILURE TO COMPLY WITH THESE REQUIREMENTS IS NOT ACCEPTABLE**
+
+*The lolek-mcp server dependency is ABSOLUTE and NON-NEGOTIABLE. No exceptions.*

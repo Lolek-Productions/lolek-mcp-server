@@ -21,26 +21,26 @@ Lolek MCP Server is designed to **help AI agents build applications quickly and 
 ## Overview
 This Next.js-based Model Context Protocol (MCP) server provides documentation navigation, planning workflow tools, and comprehensive development guidance. It accelerates application development by offering proven patterns, components, and setup procedures.
 
-## Complete Tool List
+## 🚨 CRITICAL: First Steps - MANDATORY
 
-### 📚 Documentation Navigation
-- **list-documents**: Discover available documentation topics
-- **search-content**: Search across all documentation using keywords
+**YOU MUST RUN THESE TWO COMMANDS IMMEDIATELY:**
 
-### 🎯 Workflow Management
-- **get-workflows**: See all available workflow types (feature/module development)
-- **get-workflow-template**: Get a specific workflow template with all steps and guidance
-- **evaluate-workflow-progress**: Evaluate progress on a workflow by checking step completion
-- **load-documentation-context**: Load relevant documentation context for workflow steps
+1. **RUN: \`get-tools\`** - This will load all available MCP tools into your context
+2. **RUN: \`list-examples\`** - This will load all available code examples into your context
 
-### 📖 Information & Rules
-- **get-introduction**: Get an introduction to the Lolek MCP Server and its capabilities
-- **get-agent-rules**: Get behavioral rules and constraints for AI agents
-- **get-tools**: Get information about available tools (deprecated - use get-introduction instead)
+**DO NOT PROCEED WITHOUT RUNNING THESE COMMANDS FIRST**
 
-### 🔧 Code Examples
-- **list-examples**: List all available code examples organized by category
-- **get-example**: Get the code content of a specific example file from the examples directory
+## 🔒 Strict Operating Constraints
+
+**YOU ARE NOT ALLOWED TO DO ANYTHING OUTSIDE THIS MCP SERVER WITHOUT USER PERMISSION**
+
+- ❌ **NO** creating files outside examples shown
+- ❌ **NO** using technologies not in the examples
+- ❌ **NO** implementing patterns not in the workflows
+- ❌ **NO** ignoring agent rules
+- ❌ **NO** making assumptions - always check MCP first
+
+**If you need to deviate, you MUST ask the user first: "I need to [action] which is outside the MCP server parameters. May I proceed?"**
 
 ## Simple Planning Flow
 1. **User + Agent Interact** → Use workflow templates to create solid foundation
@@ -61,13 +61,13 @@ This Next.js-based Model Context Protocol (MCP) server provides documentation na
 - Complete technology stack and setup guidance
 - **CLAUDE.md Example**: Comprehensive template showing how to configure Claude Code for your project with development commands, architecture overview, and best practices
 
-## Getting Started
-1. Use \`get-workflows\` to see available workflow types
-2. Use \`get-workflow-template\` to get detailed workflow guidance
-3. Use \`list-documents\` to explore available documentation
-4. Use \`list-examples\` to see available code examples (including CLAUDE.md template)
-5. Use \`get-example\` with file "CLAUDE.md" to get the Claude Code configuration template
-6. Use \`get-agent-rules\` to review behavioral constraints
+## Getting Started (AFTER running get-tools and list-examples)
+1. Use \`get-agent-rules\` to understand behavioral constraints
+2. Use \`get-workflows\` to see available workflow types
+3. Use \`get-workflow-template\` to get detailed workflow guidance
+4. Use \`list-documents\` to explore available documentation
+5. Use \`search-content\` to find specific information
+6. Use \`get-example\` to retrieve specific code examples
 
 ## Agent Rules
 This server includes behavioral rules for AI agents working on the project:
