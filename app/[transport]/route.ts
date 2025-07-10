@@ -33,6 +33,8 @@ const handler = createMcpHandler(
       contentFilter
     };
     
+    // Force deployment update - parameter validation fix
+    
     // Helper function to register extracted tools
     const registerTool = (toolDef: ToolDefinition) => {
       // Convert ZodObject to ZodRawShape if needed
