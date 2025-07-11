@@ -1,6 +1,10 @@
-# Agent Rules
+# MCP Server Interaction Rules
 
-This file contains behavioral rules and constraints for the AI agent when working on this project.
+**PURPOSE**: This document defines how Claude/AI agents should interact with the lolek-mcp server.
+**ACCESSED VIA**: `get-claude-rules` tool
+**SCOPE**: Server-level behavioral guidelines, tool usage protocols, and MCP interaction patterns
+
+This file contains behavioral rules and constraints for AI agents when using the lolek-mcp server.
 
 ## Code Generation Rules
 
