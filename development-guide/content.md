@@ -1842,3 +1842,286 @@ app/notes/
 - **Data Patterns**: Server actions with standardized result formats
 - **Toast Integration**: User feedback for all operations
 - **Mobile Responsive**: Card grids instead of complex tables
+
+----------------------------------------
+
+TITLE: Authentication Pages
+DESCRIPTION: Complete authentication page templates for login and signup flows using Supabase Auth. Provides ready-to-use authentication UI with proper error handling and navigation.
+SOURCE: /examples/pages/
+
+## Login Page Component
+**File**: `login-page.tsx`
+**Purpose**: Complete login page with Supabase authentication
+**Usage**: Client component for user authentication with email/password
+
+### Features
+- **Supabase Integration**: Direct authentication with Supabase client
+- **Form State Management**: Loading states and error handling
+- **Navigation Flow**: Automatic redirect to dashboard on success
+- **Visual Design**: Centered card layout with branding
+- **Link to Signup**: Seamless navigation to registration
+
+### Code Structure
+```tsx
+'use client'
+
+export default function LoginPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) {
+      setError(error.message)
+    } else {
+      router.push('/dashboard')
+    }
+    setLoading(false)
+  }
+}
+```
+
+### Visual Components
+- **Logo Header**: Church icon with app branding
+- **Card Container**: Clean white card on gray background
+- **Form Fields**: Email and password inputs with labels
+- **Error Display**: Red text for authentication errors
+- **Loading States**: Disabled button with loading text
+
+### Usage Notes
+- Client component with 'use client' directive
+- Requires Supabase client configuration
+- Uses custom FormField component for inputs
+- Responsive design with mobile-first approach
+- Integrates with shadcn/ui Card and Button components
+
+## Signup Page Component
+**File**: `signup-page.tsx`
+**Purpose**: Complete registration page with Supabase authentication
+**Usage**: Client component for new user registration
+
+### Features
+- **Account Creation**: Supabase signUp with email/password
+- **Auto-login Logic**: Handles both confirmed and unconfirmed email flows
+- **Error Handling**: Comprehensive error states and fallback flows
+- **Success Messaging**: Green success messages with timed redirects
+- **Password Requirements**: Visual hint for minimum password length
+
+### Code Structure
+```tsx
+const handleSignup = async (e: React.FormEvent) => {
+  e.preventDefault()
+  setLoading(true)
+  setError('')
+  setMessage('')
+
+  const supabase = createClient()
+  
+  try {
+    // First try to sign up
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      email,
+      password,
+    })
+
+    if (signUpError) {
+      setError(signUpError.message)
+      return
+    }
+
+    // If email confirmation is disabled, user should be automatically signed in
+    if (signUpData.session) {
+      setMessage('Account created successfully! Redirecting to dashboard...')
+      setTimeout(() => {
+        router.replace('/dashboard')
+      }, 2000)
+    } else {
+      // Try to sign in manually (fallback)
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+      
+      if (signInError) {
+        setError('Account created but failed to sign in. Please try logging in manually.')
+        setTimeout(() => router.push('/login'), 2000)
+      } else {
+        setMessage('Account created successfully! Redirecting to dashboard...')
+        setTimeout(() => {
+          window.location.href = '/dashboard'
+        }, 2000)
+      }
+    }
+  } catch {
+    setError('An unexpected error occurred. Please try again.')
+  }
+  setLoading(false)
+}
+```
+
+### Advanced Features
+- **Email Confirmation Handling**: Works with or without email confirmation
+- **Fallback Authentication**: Tries manual login if auto-login fails
+- **Timed Redirects**: 2-second delay for user feedback
+- **Window Location Fallback**: Uses window.location for hard navigation
+- **Try-Catch Safety**: Catches unexpected errors gracefully
+
+### Usage Notes
+- Handles both email-confirmed and instant-access scenarios
+- Password field includes helpful description text
+- Success and error messages with appropriate styling
+- Links back to login page for existing users
+- Same visual design as login page for consistency
+
+----------------------------------------
+
+TITLE: Global Styles Configuration
+DESCRIPTION: Modern CSS configuration using Tailwind CSS v4 with custom theme variables and dark mode support. Implements oklch color system for better color consistency.
+SOURCE: /examples/pages/globals.css
+
+## CSS Architecture
+**File**: `globals.css`
+**Purpose**: Global styles with Tailwind v4 and custom design tokens
+**Usage**: Import in root layout for application-wide styling
+
+### Features
+- **Tailwind v4 Imports**: Modern import syntax for Tailwind
+- **Custom Variant**: Dark mode support with custom variant syntax
+- **Theme Inline**: CSS custom properties mapped to Tailwind
+- **OKLCH Colors**: Perceptually uniform color space
+- **Design Tokens**: Comprehensive color and radius system
+
+### Theme Configuration
+```css
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  /* ... additional theme mappings */
+}
+```
+
+### Color System
+- **OKLCH Format**: Better color interpolation and consistency
+- **Semantic Colors**: primary, secondary, muted, accent, destructive
+- **Component Colors**: card, popover, sidebar specific colors
+- **Chart Colors**: 5 distinct chart colors for data visualization
+- **Dark Mode**: Complete dark theme with adjusted lightness values
+
+### Usage Notes
+- Import as first stylesheet in application
+- Supports automatic dark mode switching
+- Works with shadcn/ui component system
+- Includes sidebar-specific color tokens
+- Base styles apply borders and backgrounds automatically
+
+----------------------------------------
+
+TITLE: Development Scripts
+DESCRIPTION: Utility scripts for development workflow automation. Includes automatic restart on errors for better development experience.
+SOURCE: /examples/scripts/
+
+## Watch and Restart Script
+**File**: `watch-and-restart.sh`
+**Purpose**: Automatically restart commands on failure or error patterns
+**Usage**: Wrapper script for development servers and long-running processes
+
+### Features
+- **Error Pattern Detection**: Configurable patterns to watch for
+- **Automatic Restart**: Restarts command after configurable delay
+- **Maximum Restart Limit**: Prevents infinite restart loops
+- **Command Line Interface**: Full CLI with help and options
+- **Default Error Patterns**: Common Node.js and build errors
+
+### Usage Examples
+```bash
+# Basic usage
+./scripts/watch-and-restart.sh -- npm run dev
+
+# With custom error patterns
+./scripts/watch-and-restart.sh -p "TypeError:" -p "ReferenceError:" -- npm run dev
+
+# With custom restart delay (5 seconds)
+./scripts/watch-and-restart.sh -d 5 -- npm run dev
+
+# With maximum restart limit
+./scripts/watch-and-restart.sh -m 20 -- npm run dev
+
+# Combine multiple options
+./scripts/watch-and-restart.sh -p "Custom Error" -d 3 -m 10 -- npm run build
+```
+
+### Script Options
+- `-p, --pattern PATTERN`: Add error pattern to watch (can use multiple times)
+- `-d, --delay SECONDS`: Set delay between restarts (default: 2)
+- `-m, --max-restarts NUM`: Maximum restart attempts (default: 10, 0 for unlimited)
+- `-h, --help`: Show help message with examples
+
+### Default Error Patterns
+- "Error:"
+- "error"
+- "failed"
+- "Failed"
+- "ELIFECYCLE"
+- "ENOENT"
+- "Cannot find module"
+
+### Implementation Details
+```bash
+# Main monitoring loop
+while true; do
+  # Run command and capture output
+  OUTPUT=$(eval "$COMMAND" 2>&1)
+  EXIT_CODE=$?
+  
+  # Check for errors
+  if [[ $EXIT_CODE -ne 0 ]] || contains_error "$OUTPUT"; then
+    RESTART_COUNT=$((RESTART_COUNT + 1))
+    
+    # Check restart limit
+    if [[ $MAX_RESTARTS -gt 0 && $RESTART_COUNT -gt $MAX_RESTARTS ]]; then
+      echo "Reached maximum number of restarts ($MAX_RESTARTS). Exiting."
+      exit 1
+    fi
+    
+    echo "Error detected. Restarting in $RESTART_DELAY seconds..."
+    sleep $RESTART_DELAY
+  else
+    echo "Command completed successfully. Exiting."
+    exit 0
+  fi
+done
+```
+
+### Usage Notes
+- Make script executable: `chmod +x scripts/watch-and-restart.sh`
+- Use `--` to separate script options from command
+- Captures both stdout and stderr for error detection
+- Shows restart count and maximum limit
+- Useful for development servers that crash on syntax errors
+- Can monitor any command, not just Node.js processes
+
+### Common Use Cases
+1. **Development Server**: Auto-restart on TypeScript errors
+2. **Build Watching**: Restart build on configuration changes
+3. **Test Runner**: Re-run tests on test framework errors
+4. **Database Migrations**: Retry on connection errors
+5. **Long-running Scripts**: Handle transient failures

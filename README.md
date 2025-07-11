@@ -14,9 +14,10 @@ This MCP server is designed to help AI agents:
 
 ## 🛠️ Available Tools
 
-For a complete list of all 11 available tools and their descriptions, use the `get-introduction` tool. The tools are organized into categories:
+For a complete list of all available tools and their descriptions, use the `get-introduction` tool. The tools are organized into categories:
 
 - **Documentation Navigation**: Tools for discovering and searching documentation
+- **Development Guide**: Tools for accessing comprehensive development guidance and examples
 - **Workflow Management**: Tools for managing development workflows and progress tracking
 - **Information & Rules**: Tools for server information and agent behavioral guidelines
 - **Code Examples**: Tools for browsing and retrieving code examples
@@ -25,15 +26,20 @@ For a complete list of all 11 available tools and their descriptions, use the `g
 
 ### Documentation Navigation Workflow
 ```
-1. get-introduction → Get server overview and complete tool list
-2. load-documentation-context → Load all essential context efficiently
+1. get-introduction → Get server overview and FOLLOW SETUP INSTRUCTIONS
+   (This will tell you to download CLAUDE.md to your project)
+2. get-development-guide-index → See all available components and patterns
+3. get-development-guide-section → Get specific component or pattern details
+   OR
+   load-documentation-context → Load all essential context efficiently
    OR
    1. list-documents → See available topics
    2. search-content → Find specific information with context
 
-3. Use specific tools as needed:
+4. Use specific tools as needed:
    - get-agent-rules → Behavioral guidelines
    - list-examples → Available code examples
+   - get-claude-rules → Context-engineering rules for agents
 ```
 
 ### Development Planning Workflow
@@ -61,11 +67,11 @@ For a complete list of all 11 available tools and their descriptions, use the `g
 ## 📁 Documentation Structure
 
 ```
+development-guide/
+└── content.md                   # Complete component library and development patterns
+
 documents/
 ├── README.md                    # Documentation system overview
-├── development-guide/           # Comprehensive development guidance
-│   ├── content.md              # Complete component library and setup guides
-│   └── index.md                # Navigation structure
 ├── nextjs/                     # Next.js framework documentation
 │   ├── content.md              # 685+ Next.js implementation details
 │   └── index.md                # Organized sections for navigation
@@ -75,18 +81,32 @@ documents/
 └── supabase/                   # Supabase integration guides
     ├── content.md              # Authentication and database patterns
     └── index.md                # Supabase service categories
+
+workflows/
+├── feature-workflow.md          # Complete 10-step feature development workflow
+├── module-workflow.md           # Complete 12-step module development workflow
+├── create-app-workflow.md       # Complete 12-step new app creation workflow
+└── wizard-workflow.md           # Complete 8-step wizard development workflow
 ```
 
 ## 🔄 Workflow System
 
-The MCP server includes a consolidated workflow system with embedded planning:
+The MCP server includes a comprehensive workflow system with embedded planning:
+
+### Available Workflows
+- **Feature Development** (10 steps) - Add new functionality to existing modules
+- **Module Development** (12 steps) - Build entirely new standalone modules
+- **Create New App** (12 steps) - Build complete applications from scratch
+- **Wizard Development** (8 steps) - Create step-by-step user interfaces
 
 ### Workflow Structure
 ```
 workflows/
-├── feature-workflow.json       # Complete 9-step feature workflow
-├── module-workflow.json        # Complete 12-step module workflow
-└── __tests__/                  # Comprehensive test suite
+├── feature-workflow.md          # Complete 10-step feature workflow
+├── module-workflow.md           # Complete 12-step module workflow  
+├── create-app-workflow.md       # Complete 12-step new app workflow
+├── wizard-workflow.md           # Complete 8-step wizard workflow
+└── __tests__/                   # Comprehensive test suite
     └── workflow-templates.test.js
 ```
 
@@ -108,24 +128,28 @@ When pre-planning quality score ≥ 3.5, the system automatically generates:
 - Risk mitigation plan
 - Success criteria
 
-## 🧩 Component Library
+## 🧩 Development Guide
 
-The development guide includes production-ready React components:
+The development guide provides comprehensive guidance accessed via three dedicated tools:
 
-### Navigation & Layout
-- **MainHeader** - Application header with breadcrumbs
-- **MainSidebar** - Navigation sidebar with collapsible sections
-- **PublicHeader/Footer** - Public page navigation
-- **PageContainer** - Consistent page layouts
+### Development Guide Tools
+- **get-development-guide-index** - Dynamically generated index of all components and patterns
+- **get-development-guide-content** - Complete guide content with all examples
+- **get-development-guide-section** - Get specific sections by title or partial match
 
-### UI Components  
-- **CenteredFormCard** - Form container with responsive design
-- **CopyButton** - Clipboard functionality with feedback
-- **CollapsibleNavSection** - Expandable navigation groups
-- **UserProfile** - Authentication dropdown with Supabase
+### Component Categories
+- **Navigation & Layout** - Headers, sidebars, containers, and page layouts
+- **UI Components** - Forms, buttons, cards, and interactive elements  
+- **Authentication Pages** - Login and signup pages with Supabase integration
+- **Page Templates** - CRUD pages, list views, and form templates
+- **Development Scripts** - Automation and utility scripts
+- **Global Configuration** - CSS, theming, and style configuration
 
-### Context & State
-- **AppContextProvider** - Global state management with Supabase auth
+### Key Features
+- **Single Source Maintenance** - Only content.md needs updates, index auto-generates
+- **Smart Search** - Find components by partial title matching
+- **Categorized Organization** - Components grouped by type and purpose
+- **Production Ready** - All components include error handling, accessibility, and TypeScript
 
 ## 🚀 Technology Stack
 
@@ -227,11 +251,34 @@ Add to Windsurf MCP configuration:
 
 This configuration uses `mcp-remote` to connect to the deployed MCP server.
 
+## ⚠️ Important Setup Note
+
+**After configuring the MCP server connection, always start by running `get-introduction`**. This tool provides critical setup instructions including downloading the CLAUDE.md file that ensures proper usage patterns and consistency across all projects using lolek-mcp.
+
+## 🚀 Getting Started
+
+### Essential First Step
+**Before doing anything else, run the `get-introduction` tool**. This tool will:
+- Provide an overview of all server capabilities
+- Guide you through the mandatory setup process
+- **Instruct you to download the CLAUDE.md file and save it to your project**
+
+This CLAUDE.md file contains strict operational rules that ensure consistency and proper usage of the lolek-mcp server. Following this setup is **critical for success**.
+
+```
+Claude, use get-introduction to get started and follow the setup instructions exactly.
+```
+
 ## 🎯 Example Usage
 
 ### Quick Start with Documentation
 ```
-Claude, use get-introduction to understand the server capabilities, then use load-documentation-context to get all essential context for building a contact management feature.
+Claude, use get-introduction to understand the server capabilities, then use get-development-guide-index to see all available components and patterns.
+```
+
+### Finding Components
+```
+Claude, use get-development-guide-index to see all available components, then use get-development-guide-section with title "MainSidebar" to get the sidebar component details.
 ```
 
 ### Feature Planning
@@ -239,14 +286,14 @@ Claude, use get-introduction to understand the server capabilities, then use loa
 Claude, use get-workflow-template with type "feature" to help me plan a bulk contact import feature.
 ```
 
-### Finding Components
+### Getting Complete Development Context
 ```
-Claude, use list-examples to see all available components, then use get-example to get the sidebar code.
+Claude, use get-development-guide-content to get the complete development guide with all examples and patterns.
 ```
 
-### Getting Example Code
+### Finding Specific Patterns
 ```
-Claude, use get-example with file "components/main-sidebar.tsx" to get the sidebar component code.
+Claude, use get-development-guide-section with title "authentication" to get login and signup page examples.
 ```
 
 ## 🔍 Troubleshooting

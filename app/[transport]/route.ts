@@ -23,6 +23,11 @@ import {
   listExamples,
   getExample
 } from "../../tools/examples";
+import {
+  getDevelopmentGuideContent,
+  getDevelopmentGuideIndex,
+  getDevelopmentGuideSection
+} from "../../tools/development-guide";
 import { ToolDefinition, ToolContext } from "../../tools/types";
 
 const handler = createMcpHandler(
@@ -71,6 +76,9 @@ const handler = createMcpHandler(
     registerTool(loadDocumentationContext);
     registerTool(listExamples);
     registerTool(getExample);
+    registerTool(getDevelopmentGuideContent);
+    registerTool(getDevelopmentGuideIndex);
+    registerTool(getDevelopmentGuideSection);
   },
   {
     capabilities: {
