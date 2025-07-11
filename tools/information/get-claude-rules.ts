@@ -5,11 +5,11 @@ import { ToolDefinition } from "../types";
 
 export const getClaudeRules: ToolDefinition = {
   name: "get-claude-rules",
-  description: "Get strict CLAUDE.md rules for efficient web app development",
+  description: "Get behavioral rules and constraints for how to interact with this MCP server",
   inputSchema: z.object({}).optional(),
   handler: async (params) => {
     try {
-      const claudeRulesPath = join(process.cwd(), "examples", "CLAUDE.md");
+      const claudeRulesPath = join(process.cwd(), "agent-rules.md");
       const claudeRulesContent = readFileSync(claudeRulesPath, "utf-8");
       
       return {
@@ -22,7 +22,7 @@ export const getClaudeRules: ToolDefinition = {
       return {
         content: [{
           type: "text" as const,
-          text: `Error reading Claude rules: ${error instanceof Error ? error.message : String(error)}`
+          text: `Error reading Claude MCP server rules: ${error instanceof Error ? error.message : String(error)}`
         }]
       };
     }
