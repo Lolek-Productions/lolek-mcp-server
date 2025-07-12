@@ -32,6 +32,7 @@ This file contains behavioral rules and constraints for AI agents when using the
 ### Component-Specific Rules
 - **For Toast notifications - always use shadcn/ui Toast components** - Use shadcn/ui for all toast messaging needs
 - **For Confirmation dialogs - always use shadcn/ui Dialog components** - Use shadcn/ui for all confirmation dialog implementations
+- **For Loading states - ALWAYS place Loading components WITHIN PageContainer** - Never replace PageContainer with Loading components. Use `<PageContainer><Loading centered={false} /></PageContainer>` pattern. Reference `/examples/pages/loading-example-page.tsx` for correct implementation
 
 ### Code Style & Architecture
 - **Follow existing patterns in the codebase** - Maintain consistency with established conventions
