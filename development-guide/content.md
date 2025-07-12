@@ -171,6 +171,256 @@ DEPENDENCIES: shadcn/ui Card components, cn utility function
 
 ----------------------------------------
 
+TITLE: FormField Component
+DESCRIPTION: **MANDATORY** form input component that provides consistent styling, labeling, and behavior for all form inputs. Supports text inputs, textareas, and select dropdowns with built-in label, description, and required field handling.
+SOURCE: /examples/components/form-field.tsx
+LANGUAGE: tsx
+CODE:
+```tsx
+import React from 'react'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+
+interface BaseFormFieldProps {
+  id: string
+  label: string
+  description?: string
+  required?: boolean
+  className?: string
+  formFieldClassName?: string
+}
+
+interface InputFieldProps extends BaseFormFieldProps {
+  inputType?: string
+  value: string
+  onChange: (value: string) => void
+  placeholder?: string
+  min?: string
+  max?: string
+  step?: string
+}
+
+interface TextareaFieldProps extends BaseFormFieldProps {
+  inputType: 'textarea'
+  value: string
+  onChange: (value: string) => void
+  placeholder?: string
+  rows?: number
+  resize?: boolean
+}
+
+interface SelectFieldProps extends BaseFormFieldProps {
+  inputType: 'select'
+  value: string
+  onChange: (value: string) => void
+  children?: React.ReactNode
+  options?: Array<{value: string; label: string}>
+}
+
+type FormFieldProps = InputFieldProps | TextareaFieldProps | SelectFieldProps
+
+export function FormField(props: FormFieldProps) {
+  const { id, label, description, required = false, className = '' } = props
+
+  const renderInput = () => {
+    switch (props.inputType) {
+      case 'textarea':
+        return (
+          <Textarea
+            id={id}
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+            placeholder={(props as TextareaFieldProps).placeholder}
+            rows={(props as TextareaFieldProps).rows || 12}
+            className={`min-h-[200px] ${(props as TextareaFieldProps).resize ? 'resize-y' : 'resize-none'}`}
+            required={required}
+          />
+        )
+      case 'select':
+        return (
+          <Select value={props.value} onValueChange={props.onChange}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select an option" />
+            </SelectTrigger>
+            <SelectContent>
+              {(props as SelectFieldProps).options ? (
+                (props as SelectFieldProps).options!.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))
+              ) : (
+                (props as SelectFieldProps).children
+              )}
+            </SelectContent>
+          </Select>
+        )
+      default:
+        return (
+          <Input
+            id={id}
+            type={props.inputType || 'text'}
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+            placeholder={(props as InputFieldProps).placeholder}
+            min={(props as InputFieldProps).min}
+            max={(props as InputFieldProps).max}
+            step={(props as InputFieldProps).step}
+            required={required}
+          />
+        )
+    }
+  }
+
+  return (
+    <div className={className}>
+      <Label htmlFor={id} className={`text-sm font-medium ${description ? '' : 'mb-1'}`}>{label}</Label>
+      {description && (
+        <p className="text-xs text-muted-foreground mb-1.5">{description}</p>
+      )}
+      {renderInput()}
+    </div>
+  )
+}
+```
+USAGE: **CRITICAL: Use FormField for ALL form inputs unless you have a specific exception that requires direct input usage (such as search bars, filters, or specialized input patterns). You MUST request permission before using direct Input/Textarea/Select components instead of FormField.** Examples:
+- Text input: `<FormField id="name" label="Full Name" value={name} onChange={setName} required />`
+- Textarea: `<FormField id="bio" label="Biography" inputType="textarea" value={bio} onChange={setBio} />`
+- Select: `<FormField id="role" label="Role" inputType="select" value={role} onChange={setRole} options={[{value: 'admin', label: 'Administrator'}]} />`
+DEPENDENCIES: shadcn/ui Label, Input, Textarea, Select components
+
+----------------------------------------
+
+TITLE: Form Example Page
+DESCRIPTION: Comprehensive example demonstrating mandatory FormField component usage for all form inputs. Shows proper patterns for text inputs, selects, textareas, and exception request guidelines.
+SOURCE: /examples/pages/form-example-page.tsx
+LANGUAGE: tsx
+CODE:
+```tsx
+import React, { useState } from 'react';
+import PageContainer from '@/components/page-container';
+import { FormField } from '@/components/form-field';
+import { Button } from '@/components/ui/button';
+import { SelectItem } from '@/components/ui/select';
+
+export default function FormExamplePage() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    role: '',
+    department: '',
+    bio: '',
+    startDate: '',
+    salary: '',
+    isActive: 'true'
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    // Handle form submission here
+  };
+
+  const updateField = (field: string) => (value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  return (
+    <PageContainer 
+      title="Form Fields Example" 
+      description="Demonstration of mandatory FormField component usage patterns"
+    >
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Basic Text Inputs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <FormField
+            id="firstName"
+            label="First Name"
+            value={formData.firstName}
+            onChange={updateField('firstName')}
+            placeholder="Enter first name"
+            required
+          />
+          <FormField
+            id="lastName"
+            label="Last Name"
+            value={formData.lastName}
+            onChange={updateField('lastName')}
+            placeholder="Enter last name"
+            required
+          />
+        </div>
+
+        {/* Email Input with Description */}
+        <FormField
+          id="email"
+          label="Email Address"
+          inputType="email"
+          value={formData.email}
+          onChange={updateField('email')}
+          placeholder="user@company.com"
+          description="This will be used for login and notifications"
+          required
+        />
+
+        {/* Select with Options Array */}
+        <FormField
+          id="role"
+          label="Role"
+          inputType="select"
+          value={formData.role}
+          onChange={updateField('role')}
+          options={[
+            { value: 'admin', label: 'Administrator' },
+            { value: 'manager', label: 'Manager' },
+            { value: 'employee', label: 'Employee' },
+            { value: 'contractor', label: 'Contractor' }
+          ]}
+          required
+        />
+
+        {/* Textarea */}
+        <FormField
+          id="bio"
+          label="Biography"
+          inputType="textarea"
+          value={formData.bio}
+          onChange={updateField('bio')}
+          placeholder="Brief professional biography..."
+          rows={4}
+          resize
+          description="Optional professional summary (max 500 characters)"
+        />
+
+        {/* Date Input */}
+        <FormField
+          id="startDate"
+          label="Start Date"
+          inputType="date"
+          value={formData.startDate}
+          onChange={updateField('startDate')}
+          required
+        />
+
+        {/* Submit Button */}
+        <div className="flex justify-end space-x-4">
+          <Button type="button" variant="outline">Cancel</Button>
+          <Button type="submit">Save Employee</Button>
+        </div>
+      </form>
+    </PageContainer>
+  );
+}
+```
+USAGE: **MANDATORY** reference for all form implementations. Always use FormField for standard form inputs. Copy the state management pattern and form structure. Use the exception request format when FormField doesn't meet specific requirements.
+DEPENDENCIES: PageContainer, FormField, shadcn/ui Button and SelectItem
+
+----------------------------------------
+
 TITLE: CollapsibleNavSection Component
 DESCRIPTION: Collapsible navigation section for sidebar menus with expand/collapse animation. Integrates with sidebar context for mobile behavior and supports custom icons and navigation items.
 SOURCE: /examples/components/collapsible-nav-section.tsx

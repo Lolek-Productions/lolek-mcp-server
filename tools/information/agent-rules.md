@@ -33,6 +33,7 @@ This file contains behavioral rules and constraints for AI agents when using the
 - **For Toast notifications - always use shadcn/ui Toast components** - Use shadcn/ui for all toast messaging needs
 - **For Confirmation dialogs - always use shadcn/ui Dialog components** - Use shadcn/ui for all confirmation dialog implementations
 - **For Loading states - ALWAYS place Loading components WITHIN PageContainer** - Never replace PageContainer with Loading components. Use `<PageContainer><Loading centered={false} /></PageContainer>` pattern. Reference `/examples/pages/loading-example-page.tsx` for correct implementation
+- **For Form inputs - ALWAYS use FormField component** - Use FormField for ALL form inputs (text, textarea, select) unless you have a specific exception. You MUST request permission before using direct Input/Textarea/Select components. Exception request format: "🚨 FORM FIELD EXCEPTION REQUEST: I need to use direct [Input/Textarea/Select] for [specific use case] because FormField doesn't support [specific requirement]. May I proceed?" Reference `/examples/pages/form-example-page.tsx` for correct patterns
 
 ### Code Style & Architecture
 - **Follow existing patterns in the codebase** - Maintain consistency with established conventions
