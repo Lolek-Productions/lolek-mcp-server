@@ -57,8 +57,11 @@ export const getWorkflowRules: ToolDefinition = {
 - **Follow established conventions**: Maintain consistency with existing codebase
 - **Reuse before creating**: Prefer extending existing components over creating new ones
 - **Test integration**: Ensure new code integrates properly with existing systems
+- **Server actions security**: Follow universal server actions security requirements for ANY server actions created
 
-#### Module File Organization (CRITICAL)
+#### File Organization Standards (CRITICAL)
+
+##### Module Structure
 **ALL module-related files must be organized within \`/app/[module-name]/\` folder:**
 
 \`\`\`
@@ -93,6 +96,158 @@ import { AnnouncementForm } from '@/components/announcements/announcement-form'
 - Edit page: Full-featured form that handles both new and existing items
 - Same form component used in both create and edit modes
 - After creation: redirect from \`/create\` to \`/edit/[new-id]\`
+
+##### Server Actions Files (UNIVERSAL REQUIREMENT)
+**APPLIES TO**: Any development work creating server actions (modules, features, any workflow)
+**Locations**: 
+- Modules: \`/app/[module-name]/actions.ts\`
+- Features: Existing module or \`/app/[relevant-area]/actions.ts\`
+- New functionality: Appropriate \`/app/[area]/actions.ts\` location
+
+**Structure and Security**:
+\`\`\`typescript
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+
+// 🔒 SECURITY: Always validate inputs with Zod schemas
+const createAnnouncementSchema = z.object({
+  text: z.string().min(1).max(1000),
+  parish_id: z.string().uuid(),
+  liturgical_event_id: z.string().uuid().optional(),
+});
+
+// 🔒 SECURITY: Always verify user authentication and authorization
+async function verifyUserAccess() {
+  const supabase = await createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
+  
+  if (error || !user) {
+    throw new Error("Unauthorized");
+  }
+  
+  return { supabase, user };
+}
+
+// ✅ CREATE action - saves and redirects to edit
+export async function createAnnouncement(formData: FormData) {
+  try {
+    // 🔒 Verify authentication
+    const { supabase, user } = await verifyUserAccess();
+    
+    // 🔒 Validate input data
+    const rawData = {
+      text: formData.get("text"),
+      parish_id: formData.get("parish_id"),
+      liturgical_event_id: formData.get("liturgical_event_id"),
+    };
+    
+    const validatedData = createAnnouncementSchema.parse(rawData);
+    
+    // 🔒 Check user permissions for parish
+    const { data: parish } = await supabase
+      .from("parishes")
+      .select("id")
+      .eq("id", validatedData.parish_id)
+      .eq("user_id", user.id) // RLS enforcement
+      .single();
+      
+    if (!parish) {
+      throw new Error("Unauthorized access to parish");
+    }
+    
+    // Create the record
+    const { data, error } = await supabase
+      .from("announcements")
+      .insert({
+        ...validatedData,
+        created_at: new Date().toISOString(),
+      })
+      .select()
+      .single();
+      
+    if (error) throw error;
+    
+    // 🔄 Revalidate cache and redirect to edit
+    revalidatePath("/announcements");
+    redirect(\`/announcements/edit/\${data.id}\`);
+    
+  } catch (error) {
+    console.error("Create announcement error:", error);
+    throw new Error(error instanceof Error ? error.message : "Failed to create announcement");
+  }
+}
+
+// ✅ UPDATE action - updates existing record
+export async function updateAnnouncement(id: string, formData: FormData) {
+  try {
+    const { supabase, user } = await verifyUserAccess();
+    
+    const rawData = {
+      text: formData.get("text"),
+      parish_id: formData.get("parish_id"),
+      liturgical_event_id: formData.get("liturgical_event_id"),
+    };
+    
+    const validatedData = createAnnouncementSchema.parse(rawData);
+    
+    // Update with RLS protection
+    const { error } = await supabase
+      .from("announcements")
+      .update({
+        ...validatedData,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id)
+      .eq("parish_id", validatedData.parish_id); // Additional security check
+      
+    if (error) throw error;
+    
+    revalidatePath("/announcements");
+    revalidatePath(\`/announcements/edit/\${id}\`);
+    
+  } catch (error) {
+    console.error("Update announcement error:", error);
+    throw new Error(error instanceof Error ? error.message : "Failed to update announcement");
+  }
+}
+
+// ✅ DELETE action - removes record
+export async function deleteAnnouncement(id: string) {
+  try {
+    const { supabase } = await verifyUserAccess();
+    
+    const { error } = await supabase
+      .from("announcements")
+      .delete()
+      .eq("id", id);
+      
+    if (error) throw error;
+    
+    revalidatePath("/announcements");
+    redirect("/announcements");
+    
+  } catch (error) {
+    console.error("Delete announcement error:", error);
+    throw new Error("Failed to delete announcement");
+  }
+}
+\`\`\`
+
+**Security Requirements (MANDATORY FOR ALL SERVER ACTIONS)**:
+- **"use server"** directive at top of file
+- **Zod validation** for all input data  
+- **User authentication** verification in every action
+- **RLS enforcement** through proper filtering
+- **Error handling** with try/catch blocks
+- **Input sanitization** via Zod schemas
+- **Permission checks** for data access
+- **Revalidation** of affected paths after mutations
+
+**⚠️ CRITICAL**: These security requirements apply to ALL server actions files created in ANY workflow or development context, not just modules.
 
 ### 5. Progress Documentation
 - **Document decisions**: Record architectural and technical decisions as you work
@@ -184,6 +339,7 @@ const navigationItems = [
 - **Backward compatibility**: Ensure changes don't break existing functionality
 - **User experience**: Consider user workflow and interface changes
 - **Rollback planning**: Plan how to rollback feature if issues arise
+- **Server actions**: If adding server actions, follow universal security requirements above
 
 ### Create App
 - **Foundation first**: Establish solid technical foundation before feature development

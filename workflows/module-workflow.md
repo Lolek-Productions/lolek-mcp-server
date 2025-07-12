@@ -468,30 +468,37 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 ### Step 5: API Layer Implementation
 **ID:** 5_api_layer  
 **Name:** API Layer Implementation  
-**Description:** Implement business logic and API endpoints
+**Description:** Implement server actions and business logic
 
 **Deliverables:**
+- Server Actions file (`/app/[module-name]/actions.ts`)
 - Business logic implementation
-- API endpoints
 - Authentication and authorization
 - Input validation and error handling
 - API documentation
 
 **Activities:**
-- Implement core business logic
-- Create API endpoints and controllers
-- Implement authentication and authorization
-- Add input validation and sanitization
-- Implement error handling and logging
-- Write API documentation
-- Write unit and integration tests
+- **CRITICAL**: Create `/app/[module-name]/actions.ts` with server actions (see get-workflow-rules)
+- **MANDATORY**: Use "use server" directive and follow security patterns
+- Implement CRUD server actions (create, update, delete) with proper patterns
+- **SECURITY**: Add Zod validation for all inputs
+- **SECURITY**: Verify user authentication in every action
+- **SECURITY**: Implement RLS enforcement and permission checks
+- Add proper error handling with try/catch blocks
+- Implement cache revalidation with revalidatePath()
+- **CREATE PATTERN**: Create action saves and redirects to edit view
+- Write unit and integration tests for server actions
+- Document server action usage and security considerations
 
 **Exit Criteria:**
-- All APIs implemented
-- Authentication working
-- Error handling complete
-- API documentation current
-- API tests passing
+- Server actions file created at `/app/[module-name]/actions.ts`
+- All CRUD operations implemented (create, update, delete)
+- **SECURITY**: All actions use Zod validation and authentication
+- **SECURITY**: RLS and permission checks implemented
+- Create action redirects to edit view correctly
+- Error handling implemented with proper user feedback
+- Cache revalidation working for all mutations
+- Server action tests passing
 
 ---
 

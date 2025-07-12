@@ -116,9 +116,12 @@ This workflow integrates seamlessly with other tools and components in this proj
 
 **Guidance:** Focus on feature-specific implementation. Standard architecture patterns are covered in the development guide.
 
+**⚠️ Server Actions:** If your feature requires server actions, you MUST follow the universal server actions security requirements in `get-workflow-rules` (Zod validation, authentication, RLS, error handling).
+
 **Examples:**
-- Use file upload component, parse CSV with Papa Parse library, validate data server-side, batch insert to database
-- Implement WebSocket connection, create notification service, update UI with real-time events
+- Use file upload component, parse CSV with Papa Parse library, validate data server-side with server actions, batch insert to database
+- Implement WebSocket connection, create notification service with server actions, update UI with real-time events
+- Add server actions in existing module's actions.ts or create new actions.ts file following security patterns
 
 ### 6. Affected Components *(Required)*
 **Which existing components or modules will be affected beyond standard components?**
