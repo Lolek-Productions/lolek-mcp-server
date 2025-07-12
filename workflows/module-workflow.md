@@ -45,7 +45,7 @@ Modules built using this workflow undergo extensive quality evaluation across mu
 - **Performance & Scalability**: Requirements clearly defined and validated
 - **Integration Strategy**: Clear understanding of system integration points
 
-**Quality Threshold:** All modules must achieve a minimum quality score of 3.5/5.0 during pre-planning before architecture design begins.
+**Quality Standard:** All modules require comprehensive pre-planning with detailed answers to all questions before architecture design begins.
 
 ## Project Integration
 
@@ -54,7 +54,7 @@ This workflow integrates comprehensively with the entire project ecosystem:
 ### MCP Tools Integration
 - **get-workflows**: Discover all available workflow types
 - **get-workflow-template**: Access this complete workflow guide
-- **evaluate-workflow-progress**: Track progress and receive guidance
+- **get-workflow-rules**: Get master workflow rules and database requirements
 - **load-documentation-context**: Access project documentation and components
 - **list-examples**: Browse available component examples
 - **get-example**: Retrieve specific component implementations
@@ -334,9 +334,8 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 
 **Activities:**
 - Answer all 10 pre-planning questions thoroughly (see questions section above)
-- Use evaluate-workflow-progress tool for quality assessment with pre-planning answers
-- Refine answers until achieving 3.5+ quality score
-- Implementation plan will be automatically generated upon quality approval
+- Review answers for completeness and clarity
+- Ensure all questions have comprehensive responses
 - Stakeholder interviews and requirements gathering
 
 **Exit Criteria:**
@@ -716,18 +715,18 @@ These are critical milestones that require verification before proceeding:
 
 ### Getting Started
 1. **Load Context**: Use `load-documentation-context` to prepare your knowledge base
-2. **Analyze Existing Patterns**: Review existing modules and architectural patterns
-3. **Start Pre-Planning**: Answer the 10 embedded questions thoroughly
-4. **Evaluate Quality**: Use `evaluate-workflow-progress` with your answers
-5. **Iterate**: Refine answers until achieving quality score ≥ 3.5
+2. **Review Rules**: Use `get-workflow-rules` to understand database and quality requirements
+3. **Analyze Existing Patterns**: Review existing modules and architectural patterns
+4. **Start Pre-Planning**: Answer the 10 embedded questions thoroughly
+5. **Review Quality**: Ensure all answers are comprehensive and well-thought-out
 6. **Design Architecture**: Create comprehensive system architecture
 7. **Implement Systematically**: Follow the step-by-step workflow with regular progress checks
 
 ### Progress Tracking
-- Use `evaluate-workflow-progress` at each step to track completion
 - Review exit criteria before moving to the next step
 - Pay special attention to checkpoint steps
 - Document architectural decisions and rationale throughout the process
+- Track completion against the workflow steps systematically
 - Conduct regular architecture reviews
 
 ### Integration with Project Tools

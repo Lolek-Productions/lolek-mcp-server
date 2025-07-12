@@ -64,10 +64,17 @@ This Next.js-based Model Context Protocol (MCP) server provides documentation na
 ## Getting Started (AFTER running get-tools and list-examples)
 1. Use \`get-agent-rules\` to understand behavioral constraints
 2. Use \`get-workflows\` to see available workflow types
-3. Use \`get-workflow-template\` to get detailed workflow guidance
-4. Use \`list-documents\` to explore available documentation
-5. Use \`search-content\` to find specific information
-6. Use \`get-example\` to retrieve specific code examples
+3. **🚨 CRITICAL**: Use \`get-workflow-rules\` to understand master workflow rules and DATABASE.md requirements
+4. Use \`get-workflow-template\` to get detailed workflow guidance
+5. Use \`list-documents\` to explore available documentation
+6. Use \`search-content\` to find specific information
+7. Use \`get-example\` to retrieve specific code examples
+
+### ⚠️ Before ANY Workflow Work
+**MANDATORY**: Run \`get-workflow-rules\` to understand:
+- DATABASE.md update requirements (critical for any database changes)
+- Universal workflow standards and quality gates
+- Security and performance requirements
 
 ## Agent Rules
 This server includes behavioral rules for AI agents working on the project:

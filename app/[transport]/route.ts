@@ -16,7 +16,7 @@ import {
 import { 
   getWorkflows,
   getWorkflowTemplate,
-  evaluateWorkflowProgress,
+  getWorkflowRules,
   loadDocumentationContext
 } from "../../tools/workflow";
 import {
@@ -72,7 +72,7 @@ const handler = createMcpHandler(
     registerTool(getClaudeRules);
     registerTool(getWorkflows);
     registerTool(getWorkflowTemplate);
-    registerTool(evaluateWorkflowProgress);
+    registerTool(getWorkflowRules);
     registerTool(loadDocumentationContext);
     registerTool(listExamples);
     registerTool(getExample);

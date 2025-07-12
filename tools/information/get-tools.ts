@@ -36,17 +36,13 @@ export const getTools: ToolDefinition = {
 ### get-workflow-template
 **Description**: Get a specific workflow template with all steps and guidance
 **Parameters**: 
-- type (required): "module" or "feature"
+- type (required): "module", "feature", "create-app", or "wizard"
 **Usage**: Get comprehensive workflow with pre-planning questions and implementation steps
 
-### evaluate-workflow-progress
-**Description**: Evaluate progress on a workflow by checking step completion
-**Parameters**: 
-- type (required): "module" or "feature"
-- currentStep (required): Current workflow step ID
-- stepProgress (required): Description of current progress
-- preplanningAnswers (optional): JSON answers for pre-planning evaluation
-**Usage**: Track progress through workflow steps and get quality feedback
+### get-workflow-rules
+**Description**: Get master workflow rules and requirements that apply to all workflows
+**Parameters**: None
+**Usage**: **🚨 CRITICAL** - Run before ANY workflow work to understand DATABASE.md requirements and universal standards
 
 ### load-documentation-context
 **Description**: Load relevant documentation context for workflow steps

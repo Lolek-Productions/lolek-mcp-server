@@ -43,7 +43,7 @@ Features built using this workflow undergo rigorous quality evaluation before im
 - Success metrics are defined upfront
 - Rollback strategies are planned before deployment
 
-**Quality Threshold:** All features must achieve a minimum quality score of 3.5/5.0 during pre-planning before implementation begins.
+**Quality Standard:** All features require comprehensive pre-planning with detailed answers to all questions before implementation begins.
 
 ## Project Integration
 
@@ -52,7 +52,7 @@ This workflow integrates seamlessly with other tools and components in this proj
 ### MCP Tools Integration
 - **get-workflows**: Discover all available workflow types
 - **get-workflow-template**: Access this complete workflow guide
-- **evaluate-workflow-progress**: Track progress and receive guidance
+- **get-workflow-rules**: Get master workflow rules and database requirements
 - **load-documentation-context**: Access project documentation and components
 
 ### Component Integration
@@ -318,9 +318,8 @@ The feature planning is inadequate. Please start over and provide more detailed,
 
 **Activities:**
 - Answer all 10 pre-planning questions thoroughly (see questions section above)
-- Use evaluate-workflow-progress tool for quality assessment with pre-planning answers
-- Refine answers until achieving 3.5+ quality score
-- Implementation plan will be automatically generated upon quality approval
+- Review answers for completeness and clarity
+- Ensure all questions have comprehensive responses
 
 **Exit Criteria:**
 - All required questions answered
@@ -568,7 +567,7 @@ The feature planning is inadequate. Please start over and provide more detailed,
 These are critical milestones that require verification before proceeding:
 
 - **0_context_preparation:** Documentation context and agent rules loaded
-- **1_preplanning:** Pre-planning quality score ≥ 3.5
+- **1_preplanning:** Comprehensive pre-planning with detailed answers to all questions
 - **2_design:** Design approval from stakeholders
 - **2_5_database_structure:** Database changes applied and documentation updated
 - **4_implementation:** Core functionality demo
@@ -581,16 +580,16 @@ These are critical milestones that require verification before proceeding:
 
 ### Getting Started
 1. **Load Context**: Use `load-documentation-context` to prepare your knowledge base
-2. **Start Pre-Planning**: Answer the 10 embedded questions thoroughly
-3. **Evaluate Quality**: Use `evaluate-workflow-progress` with your answers
-4. **Iterate**: Refine answers until achieving quality score ≥ 3.5
+2. **Review Rules**: Use `get-workflow-rules` to understand database and quality requirements
+3. **Start Pre-Planning**: Answer the 10 embedded questions thoroughly
+4. **Review Quality**: Ensure all answers are comprehensive and well-thought-out
 5. **Implement**: Follow the step-by-step workflow with regular progress checks
 
 ### Progress Tracking
-- Use `evaluate-workflow-progress` at each step to track completion
 - Review exit criteria before moving to the next step
 - Pay special attention to checkpoint steps
 - Document decisions and rationale throughout the process
+- Track completion against the workflow steps systematically
 
 ### Integration with Project Tools
 - Reference `/examples/` directory for component patterns
@@ -610,7 +609,7 @@ These are critical milestones that require verification before proceeding:
 ## Notes and Tips
 
 ### Common Pitfalls
-- **Skipping pre-planning evaluation**: Always achieve quality score ≥ 3.5 before implementation
+- **Skipping comprehensive pre-planning**: Always complete all pre-planning questions with detailed answers before implementation
 - **Insufficient edge case consideration**: Think through failure scenarios early
 - **Weak rollback planning**: Have a clear path to revert changes if needed
 - **Poor user story definition**: Ensure user value is clearly articulated

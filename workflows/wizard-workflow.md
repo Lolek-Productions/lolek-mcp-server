@@ -44,7 +44,7 @@ Wizards built using this workflow undergo rigorous planning and user experience 
 - Error handling and validation are comprehensive
 - Progress tracking and recovery mechanisms are robust
 
-**Quality Threshold:** All wizards must achieve a minimum quality score of 4.0/5.0 during pre-planning before implementation begins.
+**Quality Standard:** All wizards require comprehensive pre-planning with detailed answers to all questions before implementation begins.
 
 ## Project Integration
 

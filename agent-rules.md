@@ -6,6 +6,17 @@
 
 This file contains behavioral rules and constraints for AI agents when using the lolek-mcp server.
 
+## 🚨 CRITICAL WORKFLOW REQUIREMENT
+
+### Before Starting ANY Workflow
+**MANDATORY**: Before beginning any workflow (module, feature, create-app, wizard), agents MUST:
+
+1. **Run `get-workflow-rules`** - Get master workflow rules and database requirements
+2. **Understand DATABASE.md requirement** - Any database change requires immediate DATABASE.md update
+3. **Review all workflow rules** - Follow universal requirements for all workflows
+
+**This is non-negotiable and applies to ALL workflow-related tasks.**
+
 ## Code Generation Rules
 
 ### Database & Migrations
