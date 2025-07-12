@@ -1,0 +1,24 @@
+// Navigation integration for {{module:name}} module
+// Add this to your MainSidebar.tsx configuration
+
+{
+  title: "{{module:name}}",
+  url: "/{{module:name|lowercase}}",
+  icon: {{module:icon|default:MessageSquare}},
+  items: [
+    {
+      title: "All {{module:name}}s",
+      url: "/{{module:name|lowercase}}"
+    },
+    {
+      title: "Create New",
+      url: "/{{module:name|lowercase}}/create"
+    }{{#module:additionalNavItems}},
+    {{#each module:additionalNavItems}}
+    {
+      title: "{{title}}",
+      url: "{{url}}"
+    }{{#unless @last}},{{/unless}}
+    {{/each}}{{/module:additionalNavItems}}
+  ]
+}

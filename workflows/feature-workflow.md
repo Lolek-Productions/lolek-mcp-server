@@ -63,7 +63,7 @@ This workflow integrates seamlessly with other tools and components in this proj
 
 ### Documentation References
 - **Development Guide**: `/documents/development-guide/` for technical patterns
-- **Agent Rules**: `/agent-rules.md` for behavioral guidelines
+- **Agent Rules**: `/tools/information/agent-rules.md` for behavioral guidelines
 - **Database Documentation**: Generated via `/scripts/generate-database-docs.sh`
 - **Project Setup**: Reference CLAUDE.md for project context
 
@@ -294,7 +294,7 @@ The feature planning is inadequate. Please start over and provide more detailed,
 
 **Activities:**
 - Use load-documentation-context tool to efficiently load all essential context
-- Alternative: Use individual tools (list-docs, get-sections, get-agent-rules, get-tools) for specific context
+- Alternative: Use individual tools (list-docs, get-sections, get-claude-rules, get-tools) for specific context
 - Review loaded documentation headings and available components
 - Understand agent behavioral constraints
 - Familiarize with available MCP tools for development workflow
@@ -598,7 +598,7 @@ These are critical milestones that require verification before proceeding:
 - Reference `/examples/` directory for component patterns
 - Use `/scripts/generate-database-docs.sh` for database documentation
 - Follow patterns from `/documents/development-guide/`
-- Adhere to guidelines in `/agent-rules.md`
+- Adhere to guidelines in `/tools/information/agent-rules.md`
 
 ### Best Practices
 - Complete each step thoroughly before proceeding

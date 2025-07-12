@@ -57,7 +57,7 @@ export const loadDocumentationContext: ToolDefinition = {
       // Load agent rules if requested
       if (includeAgentRules) {
         try {
-          const agentRulesPath = join(process.cwd(), "agent-rules.md");
+          const agentRulesPath = join(process.cwd(), "tools/information/agent-rules.md");
           const agentRules = readFileSync(agentRulesPath, "utf-8");
           results.push("## Agent Rules and Constraints\n");
           results.push(agentRules);
@@ -117,7 +117,7 @@ export const loadDocumentationContext: ToolDefinition = {
 
 **Information Tools:**
 - get-introduction: Server introduction and capabilities
-- get-agent-rules: Behavioral constraints for AI agents
+- get-claude-rules: Behavioral constraints for AI agents
 - get-tools: List all available MCP tools
 
 **Workflow Tools:**

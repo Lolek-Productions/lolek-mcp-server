@@ -56,7 +56,7 @@ export const getTools: ToolDefinition = {
 **Parameters**: None
 **Usage**: Understand the server's purpose and how to use it effectively
 
-### get-agent-rules
+### get-claude-rules
 **Description**: Get behavioral rules and constraints for AI agents
 **Parameters**: None
 **Usage**: Review project-specific rules and constraints before starting work
@@ -90,7 +90,7 @@ export const getTools: ToolDefinition = {
 ## 📋 Tool Categories Summary
 - **Documentation** (2 tools): list-documents, search-content
 - **Workflows** (4 tools): get-workflows, get-workflow-template, evaluate-workflow-progress, load-documentation-context  
-- **Information** (3 tools): get-introduction, get-agent-rules, get-tools
+- **Information** (3 tools): get-introduction, get-claude-rules, get-tools
 - **Examples** (2 tools): list-examples, get-example
 
 Total: 11 MCP tools available`

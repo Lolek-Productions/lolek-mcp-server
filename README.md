@@ -37,7 +37,7 @@ For a complete list of all available tools and their descriptions, use the `get-
    2. search-content → Find specific information with context
 
 4. Use specific tools as needed:
-   - get-agent-rules → Behavioral guidelines
+   - get-claude-rules → Behavioral guidelines
    - list-examples → Available code examples
    - get-claude-rules → Context-engineering rules for agents
 ```

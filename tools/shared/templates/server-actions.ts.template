@@ -1,0 +1,222 @@
+"use server";
+
+import { z } from "zod";
+import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+// Validation schemas for {{module:name}}
+const create{{module:name}}Schema = z.object({
+  // Add your field validations here based on your database schema
+  // Example:
+  // name: z.string().min(1, "Name is required"),
+  // email: z.string().email("Invalid email format"),
+  // description: z.string().optional(),
+});
+
+const update{{module:name}}Schema = create{{module:name}}Schema.extend({
+  id: z.string().uuid(),
+});
+
+// Types
+type Create{{module:name}}Input = z.infer<typeof create{{module:name}}Schema>;
+type Update{{module:name}}Input = z.infer<typeof update{{module:name}}Schema>;
+
+// Helper function to get authenticated user
+async function getAuthenticatedUser() {
+  const supabase = createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
+  
+  if (error || !user) {
+    throw new Error("Authentication required");
+  }
+  
+  return { user, supabase };
+}
+
+// CREATE: Add new {{module:name}}
+export async function create{{module:name}}(data: Create{{module:name}}Input) {
+  try {
+    // Validate input
+    const validatedData = create{{module:name}}Schema.parse(data);
+    
+    // Get authenticated user and supabase client
+    const { user, supabase } = await getAuthenticatedUser();
+    
+    // Insert into database with RLS automatically enforced
+    const { data: {{module:name|lowercase}}, error } = await supabase
+      .from("{{module:tableName}}")
+      .insert({
+        ...validatedData,
+        user_id: user.id, // Ensure user ownership
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Database error creating {{module:name|lowercase}}:", error);
+      throw new Error("Failed to create {{module:name|lowercase}}");
+    }
+
+    // Revalidate the list page to show new data
+    revalidatePath("/{{module:name|lowercase}}");
+    
+    // Redirect to edit page for further configuration
+    redirect(`/{{module:name|lowercase}}/${{{module:name|lowercase}}.id}`);
+    
+  } catch (error) {
+    console.error("Error in create{{module:name}}:", error);
+    
+    if (error instanceof z.ZodError) {
+      throw new Error(`Validation failed: ${error.errors.map(e => e.message).join(", ")}`);
+    }
+    
+    throw error instanceof Error ? error : new Error("Unknown error occurred");
+  }
+}
+
+// UPDATE: Modify existing {{module:name}}
+export async function update{{module:name}}(data: Update{{module:name}}Input) {
+  try {
+    // Validate input
+    const validatedData = update{{module:name}}Schema.parse(data);
+    const { id, ...updateData } = validatedData;
+    
+    // Get authenticated user and supabase client
+    const { user, supabase } = await getAuthenticatedUser();
+    
+    // Update with RLS automatically enforced (user can only update their own records)
+    const { data: updated{{module:name}}, error } = await supabase
+      .from("{{module:tableName}}")
+      .update(updateData)
+      .eq("id", id)
+      .eq("user_id", user.id) // Additional security check
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Database error updating {{module:name|lowercase}}:", error);
+      throw new Error("Failed to update {{module:name|lowercase}}");
+    }
+
+    if (!updated{{module:name}}) {
+      throw new Error("{{module:name}} not found or access denied");
+    }
+
+    // Revalidate affected pages
+    revalidatePath("/{{module:name|lowercase}}");
+    revalidatePath(`/{{module:name|lowercase}}/${id}`);
+    
+    return updated{{module:name}};
+    
+  } catch (error) {
+    console.error("Error in update{{module:name}}:", error);
+    
+    if (error instanceof z.ZodError) {
+      throw new Error(`Validation failed: ${error.errors.map(e => e.message).join(", ")}`);
+    }
+    
+    throw error instanceof Error ? error : new Error("Unknown error occurred");
+  }
+}
+
+// DELETE: Remove {{module:name}}
+export async function delete{{module:name}}(id: string) {
+  try {
+    // Validate ID format
+    const idSchema = z.string().uuid();
+    const validatedId = idSchema.parse(id);
+    
+    // Get authenticated user and supabase client
+    const { user, supabase } = await getAuthenticatedUser();
+    
+    // Delete with RLS automatically enforced
+    const { error } = await supabase
+      .from("{{module:tableName}}")
+      .delete()
+      .eq("id", validatedId)
+      .eq("user_id", user.id); // Additional security check
+
+    if (error) {
+      console.error("Database error deleting {{module:name|lowercase}}:", error);
+      throw new Error("Failed to delete {{module:name|lowercase}}");
+    }
+
+    // Revalidate the list page
+    revalidatePath("/{{module:name|lowercase}}");
+    
+    // Redirect to list page after successful deletion
+    redirect("/{{module:name|lowercase}}");
+    
+  } catch (error) {
+    console.error("Error in delete{{module:name}}:", error);
+    
+    if (error instanceof z.ZodError) {
+      throw new Error("Invalid ID format");
+    }
+    
+    throw error instanceof Error ? error : new Error("Unknown error occurred");
+  }
+}
+
+// FETCH: Get all {{module:name}}s for current user
+export async function get{{module:name}}s() {
+  try {
+    // Get authenticated user and supabase client
+    const { user, supabase } = await getAuthenticatedUser();
+    
+    // Fetch with RLS automatically enforced
+    const { data: {{module:name|lowercase}}s, error } = await supabase
+      .from("{{module:tableName}}")
+      .select("*")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Database error fetching {{module:name|lowercase}}s:", error);
+      throw new Error("Failed to fetch {{module:name|lowercase}}s");
+    }
+
+    return {{module:name|lowercase}}s || [];
+    
+  } catch (error) {
+    console.error("Error in get{{module:name}}s:", error);
+    throw error instanceof Error ? error : new Error("Unknown error occurred");
+  }
+}
+
+// FETCH: Get single {{module:name}} by ID
+export async function get{{module:name}}ById(id: string) {
+  try {
+    // Validate ID format
+    const idSchema = z.string().uuid();
+    const validatedId = idSchema.parse(id);
+    
+    // Get authenticated user and supabase client
+    const { user, supabase } = await getAuthenticatedUser();
+    
+    // Fetch with RLS automatically enforced
+    const { data: {{module:name|lowercase}}, error } = await supabase
+      .from("{{module:tableName}}")
+      .select("*")
+      .eq("id", validatedId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (error) {
+      console.error("Database error fetching {{module:name|lowercase}}:", error);
+      throw new Error("Failed to fetch {{module:name|lowercase}}");
+    }
+
+    return {{module:name|lowercase}};
+    
+  } catch (error) {
+    console.error("Error in get{{module:name}}ById:", error);
+    
+    if (error instanceof z.ZodError) {
+      throw new Error("Invalid ID format");
+    }
+    
+    throw error instanceof Error ? error : new Error("Unknown error occurred");
+  }
+}

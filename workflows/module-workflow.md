@@ -67,11 +67,12 @@ This workflow integrates comprehensively with the entire project ecosystem:
 - **API Patterns**: Use server action patterns from `/examples/lib/actions/`
 
 ### Documentation Integration
+- **Module Design Patterns**: `/workflows/module-design-patterns.md` for choosing module architecture
 - **Development Guide**: `/documents/development-guide/` for comprehensive technical guidance
 - **Next.js Patterns**: `/documents/nextjs/` for framework-specific guidance
 - **shadcn/ui Components**: `/documents/shadcn/` for UI component library
 - **Supabase Integration**: `/documents/supabase/` for database and auth patterns
-- **Agent Rules**: `/agent-rules.md` for development behavioral guidelines
+- **Agent Rules**: `/tools/information/agent-rules.md` for development behavioral guidelines
 
 ### Infrastructure Integration
 - **Database Documentation**: Generated via `/scripts/generate-database-docs.sh`
@@ -189,6 +190,21 @@ This workflow integrates comprehensively with the entire project ecosystem:
 - Budget constraint of $X
 - Must be completed within 3 months
 
+### 11. Module Design Type *(Required)*
+**Which module design type best fits your requirements?**
+
+**Guidance:** Choose from Small, Medium, or Large design patterns based on your module's complexity. See `module-design-patterns.md` for detailed guidance.
+
+**Options:**
+- **Small:** Single page with modal-based create/edit (1-3 fields, simple interactions)
+- **Medium:** Separate pages for list/create/edit with shared forms (4-7 fields, standard CRUD)
+- **Large:** Wizard-based multi-step configuration (8+ fields, complex workflows)
+
+**Examples:**
+- Small: Announcements, Tags, Simple Settings
+- Medium: Contacts, Products, Blog Posts
+- Large: Projects, Campaigns, Employee Onboarding
+
 ---
 
 ## Quality Standards
@@ -305,7 +321,7 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 
 **Activities:**
 - Use load-documentation-context tool to efficiently load all essential context
-- Alternative: Use individual tools (list-docs, get-sections, get-agent-rules, get-tools) for specific context
+- Alternative: Use individual tools (list-docs, get-sections, get-claude-rules, get-tools) for specific context
 - Review loaded documentation headings and available components
 - Understand agent behavioral constraints
 - Analyze existing module patterns and architecture
@@ -353,29 +369,30 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 **Description:** Design the complete module architecture and interfaces
 
 **Deliverables:**
-- System architecture document
+- System architecture document based on selected design type (Small/Medium/Large)
 - Database schema design
 - API specifications
 - Security architecture
 - Integration points definition
-- UI/UX design system
+- UI/UX design system following module pattern
 
 **Activities:**
-- Design overall system architecture
+- Apply selected module design pattern from pre-planning
+- Design overall system architecture following chosen pattern
 - Create detailed database schema
 - Define all API endpoints and contracts
 - Design security model and access controls
 - Plan integration with existing systems
-- Create UI mockups and user flows
+- Create UI mockups following Small/Medium/Large pattern guidelines
 - Performance and scalability planning
 
 **Exit Criteria:**
-- Architecture review completed
+- Architecture follows selected module design pattern
 - Database design approved
 - API contracts finalized
 - Security model validated
 - Integration approach confirmed
-- UI/UX design approved
+- UI/UX design approved and matches chosen pattern
 
 ---
 
@@ -511,6 +528,7 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 - UI components implemented in `/app/[module-name]/components/`
 - Module pages in proper App Router structure
 - **REQUIRED VIEWS**: List view, Create view, Edit view (minimum)
+- **PRINT VIEWS**: Print-optimized pages in `/app/(print)/[module-name]/` (if needed)
 - User workflows and navigation integration
 - **CRITICAL**: Main sidebar navigation updated with module and sub-items
 - Responsive design
@@ -569,6 +587,7 @@ Update `components/MainSidebar.tsx` to include:
 - Implement accessibility features (ARIA labels, keyboard navigation)
 - Integrate UI with API layer and server actions
 - Add client-side validation and error handling
+- **Print functionality**: If module data needs printing, create print views in `/app/(print)/[module-name]/`
 - Write UI tests using Jest and @testing-library/react
 - Test navigation between list, create, and edit views
 

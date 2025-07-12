@@ -69,7 +69,7 @@ This workflow integrates seamlessly with the lolek-mcp context-engineering syste
    - `get-introduction`
    - `get-tools`
    - `list-examples`
-   - `get-agent-rules`
+   - `get-claude-rules`
    - `get-claude-rules`
 
 2. **Define wizard purpose:**

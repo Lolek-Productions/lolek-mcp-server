@@ -9,7 +9,6 @@ import {
 } from "../../tools/documentation";
 import { 
   getIntroduction, 
-  getAgentRules,
   getTools,
   getClaudeRules
 } from "../../tools/information";
@@ -17,7 +16,8 @@ import {
   getWorkflows,
   getWorkflowTemplate,
   getWorkflowRules,
-  loadDocumentationContext
+  loadDocumentationContext,
+  generateModuleTemplate
 } from "../../tools/workflow";
 import {
   listExamples,
@@ -67,13 +67,13 @@ const handler = createMcpHandler(
     registerTool(listDocuments);
     registerTool(searchContent);
     registerTool(getIntroduction);
-    registerTool(getAgentRules);
     registerTool(getTools);
     registerTool(getClaudeRules);
     registerTool(getWorkflows);
     registerTool(getWorkflowTemplate);
     registerTool(getWorkflowRules);
     registerTool(loadDocumentationContext);
+    registerTool(generateModuleTemplate);
     registerTool(listExamples);
     registerTool(getExample);
     registerTool(getDevelopmentGuideContent);
