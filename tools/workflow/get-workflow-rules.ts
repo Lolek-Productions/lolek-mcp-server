@@ -58,6 +58,42 @@ export const getWorkflowRules: ToolDefinition = {
 - **Reuse before creating**: Prefer extending existing components over creating new ones
 - **Test integration**: Ensure new code integrates properly with existing systems
 
+#### Module File Organization (CRITICAL)
+**ALL module-related files must be organized within \`/app/[module-name]/\` folder:**
+
+\`\`\`
+/app/announcements/
+├── page.tsx                    # Main list page
+├── create/
+│   └── page.tsx               # Create announcement page  
+├── edit/
+│   └── [id]/
+│       └── page.tsx          # Edit announcement page
+├── components/
+│   ├── announcement-form.tsx  # ❌ NOT: /components/announcements/announcement-form.tsx
+│   ├── template-form.tsx      # ❌ NOT: /components/announcements/template-form.tsx
+│   ├── announcement-list.tsx  # All module components here
+│   └── template-selector.tsx
+├── actions.ts                 # Server actions for the module
+└── types.ts                  # Type definitions for the module
+\`\`\`
+
+**Import paths for module files:**
+\`\`\`typescript
+// ✅ CORRECT - Module components in same directory
+import { AnnouncementForm } from './components/announcement-form'
+import { TemplateForm } from './components/template-form'
+
+// ❌ WRONG - Do not put module components in /components/[module]/
+import { AnnouncementForm } from '@/components/announcements/announcement-form'
+\`\`\`
+
+**Create/Edit View Pattern:**
+- Create page: Simple form that saves and redirects to edit
+- Edit page: Full-featured form that handles both new and existing items
+- Same form component used in both create and edit modes
+- After creation: redirect from \`/create\` to \`/edit/[new-id]\`
+
 ### 5. Progress Documentation
 - **Document decisions**: Record architectural and technical decisions as you work
 - **Update README**: If workflow results in new features, update project README
@@ -69,6 +105,28 @@ export const getWorkflowRules: ToolDefinition = {
 - **Test execution**: Run existing tests and ensure they pass
 - **Lint compliance**: Address any linting errors before proceeding
 - **Type checking**: Ensure TypeScript types are correct and complete
+
+#### Testing Requirements (MANDATORY)
+**All modules MUST include Jest testing:**
+
+\`\`\`
+/app/[module-name]/
+├── __tests__/
+│   ├── components/
+│   │   ├── module-form.test.tsx       # Component tests
+│   │   └── module-list.test.tsx
+│   ├── actions.test.ts                # Server action tests
+│   └── integration.test.ts            # Integration tests
+└── jest.config.js                     # Module-specific Jest config (if needed)
+\`\`\`
+
+**Testing Standards:**
+- **Unit tests**: All components and server actions
+- **Integration tests**: Complete workflows and data operations  
+- **Jest framework**: Use Jest for all testing (not other frameworks)
+- **Test coverage**: Aim for 80%+ coverage on new module code
+- **Database mocking**: Mock database operations for unit tests
+- **Component testing**: Use @testing-library/react for component tests
 
 ### 7. Security and Performance
 - **Security review**: Consider security implications of all changes
@@ -83,6 +141,43 @@ export const getWorkflowRules: ToolDefinition = {
 - **Integration planning**: Consider how module fits with existing system architecture
 - **Data design**: Design database schema before beginning implementation
 - **API design**: Plan API structure and endpoints early in the process
+
+#### Navigation Integration (MANDATORY)
+**ALL new modules MUST be added to the main sidebar navigation:**
+
+\`\`\`typescript
+// In components/MainSidebar.tsx or similar navigation component
+// Add new module to navigation items:
+
+const navigationItems = [
+  // ... existing items
+  {
+    title: "Announcements",           // Module display name
+    url: "/announcements",           // Module root path
+    icon: MessageSquare,             // Appropriate Lucide icon
+    items: [                         // Sub-navigation if needed
+      {
+        title: "All Announcements",
+        url: "/announcements"
+      },
+      {
+        title: "Templates", 
+        url: "/announcements/templates"
+      },
+      {
+        title: "Create New",
+        url: "/announcements/create"
+      }
+    ]
+  }
+]
+\`\`\`
+
+**Navigation Requirements:**
+- **Main menu item**: Add module to primary navigation
+- **Appropriate icon**: Choose relevant Lucide React icon
+- **Sub-navigation**: Include key module pages in sub-menu
+- **User permissions**: Respect user roles and permissions for menu visibility
 
 ### Feature Development  
 - **Impact analysis**: Analyze impact on existing features and components

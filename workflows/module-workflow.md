@@ -501,27 +501,80 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 **Description:** Implement user interface components and user experience
 
 **Deliverables:**
-- UI components implemented
-- User workflows
+- UI components implemented in `/app/[module-name]/components/`
+- Module pages in proper App Router structure
+- **REQUIRED VIEWS**: List view, Create view, Edit view (minimum)
+- User workflows and navigation integration
+- **CRITICAL**: Main sidebar navigation updated with module and sub-items
 - Responsive design
 - Accessibility features
 - UI integration with APIs
 
 **Activities:**
-- Implement UI components
-- Create user workflows and navigation
-- Ensure responsive design
-- Implement accessibility features
-- Integrate UI with API layer
-- Add client-side validation
-- Write UI tests
+
+#### File Structure & Components
+- **CRITICAL**: Follow `/app/[module-name]/` file structure (see get-workflow-rules)
+- Create module components in `/app/[module-name]/components/` (NOT `/components/[module]/`)
+- Use proper import paths: `import { Form } from './components/form'`
+
+#### Required Views (MANDATORY)
+- **List View**: `/app/[module-name]/page.tsx` - Display all module items in table/grid
+- **Create View**: `/app/[module-name]/create/page.tsx` - Form to create new items (redirects to edit after creation)
+- **Edit View**: `/app/[module-name]/edit/[id]/page.tsx` - Combined create/edit form for existing items
+- Additional views as needed (detail view, templates, etc.)
+
+**Create/Edit Pattern:**
+- Create form saves new item and redirects to `/edit/[new-id]` 
+- Edit form handles both new items (after redirect) and existing items
+- Same form component used for both create and edit modes
+
+#### Main Sidebar Integration (CRITICAL)
+Update `components/MainSidebar.tsx` to include:
+```typescript
+{
+  title: "Announcements",           // Module display name
+  url: "/announcements",           // Module root (list view)
+  icon: MessageSquare,             // Appropriate Lucide icon
+  items: [                         // Required sub-menu items:
+    {
+      title: "All Announcements",   // Link to list view
+      url: "/announcements"
+    },
+    {
+      title: "Create New",          // Link to create view (redirects to edit after save)
+      url: "/announcements/create"
+    },
+    {
+      title: "Templates",           // Additional module-specific items (if needed)
+      url: "/announcements/templates"
+    }
+  ]
+}
+```
+
+**Navigation Flow:**
+1. User clicks "Create New" → Goes to `/create` page
+2. User fills form and saves → Redirects to `/edit/[new-id]` 
+3. User can continue editing or return to list
+
+#### Implementation Details
+- Ensure responsive design across all module pages
+- Implement accessibility features (ARIA labels, keyboard navigation)
+- Integrate UI with API layer and server actions
+- Add client-side validation and error handling
+- Write UI tests using Jest and @testing-library/react
+- Test navigation between list, create, and edit views
 
 **Exit Criteria:**
-- All UI components functional
-- User workflows complete
-- Responsive design verified
-- Accessibility requirements met
-- UI tests passing
+- All UI components functional and properly placed in `/app/[module-name]/components/`
+- **REQUIRED VIEWS**: List, Create, and Edit views implemented and working
+- **CREATE/EDIT FLOW**: Create form saves and redirects to edit view correctly
+- **SIDEBAR**: Main sidebar updated with module navigation and sub-items
+- User workflows complete and navigation tested (list → create → edit flow)
+- Responsive design verified across all views
+- Accessibility requirements met (ARIA labels, keyboard navigation)
+- UI tests passing for all views and components
+- Navigation between views working correctly including redirect flow
 
 ---
 
@@ -557,31 +610,38 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 ### Step 8: Comprehensive Testing
 **ID:** 8_testing  
 **Name:** Comprehensive Testing  
-**Description:** Perform thorough testing of the complete module
+**Description:** Perform thorough testing of the complete module using Jest framework
 
 **Deliverables:**
-- Unit test coverage
-- Integration test suite
+- Jest unit test coverage (≥80%)
+- Jest integration test suite
 - End-to-end test scenarios
 - Performance test results
 - Security testing results
 - User acceptance testing
+- Test files in `/app/[module-name]/__tests__/`
 
 **Activities:**
-- Achieve comprehensive unit test coverage
-- Execute integration test suite
-- Perform end-to-end testing
+- **MANDATORY**: Use Jest testing framework for all tests
+- Create Jest tests in `/app/[module-name]/__tests__/` directory
+- Achieve comprehensive unit test coverage using Jest and @testing-library/react
+- Write integration tests for server actions using Jest
+- Execute complete integration test suite
+- Perform end-to-end testing of user workflows
 - Conduct performance and load testing
 - Perform security testing and vulnerability scanning
-- Facilitate user acceptance testing
+- Facilitate user acceptance testing with stakeholders
 - Fix identified issues and bugs
+- Ensure all tests follow Jest best practices
 
 **Exit Criteria:**
-- Test coverage ≥ 80%
-- All critical tests passing
+- Jest test coverage ≥ 80% for module code
+- All Jest unit and integration tests passing
+- End-to-end tests covering main user workflows
 - Performance requirements met
 - Security vulnerabilities addressed
 - User acceptance criteria met
+- All tests properly organized in `__tests__` directories
 
 ---
 
