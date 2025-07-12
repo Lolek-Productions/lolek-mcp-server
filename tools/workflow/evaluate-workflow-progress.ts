@@ -55,9 +55,6 @@ ${stepProgress}
       // Special handling for pre-planning step
       if (currentStep === "1_preplanning" && preplanningAnswers) {
         try {
-          // Quality standards are now embedded in the workflow
-          const standards = workflow.qualityStandards;
-          
           // Parse answers
           let parsedAnswers;
           try {
@@ -70,56 +67,47 @@ ${stepProgress}
               }]
             };
           }
+
+          // For markdown workflows, provide simplified evaluation
+          const answerCount = Object.keys(parsedAnswers).length;
+          const totalLength = Object.values(parsedAnswers).reduce((sum: number, answer: any) => {
+            return sum + (typeof answer === 'string' ? answer.length : 0);
+          }, 0);
+
+          // Calculate basic score
+          const completionScore = answerCount >= 8 ? 4 : answerCount >= 6 ? 3 : answerCount >= 4 ? 2 : 1;
+          const qualityScore = totalLength > 2000 ? 5 : totalLength > 1000 ? 4 : totalLength > 500 ? 3 : totalLength > 200 ? 2 : 1;
+          const overallScore = Math.min((completionScore + qualityScore) / 2, 5);
           
-          // Evaluate answers
-          const evaluations = [];
-          let totalScore = 0;
-          let maxScore = 0;
-          
-          for (const criterion of standards.criteria) {
-            const questionAnswer = parsedAnswers[criterion.question_id];
-            maxScore += criterion.weight;
-            
-            // Simple evaluation logic
-            let score = 0;
-            if (questionAnswer) {
-              const answerLength = questionAnswer.length;
-              const answerQuality = answerLength > 100 ? 5 : answerLength > 50 ? 4 : answerLength > 20 ? 3 : answerLength > 10 ? 2 : 1;
-              score = Math.min(answerQuality, 5);
-            }
-            
-            const weightedScore = (score / 5) * criterion.weight;
-            totalScore += weightedScore;
-            
-            const level = score >= 4.5 ? "excellent" : score >= 3.5 ? "good" : score >= 2.5 ? "acceptable" : score >= 1.5 ? "needs_improvement" : "inadequate";
-            const feedback = criterion[level] || "No feedback available";
-            
-            evaluations.push({
-              criterion: criterion.description,
-              score: score,
-              level: level,
-              feedback: feedback,
-              weight: criterion.weight
-            });
-          }
-          
-          const overallScore = totalScore / maxScore * 5;
           const overallLevel = overallScore >= 4.5 ? "excellent" : overallScore >= 3.5 ? "good" : overallScore >= 2.5 ? "acceptable" : overallScore >= 1.5 ? "needs_improvement" : "inadequate";
-          
-          const evaluationText = evaluations.map(evaluation => 
-            `**${evaluation.criterion}** (Weight: ${evaluation.weight}%)\n` +
-            `Score: ${evaluation.score}/5 (${evaluation.level})\n` +
-            `Feedback: ${evaluation.feedback}`
-          ).join("\n\n");
-          
+
           evaluation += `
 
-### Pre-Planning Quality Score: ${overallScore.toFixed(1)}/5.0 (${overallLevel})
+### Pre-Planning Quality Assessment
 
-${standards.recommendations[overallLevel]}
+**Questions Answered:** ${answerCount}
+**Total Content Length:** ${totalLength} characters
+**Quality Score:** ${overallScore.toFixed(1)}/5.0 (${overallLevel})
 
-#### Detailed Evaluation:
-${evaluationText}`;
+### Detailed Review
+
+`;
+
+          // Display formatted answers
+          for (const [key, value] of Object.entries(parsedAnswers)) {
+            const answer = typeof value === 'string' ? value : String(value);
+            const length = answer.length;
+            const quality = length > 200 ? "Comprehensive" : length > 100 ? "Good detail" : length > 50 ? "Basic" : "Needs expansion";
+            
+            evaluation += `**${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}** (${length} chars - ${quality})
+${answer.length > 300 ? answer.substring(0, 300) + "..." : answer}
+
+`;
+          }
+
+          const standards = workflow.qualityStandards;
+          evaluation += `### Recommendation
+${standards.recommendations[overallLevel]}`;
 
           // Generate implementation plan if score is good enough
           if (overallScore >= 3.5) {
