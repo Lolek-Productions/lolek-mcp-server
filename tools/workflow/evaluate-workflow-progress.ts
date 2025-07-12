@@ -7,7 +7,7 @@ export const evaluateWorkflowProgress: ToolDefinition = {
   name: "evaluate-workflow-progress",
   description: "Evaluate progress on a workflow by checking step completion and providing guidance",
   inputSchema: z.object({
-    type: z.enum(["module", "feature"]).describe("The type of workflow being evaluated"),
+    type: z.enum(["module", "feature", "create-app", "wizard"]).describe("The type of workflow being evaluated"),
     currentStep: z.string().describe("The current step ID (e.g., '1_preplanning', '2_design')"),
     stepProgress: z.string().describe("Description of progress made on the current step"),
     preplanningAnswers: z.string().optional().describe("Pre-planning answers in JSON format (required for step 1_preplanning)")
@@ -16,24 +16,19 @@ export const evaluateWorkflowProgress: ToolDefinition = {
     try {
       let workflow: any;
       
-      // Try to load markdown workflow first
+      // Load markdown workflow
       const markdownPath = join(process.cwd(), "workflows", `${type}-workflow.md`);
-      if (existsSync(markdownPath)) {
-        const markdownContent = readFileSync(markdownPath, "utf-8");
-        workflow = parseMarkdownWorkflow(markdownContent, type);
-      } else {
-        // Fallback to JSON workflow
-        const workflowPath = join(process.cwd(), "workflows", `${type}-workflow.json`);
-        if (!existsSync(workflowPath)) {
-          return {
-            content: [{
-              type: "text",
-              text: `Workflow for '${type}' not found. Available workflows can be seen with get-workflows tool.`
-            }]
-          };
-        }
-        workflow = JSON.parse(readFileSync(workflowPath, "utf-8"));
+      if (!existsSync(markdownPath)) {
+        return {
+          content: [{
+            type: "text",
+            text: `Workflow for '${type}' not found. Available workflows can be seen with get-workflows tool.`
+          }]
+        };
       }
+      
+      const markdownContent = readFileSync(markdownPath, "utf-8");
+      workflow = parseMarkdownWorkflow(markdownContent, type);
       
       // Find the current step
       const step = workflow.steps.find((s: any) => s.id === currentStep);
