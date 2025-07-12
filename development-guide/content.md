@@ -2125,3 +2125,90 @@ done
 3. **Test Runner**: Re-run tests on test framework errors
 4. **Database Migrations**: Retry on connection errors
 5. **Long-running Scripts**: Handle transient failures
+
+## Database Documentation Generator
+**File**: `generate-database-docs.sh`
+**Purpose**: Automatically generate DATABASE.md from live Supabase schema
+**Location**: `/scripts/generate-database-docs.sh`
+
+### Features
+- **Live Schema Discovery**: Fetches table information from Supabase REST API
+- **Automatic Environment Loading**: Loads variables from .env.local
+- **Column Schema Detection**: Extracts column types, defaults, and nullable status
+- **RLS Status Checking**: Shows which tables are protected by Row Level Security
+- **Read-only Output**: Sets generated file to read-only to prevent accidental edits
+
+### Usage
+```bash
+# Generate or update DATABASE.md
+./scripts/generate-database-docs.sh
+
+# Make executable if needed
+chmod +x scripts/generate-database-docs.sh
+```
+
+### Requirements
+- **Environment Variables**: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Tools**: `curl` (standard on most systems)
+- **Optional**: `jq` for better JSON parsing
+
+### What It Does
+1. **Loads Environment**: Automatically reads .env.local file
+2. **Discovers Tables**: Queries Supabase information_schema for table list
+3. **Analyzes Schema**: For each table, extracts column information
+4. **Checks Access**: Tests which tables are accessible via REST API
+5. **Generates Documentation**: Creates complete DATABASE.md with live schema
+
+### Output Structure
+```markdown
+# Database Schema Documentation
+## Database Overview
+- Authentication overview
+- Main feature areas
+- Data relationships
+
+## Tables Overview
+- List of all discovered tables
+
+## Table Schemas
+### Table: users
+**Column Schema:**
+| Column | Type | Nullable | Default |
+|--------|------|----------|---------|
+| id | uuid | NO | uuid_generate_v4() |
+| email | text | NO | none |
+| created_at | timestamp | NO | now() |
+
+## Security
+- RLS policies overview
+- Data isolation notes
+
+## Notes
+- Generation timestamp
+- Maintenance instructions
+```
+
+### When to Use
+- **Schema Changes**: After adding/modifying database tables
+- **Documentation Updates**: When DATABASE.md is missing or outdated  
+- **New Team Members**: To generate current schema overview
+- **Deployment Prep**: Before deploying with schema changes
+
+### Important Notes
+- **Overwrites DATABASE.md**: Completely regenerates the file each run
+- **Uses Anon Key**: Only accesses publicly available schema information
+- **No Database Connection**: Works through REST API, no direct DB access needed
+- **Version Control**: Commit the generated DATABASE.md to track schema evolution
+
+### Troubleshooting
+- **Missing Environment Variables**: Check .env.local file exists with Supabase credentials
+- **Empty Schema**: Verify Supabase project is accessible and has tables
+- **Permission Denied**: Ensure script is executable with `chmod +x`
+- **No Tables Found**: Check Supabase URL and anon key are correct
+
+### Agent Usage
+**When asked to "update DATABASE.md"**, agents should:
+1. Use this script: `./scripts/generate-database-docs.sh`
+2. Verify the generated file contains expected schema information
+3. Commit the updated DATABASE.md file
+4. Inform user that database documentation has been regenerated from live schema
