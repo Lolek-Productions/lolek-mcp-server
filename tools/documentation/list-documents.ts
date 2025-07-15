@@ -12,6 +12,7 @@ export const listDocuments: ToolDefinition = {
       const docsPath = join(process.cwd(), "documents");
       const entries = readdirSync(docsPath, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
+        .filter(dirent => !dirent.name.toLowerCase().includes('test'))
         .map(dirent => dirent.name); // Filter topics
       
       const topics = [];

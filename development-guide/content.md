@@ -1377,6 +1377,27 @@ src/
 └── lib/                    # Utility functions
 ```
 
+## Module Structure Pattern
+When creating new modules, follow this consistent structure pattern:
+
+```
+src/app/(main)/petitions/           # Module directory (plural name)
+├── page.tsx                        # Main list page
+├── petition-form.tsx               # Form component (singular-form.tsx)
+├── petition-list.tsx               # List component (singular-list.tsx)
+├── create/
+│   └── page.tsx                    # Create page
+└── [id]/
+    └── page.tsx                    # Edit page
+```
+
+Key naming conventions:
+- **Module directory**: Use plural form (e.g., `petitions`, `contacts`, `users`)
+- **Form component**: Use singular form with `-form` suffix (e.g., `petition-form.tsx`, `contact-form.tsx`)
+- **List component**: Use singular form with `-list` suffix (e.g., `petition-list.tsx`, `contact-list.tsx`)
+- **Dynamic routes**: Use `[id]` for edit pages
+- **Static routes**: Use `create` directory for creation pages
+
 ## Backend Stack
 - **Database & Auth**: Supabase (PostgreSQL + Authentication)
 - **Authentication**: Supabase Auth with server-side session management
@@ -2285,12 +2306,13 @@ export default async function ListPage() {
 ### Complete CRUD Structure
 ```
 app/notes/
-├── page.jsx                  # ListPage template
-├── create/page.tsx           # CreatePage template
-├── [id]/edit/page.jsx       # EditPage template
-├── components/
-│   ├── NotesTable.jsx       # ListTable component
-│   └── NoteForm.tsx         # EditForm component
+├── page.tsx                  # Main list page
+├── note-form.tsx            # Form component
+├── note-list.tsx            # List component
+├── create/
+│   └── page.tsx             # Create page
+├── [id]/
+│   └── page.tsx             # Edit page
 └── actions.ts               # Server actions
 ```
 
