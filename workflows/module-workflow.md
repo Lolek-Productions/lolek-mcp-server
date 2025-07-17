@@ -545,11 +545,11 @@ The pre-planning is inadequate. Please start over and provide more detailed, tho
 #### Required Views (MANDATORY)
 - **List View**: `/app/[module-name]/page.tsx` - Display all module items in table/grid
 - **Create View**: `/app/[module-name]/create/page.tsx` - Form to create new items (redirects to edit after creation)
-- **Edit View**: `/app/[module-name]/edit/[id]/page.tsx` - Combined create/edit form for existing items
+- **Edit View**: `/app/[module-name]/[id]/page.tsx` - Combined create/edit form for existing items
 - Additional views as needed (detail view, templates, etc.)
 
 **Create/Edit Pattern:**
-- Create form saves new item and redirects to `/edit/[new-id]` 
+- Create form saves new item and redirects to `/[new-id]` 
 - Edit form handles both new items (after redirect) and existing items
 - Same form component used for both create and edit modes
 
